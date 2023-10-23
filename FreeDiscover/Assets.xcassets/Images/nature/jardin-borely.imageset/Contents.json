@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "jardin-borely.jpg",
+      "filename" : "jardin-borely.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "jardin-borely@x2.jpg",
+      "filename" : "jardin-borely@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "jardin-borely@x3.jpg",
+      "filename" : "jardin-borely@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "plage-generique.jpg",
+      "filename" : "plage-generique.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "plage-generique@x2.jpg",
+      "filename" : "plage-generique@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "plage-generique@x3.jpg",
+      "filename" : "plage-generique@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

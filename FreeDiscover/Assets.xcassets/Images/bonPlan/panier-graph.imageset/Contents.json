@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bon_plan_panier_graff.png",
+      "filename" : "bon_plan_concert_vieux-port 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bon_plan_panier_graff@2x.png",
+      "filename" : "bon_plan_concert_vieux-port 2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bon_plan_panier_graff@3x.png",
+      "filename" : "bon_plan_concert_vieux-port 2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -16,7 +16,7 @@ struct ActivitySymbol: View {
             switch activityType {
                 case "nature":
                     Circle()
-                        .frame(width:44)
+                        .frame(width:36)
                         .foregroundColor(.green)
                         .shadow(radius: 2)
                         .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
@@ -25,7 +25,7 @@ struct ActivitySymbol: View {
                         .imageScale(.large)
                 case "sport":
                     Circle()
-                        .frame(width:44)
+                        .frame(width:36)
                         .foregroundColor(.orange)
                         .shadow(radius: 2)
                         .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
@@ -34,7 +34,7 @@ struct ActivitySymbol: View {
                         .imageScale(.large)
                 case "culture":
                     Circle()
-                        .frame(width:44)
+                        .frame(width:36)
                         .foregroundColor(.blue)
                         .shadow(radius: 2)
                         .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
@@ -42,7 +42,7 @@ struct ActivitySymbol: View {
                         .foregroundColor(.white)
                         .imageScale(.large)
                 default:
-                Circle().foregroundColor(.black).frame(width:44)
+                Circle().foregroundColor(.black).frame(width:36)
             }
             
             

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "jardin-pharo.jpg",
+      "filename" : "jardin-pharo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "jardin-pharo@x2.jpg",
+      "filename" : "jardin-pharo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "jardin-pharo@x3.jpg",
+      "filename" : "jardin-pharo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

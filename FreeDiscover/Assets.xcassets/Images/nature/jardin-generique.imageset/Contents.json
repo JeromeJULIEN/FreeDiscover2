@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "parc-generique.jpg",
+      "filename" : "jardin-generique.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "parc-generique@x2.jpg",
+      "filename" : "jardin-generique@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "parc-generique@x3.jpg",
+      "filename" : "jardin-generique@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

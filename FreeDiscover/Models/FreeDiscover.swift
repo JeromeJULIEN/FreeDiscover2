@@ -135,7 +135,7 @@ extension FreeDiscover {
         family: false,
         favorite: false,
         type: activityTypes.sport,
-        temporary: false,
+        temporary: true,
         date: .distantPast
 
     )
@@ -151,7 +151,7 @@ extension FreeDiscover {
         family: false,
         favorite: false,
         type: activityTypes.nature,
-        temporary: false,
+        temporary: true,
         date: .now
 
     )
@@ -160,14 +160,14 @@ extension FreeDiscover {
         name: "Concert-vieux-port",
         image: "concert-vieux-port",
         location: CLLocation(latitude: 43.29534870002289, longitude: 5.374253259297408),
-        shortDescription: "",
+        shortDescription: "Ambiance folf et blues pour ce concert en plein air",
         summary: "",
         voteCounter: 20,
         accessibiliy: false,
         family: false,
         favorite: false,
         type: activityTypes.culture,
-        temporary: false,
+        temporary: true,
         date: .distantFuture,
         startingDate: .distantFuture,
         endingDate: .distantFuture
