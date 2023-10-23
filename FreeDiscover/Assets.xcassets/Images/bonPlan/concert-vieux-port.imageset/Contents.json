@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "bon_plan_concert_vieux-port.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "bon_plan_concert_vieux-port@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "bon_plan_concert_vieux-port@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

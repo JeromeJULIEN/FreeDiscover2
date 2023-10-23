@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "culture_musee_subaquatique.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "culture_musee_subaquatique@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "culture_musee_subaquatique@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
