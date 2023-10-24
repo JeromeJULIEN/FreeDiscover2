@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+
 enum DurationMode {
     case temporary, permanent
 }
@@ -22,7 +24,8 @@ struct CreateActivityView: View {
     @State var activityDescription: String = ""
     @State var symbolSelection: Int = 1
     @State var activityCategory: activityTypes
-    
+   // 
+    @StateObject var viewModel = UserModel()
     
     
     var body : some View {
@@ -166,20 +169,24 @@ struct CreateActivityView: View {
             .background(Color.grayLight)
             .cornerRadius(5.0)
             .padding(.bottom, 20)
-        TextField(("Description de l'activité"), text: $activityDescription)
+        TextField(("Description de l'activité"), text: $activityDescription, axis: .vertical)
+            .lineLimit(3)
             .padding()
             .background(Color.grayLight)
             .cornerRadius(5.0)
             .padding(.bottom, 20)
+        //    .textFieldStyle(.roundedBorder)
         
         
-        Button(action: {
-            print("pouet")
-        }) {
-            CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: .lightBlue, ctaFgColor: .grayDark)
-            
-        }
-        .frame(minWidth: 340)
+//       Button(action: {
+//           print("pouet")
+//       }) {
+//            CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: .lightBlue, ctaFgColor: .grayDark)
+//           
+//       }
+//       .frame(minWidth: 340)
+        
+        EditableDisplayedImage(viewModel: viewModel)
         
         Button(action: {
             print("pouet")
@@ -201,7 +208,7 @@ struct CreateActivityView: View {
             Button(action: {
                 self.symbolSelection = 0
             }) {
-                AccessibilitySymbol(symbolSelection: 1, accessSymbol: "figure.roll", accessName: "Accessible")
+                AccessibilitySymbol(symbolSelection: 0, accessSymbol: "figure.roll", accessName: "Accessible")
             }
             
         }

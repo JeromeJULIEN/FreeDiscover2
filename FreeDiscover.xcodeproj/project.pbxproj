@@ -34,6 +34,8 @@
 		7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */; };
 		7C9ACD912AE6C3230083E3C2 /* GetActivityByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */; };
 		7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */; };
+		C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42D2AE7AC1900DEE84F /* UserModel.swift */; };
+		C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
 		C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */; };
 		F2E031582AE17D98001ECF38 /* ActivityTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E031572AE17D98001ECF38 /* ActivityTypes.swift */; };
@@ -75,6 +77,8 @@
 		7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrousselBonPlan.swift; sourceTree = "<group>"; };
 		7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityByType.swift; sourceTree = "<group>"; };
 		7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTemporaryActivity.swift; sourceTree = "<group>"; };
+		C71FB42D2AE7AC1900DEE84F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
 		C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySymbol.swift; sourceTree = "<group>"; };
 		F2E031572AE17D98001ECF38 /* ActivityTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypes.swift; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 			isa = PBXGroup;
 			children = (
 				7C7385BD2AE12D1A0024DDCC /* CreateActivityView.swift */,
+				C71FB42D2AE7AC1900DEE84F /* UserModel.swift */,
+				C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */,
 			);
 			path = CreateActivity;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 				7C9ACD852AE6B7690083E3C2 /* UserSymbolMapPosition.swift in Sources */,
 				4364CD372AE6663C001A100A /* ProfileSwitchButton.swift in Sources */,
 				43944F6F2AE271C100E03E84 /* UserProfile.swift in Sources */,
+				C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */,
 				7C0F476E2AE174CB004F8033 /* ProfileButton.swift in Sources */,
 				4364CD352AE6655E001A100A /* ContributionProfileView.swift in Sources */,
 				7C0F47762AE18B70004F8033 /* VoteCountDisplay.swift in Sources */,
@@ -402,6 +409,7 @@
 				7C7385C82AE12DBE0024DDCC /* ActivityDetailView.swift in Sources */,
 				C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */,
 				7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */,
+				C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */,
 				7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
