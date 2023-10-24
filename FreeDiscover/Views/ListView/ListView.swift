@@ -17,7 +17,7 @@ struct ListView: View {
                         Spacer().frame(height: 60)
                         ForEach(FreeDiscover.allFreeDiscover){activity in
                             NavigationLink(destination:ActivityDetailView()){
-                                ListCard(title:activity.name,shortDescription: activity.shortDescription,activityType: activity.type.rawValue,voteCount: activity.voteCounter,imageName: activity.image)
+                                ListCard(activity: activity)
                             }.accentColor(Color("GrayDark"))
                         }
                     }

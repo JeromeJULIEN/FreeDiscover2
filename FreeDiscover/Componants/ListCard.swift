@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ListCard: View {
-    var title : String
-    var shortDescription : String
-    var activityType : String
-    var voteCount :Int
-    var imageName : String
+//    var title : String
+//    var shortDescription : String
+//    var activityType : String
+//    var voteCount :Int
+//    var imageName : String
+    var activity : FreeDiscover
     
     var body: some View {
         ZStack{
@@ -22,9 +23,9 @@ struct ListCard: View {
                 .shadow(radius: 2)
             HStack{
                 VStack(alignment: .leading, spacing: 0){
-                    Text("\(title)")
+                    Text("\(activity.name)")
                         .font(.title3.bold())
-                    Text("\(shortDescription)")
+                    Text("\(activity.shortDescription)")
                         .font(.subheadline)
                         .fontWeight(.light)
                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
@@ -33,18 +34,42 @@ struct ListCard: View {
                         .foregroundColor(Color("GrayDark"))
                     Spacer()
                     HStack{
-                        ActivitySymbolSmall(activityType: "\(activityType)")
+                        ActivitySymbolSmall(activityType: "\(activity.type)")
+                        if(activity.family){
+                            Image(systemName: "figure.2.and.child.holdinghands")
+                                .foregroundColor(.grayDark)
+                        }
+                        if(activity.accessibiliy){
+                            Image(systemName: "figure.roll")
+                                .foregroundColor(.grayDark)
+                        }
+                        if(activity.temporary){
+                            Image(systemName: "calendar")
+                                .foregroundColor(.grayDark)
+                        }
                         Spacer()
-                        VoteCountDisplay(voteCount: voteCount)
+                        VoteCountDisplay(voteCount: activity.voteCounter)
                     }
                   
                 }
                 .frame(height: 110)
-                Image("\(imageName)")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 110, height: 110)
-                   .clipShape(RoundedRectangle(cornerRadius: 8))
+                ZStack(alignment:.topTrailing) {
+                    Image("\(activity.image)")
+                       .resizable()
+                       .aspectRatio(contentMode: .fill)
+                       .frame(width: 110, height: 110)
+                       .clipShape(RoundedRectangle(cornerRadius: 8))
+                    Image(systemName: "heart.fill")
+                        .padding(4)
+                        .foregroundStyle(.accent)
+                        .bold()
+                        .font(.title2)
+                    Image(systemName: "heart")
+                        .padding(4)
+                        .foregroundStyle(.white)
+                        .bold()
+                        .font(.title2)
+                }
             }
             .padding(10)
         }.padding(2)
@@ -52,5 +77,5 @@ struct ListCard: View {
 }
 
 #Preview {
-    ListCard(title : "Calanque d'en Vau",shortDescription: "Calanque grandiose, eaux turquoise.", activityType: "nature",voteCount: 10,imageName: "calanque-en-vau")
+    ListCard(activity: FreeDiscover.nature1)
 }
