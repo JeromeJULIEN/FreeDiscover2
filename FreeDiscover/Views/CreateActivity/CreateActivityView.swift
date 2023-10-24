@@ -208,12 +208,13 @@ struct CreateActivityView: View {
             Button(action: {
                 self.symbolSelection = 0
             }) {
-                AccessibilitySymbol(symbolSelection: 0, accessSymbol: "figure.roll", accessName: "Accessible")
+                AccessibilitySymbol(symbolSelection: 2, accessSymbol: "figure.roll", accessName: "Accessible")
             }
             
         }
         Spacer()
-       
+        CtaButton(ctaText: "Créer mon activité", ctaIcon: "calendar", ctaBgColor: .grayLight, ctaFgColor: .accentColor)
+            .padding()
     }
 }
 
