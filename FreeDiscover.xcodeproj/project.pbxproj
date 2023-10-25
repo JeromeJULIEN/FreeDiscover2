@@ -34,6 +34,7 @@
 		7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */; };
 		7C9ACD912AE6C3230083E3C2 /* GetActivityByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */; };
 		7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */; };
+		C705EC802AE80E3000A7D759 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705EC7F2AE80E3000A7D759 /* LikeButton.swift */; };
 		C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42D2AE7AC1900DEE84F /* UserModel.swift */; };
 		C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */; };
 		C75F398E2AE7F050005DD9AA /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */; };
@@ -78,6 +79,7 @@
 		7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrousselBonPlan.swift; sourceTree = "<group>"; };
 		7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityByType.swift; sourceTree = "<group>"; };
 		7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTemporaryActivity.swift; sourceTree = "<group>"; };
+		C705EC7F2AE80E3000A7D759 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		C71FB42D2AE7AC1900DEE84F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				C77D1F312AE286CC00C7CB74 /* CtaButton.swift */,
 				4364CD362AE6663C001A100A /* ProfileSwitchButton.swift */,
 				C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */,
+				C705EC7F2AE80E3000A7D759 /* LikeButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				F2E031582AE17D98001ECF38 /* ActivityTypes.swift in Sources */,
 				7C0F47692AE16A3D004F8033 /* ActivitySymbol.swift in Sources */,
 				7C0F47702AE17516004F8033 /* DisplaySwitchButton.swift in Sources */,
+				C705EC802AE80E3000A7D759 /* LikeButton.swift in Sources */,
 				C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */,
 				7C7385CC2AE12DE30024DDCC /* HomepageView.swift in Sources */,
 				7C7385C82AE12DBE0024DDCC /* ActivityDetailView.swift in Sources */,
