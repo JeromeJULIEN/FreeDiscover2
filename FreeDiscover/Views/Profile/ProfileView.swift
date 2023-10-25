@@ -14,37 +14,19 @@ struct ProfileView: View {
             Profile_rectangle(userName: user.userName, userPicture: user.userPicture, userStatus: user.userStatus, userContribution: user.userContribution)
             ProfileSwitchButton()
                 .padding()
-            HStack {
-                ActivitySymbolSmall(activityType: "nature")
-                Text("Nature")
-                    .font(.title2)
-                    .padding(.trailing, 240.0)
+            ScrollView {
+                CarrouselFavoriteEV()
+                CarrouselFavoriteEV()
+                CarrouselFavoriteEV()
+                CarrouselFavoriteEV()
             }
-            ScrollView(.horizontal) {
-                LazyHGrid(rows: [GridItem(.flexible())], content: {
-                    Image("calanque-en-vau")
-                        .resizable()
-                        .frame(width: 140, height: 140)
-                    Image("jardin-borely")
-                        .resizable()
-                        .frame(width: 140, height: 140)
-                    Image("plage-generique")
-                        .resizable()
-                        .frame(width: 140, height: 140)
-                    Image("calanque-en-vau")
-                        .resizable()
-                        .frame(width: 140, height: 140)
-                })
-            }
-            
-            .padding()
-            Spacer()
         }
     }
 }
 
-
 #Preview {
     ProfileView(user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial discoverer", userContribution: 0, userPoints: 0))
 }
+
+
 
