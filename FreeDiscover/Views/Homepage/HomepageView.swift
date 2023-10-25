@@ -8,26 +8,49 @@
 import SwiftUI
 import MapKit
 
+// Mode d'affichage possible
+enum ViewMode {
+    case map, list
+}
+
 struct HomepageView: View {
+    // definition du mode d'affichage en map par defaut
+    @State private var currentDisplayMode: ViewMode = .map
+    @State var showSearchModal : Bool = false
+    @State var showCarroussel : Bool = true
+
+    
     var body: some View {
         NavigationView{
             ZStack{
                 //map
-                Map()
+                if(currentDisplayMode == .map){
+                    MapView()
+                }
+                if(currentDisplayMode == .list){
+                    ListView()
+                }
                 VStack {
                     HStack{
-                        SearchButton()
+                        SearchButton(showSearchModal: $showSearchModal)
                         Spacer()
-                        DisplaySwitchButton()
+                        DisplaySwitchButton(displayMode: $currentDisplayMode)
                         Spacer()
                         ProfileButton()
                     }
                     .padding()
                     Spacer()
-                    CarrousselBonPlan()
+                    if(currentDisplayMode == .map){
+                        CarrousselBonPlan()
+                    }
                 }
+//
+                //gestion de l'affichage de la modale searchView
+                .sheet(isPresented: $showSearchModal){
+                    SheetViewShearch()
+                }
+                
             }
-
         }
     }
 }

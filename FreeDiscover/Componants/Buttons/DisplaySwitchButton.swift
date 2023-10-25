@@ -7,12 +7,8 @@
 
 import SwiftUI
 
-enum ViewMode {
-    case map, list
-}
-
 struct DisplaySwitchButton: View {
-    @State private var currentMode: ViewMode = .map
+    @Binding var displayMode: ViewMode
 
 
     var body : some View{
@@ -23,24 +19,24 @@ struct DisplaySwitchButton: View {
             .foregroundColor(.white)
             RoundedRectangle(cornerRadius: 25)
             .frame(width: 65, height: 26)
-            .offset(x: currentMode == .map ? -30 : 30)
+            .offset(x: displayMode == .map ? -30 : 30)
             .foregroundColor(.accentColor)
             HStack{
                 Spacer()
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        currentMode = .map
+                        displayMode = .map
                     }}, label: {
                     Image(systemName: "map")
-                    .foregroundColor(currentMode == .map ? .white : Color("GrayDark"))
+                    .foregroundColor(displayMode == .map ? .white : Color("GrayDark"))
                     .frame(width: 55)
                 })
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.3)) {
-                        currentMode = .list
+                        displayMode = .list
                     }}, label: {
                     Image(systemName: "list.bullet")
-                    .foregroundColor(currentMode == .list ? .white : Color("GrayDark"))
+                    .foregroundColor(displayMode == .list ? .white : Color("GrayDark"))
                     .frame(width: 55)
                 })
                 Spacer()
@@ -51,5 +47,6 @@ struct DisplaySwitchButton: View {
 }
 
 #Preview {
-    DisplaySwitchButton()
+    // besoin de passer avec .constant la valeur en binding pour générer la preview
+    DisplaySwitchButton(displayMode: .constant(.map))
 }
