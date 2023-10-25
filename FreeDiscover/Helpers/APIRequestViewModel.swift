@@ -23,7 +23,7 @@ class UserAPIRequest : ObservableObject{
         // Si oui, on prépare la requête (qui suis je ? Quelle donnée je cherche ?)
         var request = URLRequest(url: url)
         request.httpMethod="GET"
-        request.setValue("Bearer \(AIRTABLE_API_KEY)",forHTTPHeaderField: "Authorization")
+//        request.setValue("Bearer \(AIRTABLE_API_KEY)",forHTTPHeaderField: "Authorization")
         
         do { // equivalent de 'try'
             // On ouvre une session

@@ -8,7 +8,7 @@ xcuserdata/
 
 ## .env
 local.env.swift
-Local.env
+local.env
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
