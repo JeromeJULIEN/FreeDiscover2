@@ -14,12 +14,14 @@ import SwiftUI
 
 struct ProfileButton: View {
     var body: some View {
-        Image(systemName: "person")
-            .imageScale(.large)
-            .padding(10)
-            .foregroundStyle(.white)
-            .background(Color.accentColor, in: Circle())
-            .shadow(color: Color.secondary, radius: 4)
+        NavigationLink(destination: ProfilView()){
+            Image(systemName: "person")
+                .imageScale(.large)
+                .padding(10)
+                .foregroundStyle(.white)
+                .background(Color.accentColor, in: Circle())
+                .shadow(color: Color.secondary, radius: 4)
+        }
     }
 }
 
