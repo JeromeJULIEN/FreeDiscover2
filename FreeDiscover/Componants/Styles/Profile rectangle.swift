@@ -32,13 +32,29 @@ struct Profile_rectangle: View {
                     Text(userName)
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
-                        .font(.title2)
+                        .font(.title)
                     
                     Text(userStatus)
                     Text("\(userContribution) contributions")
-                        .fontWeight(.light)
+                        
                         .foregroundColor(.gray)
-                    
+                        .padding(.top, 10)
+                    HStack {
+                        Image(systemName:"plus.circle.fill")
+                            .foregroundColor(.gray)
+                            .fontWeight(.light)
+                        Text("Ajouter une activité")
+                            .foregroundColor(.gray)
+                        
+                    }
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .frame(width: 160, height: 44)
+//                            .foregroundColor(.grayLight)
+//                        Text("Ajouter une contribution")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(.accentColor)
+//                    }
                 }
                 .padding()
             }
