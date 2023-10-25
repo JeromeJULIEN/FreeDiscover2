@@ -149,7 +149,7 @@ extension FreeDiscover {
         voteCounter: 10,
         accessibiliy: false,
         family: false,
-        favorite: false,
+        favorite: true,
         type: activityTypes.nature,
         temporary: true,
         date: .now
@@ -165,7 +165,7 @@ extension FreeDiscover {
         voteCounter: 20,
         accessibiliy: false,
         family: false,
-        favorite: false,
+        favorite: true,
         type: activityTypes.culture,
         temporary: true,
         date: .distantFuture,
