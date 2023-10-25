@@ -81,7 +81,7 @@ struct DisplayedImage: View {
         UserImage(imageState: imageState)
             .scaledToFill()
            // .clipShape(Circle())
-            .frame(width: 200, height: 200)
+            .frame(width: 100, height: 100)
             .background {
                 Rectangle().fill(
                     LinearGradient(
@@ -106,7 +106,7 @@ struct EditableDisplayedImage: View {
                              photoLibrary: .shared()) {
                     Image(systemName: "photo.badge.plus")
                       //  .symbolRenderingMode(.multicolor)
-                        .font(.system(size: 100))
+                        .font(.system(size: 75))
                         .foregroundColor(.white)
                         .shadow(radius: 2)
                         .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
