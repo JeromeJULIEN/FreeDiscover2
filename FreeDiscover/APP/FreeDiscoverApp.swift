@@ -11,7 +11,7 @@ import SwiftUI
 struct FreeDiscoverApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomepageView()
         }
     }
 }

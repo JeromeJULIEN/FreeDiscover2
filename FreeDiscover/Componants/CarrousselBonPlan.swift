@@ -16,7 +16,9 @@ struct CarrousselBonPlan: View {
                 .foregroundColor(.white)
                 .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
             VStack(alignment : .leading){
-                Text("Nos bon plan du moment").font(.headline)
+                Text("Nos bon plan du moment")
+                    .font(.headline)
+                    .foregroundColor(.grayDark)
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing:40){
                         ForEach(getTemporaryActivities(),id: \.id){
@@ -44,6 +46,7 @@ struct CarrousselBonPlan: View {
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             .padding(.leading,10)
+            .presentationDetents([.height(200), .large])
         }
     }
 }
