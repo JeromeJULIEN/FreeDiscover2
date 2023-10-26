@@ -14,7 +14,7 @@ import SwiftUI
 
 struct ProfileButton: View {
     var body: some View {
-        NavigationLink(destination: ProfilView()){
+        NavigationLink(destination: ProfileView(user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial Discoverer", userContribution: 13, userPoints: 0))){
             Image(systemName: "person")
                 .imageScale(.large)
                 .padding(10)
