@@ -10,7 +10,7 @@ import SwiftUI
 struct CarrouselFavoriteEV: View {
     var body: some View {
         HStack {
-            ActivitySymbolSmall(activityType: "nature")
+            ActivitySymbolSmall(activityType: ActivityTypes.nature)
             Text("Nature")
                 .font(.title2)
                 .padding(.trailing, 100.0)

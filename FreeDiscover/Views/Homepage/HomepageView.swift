@@ -16,45 +16,74 @@ enum ViewMode {
 struct HomepageView: View {
     // definition du mode d'affichage en map par defaut
     @State private var currentDisplayMode: ViewMode = .map
-    @State var showSearchModal : Bool = false
+    @State var showSearchView : Bool = false
     @State var showCarroussel : Bool = true
-
+    @State var showActivityPreview : Bool = false
+    
+    @EnvironmentObject var globalVariables : GlobalVariables
     
     var body: some View {
         NavigationView{
             ZStack{
                 //map
                 if(currentDisplayMode == .map){
-                    MapView()
+                    MapView(showActivityPreview: $showActivityPreview)
                 }
                 if(currentDisplayMode == .list){
                     ListView()
                 }
                 VStack {
                     HStack{
-                        SearchButton(showSearchModal: $showSearchModal)
+                        SearchButton(showSearchModal: $showSearchView)
                         Spacer()
-                        DisplaySwitchButton(displayMode: $currentDisplayMode)
+                        DisplaySwitchButton(displayMode: $currentDisplayMode, showCarroussel: $showCarroussel)
                         Spacer()
-                        ProfileButton()
+                        ProfileButton(showCarroussel: $showCarroussel)
                     }
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.bottom,1)
+                    if(globalVariables.isSearchOngoing == true){
+                        HStack{
+                            CancelSearchButton()
+                            Spacer()
+                        }
+                        .padding(.leading)
+                    }
+                    
+                    
                     Spacer()
-                    if(currentDisplayMode == .map){
-                        CarrousselBonPlan()
+                    if(currentDisplayMode == ViewMode.map){
+                        Button(action: {showCarroussel.toggle()}, label:{
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 50)
+                                    .frame(width: 260,height: 30)
+                                Text("Nos bons plans du moment")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            
+                        })
                     }
+                  
                 }
-//
-                //gestion de l'affichage de la modale searchView
-                .sheet(isPresented: $showSearchModal){
-                    SheetViewShearch()
+
+                .sheet(isPresented: $showCarroussel){
+                    CarrousselBonPlan()
+                        .sheet(isPresented: $showActivityPreview){
+                            ActivityPreview()
+                        }
                 }
-                
+                .sheet(isPresented: $showActivityPreview){
+                    ActivityPreview()
+                }
+                .overlay(alignment: .top, content: {
+                    SearchView(showSearchView: $showSearchView)
+                })
             }
         }
     }
 }
 
 #Preview {
-    HomepageView()
+    HomepageView().environmentObject(GlobalVariables())
 }

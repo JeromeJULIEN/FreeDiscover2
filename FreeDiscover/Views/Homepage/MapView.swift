@@ -17,6 +17,7 @@ import MapKit
 import CoreLocation
 
 struct MapView: View {
+    // MARK: Variables locales à la vue
     //Instance de notre class
     @StateObject var locationManager = LocationManager()
     
@@ -26,17 +27,18 @@ struct MapView: View {
     /// Propriété d'état d'un tableau avec toutes les activtés de freeDiscover à épingler sur la map.
     @State private var freeDiscover: [FreeDiscover] = FreeDiscover.allFreeDiscover
     
-    /// Prorpiété d'état pour contenir le texte de recherche qu'un utiliosateur tape dans le champ de recherche.
-    @State private var searchFreeDiscover = ""
-    
     /// Propriété d'état contrôlant l'affcihage de la modal `SheetViewSearch`.
     @State private var isShowingSheetViewSearch: Bool = true
     
-    /// Prorpiété d'état qui affiche un tableau de résultat de recherche.
-    @State private var results: [FreeDiscover] = []
-    
     // variable à utiliser pour authoriser la sélection d'item sur la map
     @State private var selectedTag : Int?
+    
+    // MARK: Variables héritées d'autres vues
+    /// Gestion affichage de la modale  activity preview
+    @Binding var showActivityPreview : Bool
+      
+    /// Importation des variables globales
+    @EnvironmentObject var globalVariables : GlobalVariables
     
        
     var body: some View {
@@ -46,63 +48,45 @@ struct MapView: View {
             /// Affiche l'emplacement actuelle de l'utilisateur sur la carte.
             UserAnnotation()
             
-            // Affichage des activités en BDD
-            ForEach(FreeDiscover.allFreeDiscover.indices, id:\.self){index in
-                Annotation(
-                    "\(FreeDiscover.allFreeDiscover[index].name)",
-                    coordinate: FreeDiscover.allFreeDiscover[index].location,
-                    anchor: .center
-                
-                ){
-                    ActivitySymbol(activityType: FreeDiscover.allFreeDiscover[index].type.rawValue, temporary: FreeDiscover.allFreeDiscover[index].temporary)
-                        .scaleEffect(selectedTag == index ? 1.2 : 1)
+            // Si pas de recherche en cours, affichage des activités en BDD
+            if(globalVariables.isSearchOngoing == false){
+                ForEach(freeDiscover.indices, id:\.self){index in
+                    Annotation(
+                        "\(freeDiscover[index].name)",
+                        coordinate: freeDiscover[index].location,
+                        anchor: .center
                     
+                    ){
+                        ActivitySymbol(activityType: freeDiscover[index].type.rawValue, temporary: freeDiscover[index].temporary)
+                            .scaleEffect(selectedTag == index ? 1.2 : 1)
+                        
+                    }
+                    .tag(index)
                 }
-                .tag(index)
+            }
+            if(globalVariables.isSearchOngoing == true){
+                ForEach(globalVariables.searchResults.indices, id:\.self){index in
+                    Annotation(
+                        "\(globalVariables.searchResults[index].name)",
+                        coordinate: globalVariables.searchResults[index].location,
+                        anchor: .center
+                    
+                    ){
+                        ActivitySymbol(activityType: globalVariables.searchResults[index].type.rawValue, temporary: globalVariables.searchResults[index].temporary)
+                            .scaleEffect(selectedTag == index ? 1.2 : 1)
+                        
+                    }
+                    .tag(index)
+                }
             }
             
-//            Annotation("", coordinate: .userLocation) {
-//                
-//                /// 2) - Symbol personnalisée pour la  postion de l'utilisateur surn la carte.
-//                ZStack {
-//                    UserPositionSymbol()
-//                }
-//            }
+            
         }
-        /// 4) - Bouton qui affiche  la vue modal pour la recherche et la vue profile.
-//        .safeAreaInset(edge: .top, alignment: .leading, spacing: 16) {
-//            /// TODO Extraire les boutons.
-//            HStack {
-//                Button(action: {
-//                    withAnimation {
-//                        /// Todo ajouter la modalSheach Search.
-//                        isShowingSheetViewSearch.toggle()
-//                    }
-//                }, label: {
-//                    SearchButton()
-//                })
-//                .sheet(isPresented: $isShowingSheetViewSearch) {
-//                    SheetViewShearch()
-//                }
-//                
-//                Spacer() /// Ajouter le `segmentedPickerCustom` Liste ou plan au milieu.
-//                
-//                Button(action: {
-//                    withAnimation {
-//                        /// Todo ajouter la vue profile.
-//                    }
-//                }, label: {
-//                    ProfileButton()
-//                })
-//
-//            }
-//            .frame(minWidth: 0,  maxWidth: .infinity, alignment: .trailing)
-//            .padding()
-//        }
-        // Génération d'espaces vides en haut et à droite pour décaler les boutons mapControl
+        
+        /// Génération d'espaces vides en haut et à droite pour décaler les boutons mapControl
         .safeAreaInset(edge: .top){
             Rectangle()
-                .frame(height:58)
+                .frame(height:40)
                 .opacity(0)
         }
         .safeAreaInset(edge: .trailing){
@@ -119,53 +103,55 @@ struct MapView: View {
         }
         .mapControlVisibility(.visible)
         
-        //Quand la vue apparait on est notifié de la permission
+        ///Quand la vue apparait on est notifié de la permission
         .onAppear(perform: {
             locationManager.requestLocation()
         })
+        .onChange(of: selectedTag){
+            showActivityPreview = true
+        }
+        .onChange(of: globalVariables.launchSearch){
+            searchActivities()
+        }
     }
 }
 //}
 
 #Preview {
-    MapView()
+    MapView(showActivityPreview: .constant(false)).environmentObject(GlobalVariables())
 }
 
-/// Extension pour la classe `mapView` pour la méthode `func` recherche d'une activité dans la région effecyuer par l'utilisateur.
-///
-extension MapView {
-    func searchFreeDiscoverPlace() async {
-        /// Référence à l'interface de la vue mapView.
-        //        let mapView = MKMapView()
-        
-        /// Initialise `MKLocalSearch` une requête pour la recherche des emplacements (points d'intérêts) sur la carte en fonction de la recherche language naturel de l'utilisateur.
-        let searchRequest = MKLocalSearch.Request()
-        searchRequest.naturalLanguageQuery = searchFreeDiscover
-        searchRequest.resultTypes = .pointOfInterest
-        
-        /// Définit la région de la requête de recherche spécifique à l'utilisateur  sur la carte.
-        searchRequest.region = .userRegion
-        
-        let result = try? await MKLocalSearch(request: searchRequest).start()
-        /// TODO Ne pas oublier d'ajouter  le result une prorpiété MKMapItem pour l'activité dans un tableau.
-        
-        
-        /// Initialisation de la recherche locale, basée sur la requête fournie par l'utilisateur.
-        //        let search = MKLocalSearch(request: searchRequest)
-        
-        //        search.start { (response, error )in
-        //            guard let response = response else {
-        //                print("Erreur: \(error?.localizedDescription ?? "Aucune activité").")
-        //                return
-        //            }
-        
-        /// Boucle `for` pour les résultats de la recherche de l'activité.
-        /// TODO Ne pas oublier d'ajouter  une prorpiété MKMapItem pour l'activité dans un tableau.
-        
+// MARK: logique de recherche
+/// 1- extension du Type string pour rajouter une fonction `containsAny(of)` de recherche avec un ensemble de mot
+extension String {
+    /// Vérifie si la chaîne contient au moins un des mots spécifiés.
+    func containsAny(of words: [String]) -> Bool {
+        for word in words {
+            if self.localizedCaseInsensitiveContains(word) {
+                return true
+            }
+        }
+        return false
     }
 }
-//}
 
+/// extension du type array (restraint aux array d'élément de type FreeDiscover) pour ajouter la fonction `filter` qui s'appuie sur `containsAny()`
+extension Array where Element == FreeDiscover {
+    /// Renvoie une liste d'activités dont le champ `summary` contient au moins un des mots spécifiés.
+    func filter(searchText: String) -> [FreeDiscover] {
+        let searchWords = searchText.split(separator: " ").map { String($0) }
+        return self.filter { $0.summary.containsAny(of: searchWords) }
+    }
+}
+
+/// Extension pour la classe `mapView` pour ajouter la fonction `searchActivities()` pour appeler la fonction `filter`
+extension MapView {
+    func searchActivities() {
+        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
+    }
+}
+
+// MARK: extentions pour la map
 /// Une extension qui contient l'emplacement géographique de l'utilisateur.
 extension CLLocationCoordinate2D {
     static var userLocation = CLLocationCoordinate2D(

@@ -8,7 +8,7 @@
 import Foundation
 
 //@dev : function to filter the Activity of the data base in function of the activity type
-func getActivityByType(type : activityTypes) -> [FreeDiscover] {
+func getActivityByType(type : ActivityTypes) -> [FreeDiscover] {
     return FreeDiscover.allFreeDiscover.filter {
         $0.type == type
     }

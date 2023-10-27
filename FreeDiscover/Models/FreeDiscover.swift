@@ -55,7 +55,7 @@ struct FreeDiscover: Identifiable {
     var favorite: Bool
     
     /// Type de l'activité.
-    var type: activityTypes
+    var type: ActivityTypes
     
     /// Activité ponctuelle.
     var temporary: Bool
@@ -84,7 +84,7 @@ struct FreeDiscover: Identifiable {
     ///   - type: Catégorise le type de l'activité.
     ///   - temporary: Activité ponctuelle.
     ///   - date: Ajoute une date de création de l'activité.
-    init(id: UUID = UUID(), name: String, image: String, location: CLLocationCoordinate2D, shortDescription: String, summary: String, voteCounter: Int, accessibiliy: Bool, family: Bool, favorite: Bool, type: activityTypes, temporary: Bool, date: Date, startingDate: Date? = nil, endingDate: Date? = nil) {
+    init(id: UUID = UUID(), name: String, image: String, location: CLLocationCoordinate2D, shortDescription: String, summary: String, voteCounter: Int, accessibiliy: Bool, family: Bool, favorite: Bool, type: ActivityTypes, temporary: Bool, date: Date, startingDate: Date? = nil, endingDate: Date? = nil) {
         self.id = id
         self.name = name
         self.image = image
@@ -113,12 +113,12 @@ extension FreeDiscover {
         image: "musee-archeo",
         location: CLLocationCoordinate2D(latitude: 43.303727, longitude: 5.394671),
         shortDescription: "Parcours semi-marathon mythique.",
-        summary: "Ce parcours est célèbre pour le semi-marathon. Ce n'est pas pour l'entraînement, mais pour la course. Les défis incluent le boulevard Michelet, une étendue de béton, et la montée du col de la Gineste. Après, on découvre le port de Cassis, un lieu emblématique couru par de nombreux sportifs marseillais. Il est recommandé de s'entraîner sur d'autres parcours avant de s'y lancer.",
+        summary: "Ce musée est célèbre pour le semi-marathon. Ce n'est pas pour l'entraînement, mais pour la course. Les défis incluent le boulevard Michelet, une étendue de béton, et la montée du col de la Gineste. Après, on découvre le port de Cassis, un lieu emblématique couru par de nombreux sportifs marseillais. Il est recommandé de s'entraîner sur d'autres parcours avant de s'y lancer.",
         voteCounter: 1,
         accessibiliy: false,
         family: true,
         favorite: false,
-        type: activityTypes.culture,
+        type: ActivityTypes.culture,
         temporary: false,
         date: .now
         
@@ -134,7 +134,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: false,
-        type: activityTypes.sport,
+        type: ActivityTypes.sport,
         temporary: true,
         date: .distantPast
 
@@ -150,7 +150,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: activityTypes.nature,
+        type: ActivityTypes.nature,
         temporary: true,
         date: .now
 
@@ -161,12 +161,12 @@ extension FreeDiscover {
         image: "concert-vieux-port",
         location: CLLocationCoordinate2D(latitude: 43.29534870002289, longitude: 5.374253259297408),
         shortDescription: "Ambiance folf et blues pour ce concert en plein air",
-        summary: "",
+        summary: "Ambiance folf et blues pour ce concert en plein air",
         voteCounter: 20,
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: activityTypes.culture,
+        type: ActivityTypes.culture,
         temporary: true,
         date: .distantFuture,
         startingDate: .distantFuture,

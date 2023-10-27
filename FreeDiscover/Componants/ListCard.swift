@@ -33,7 +33,7 @@ struct ListCard: View {
                         .foregroundColor(Color("GrayDark"))
                     Spacer()
                     HStack{
-                        ActivitySymbolSmall(activityType: "\(activity.type)")
+                        ActivitySymbolSmall(activityType: activity.type)
                         if(activity.family){
                             Image(systemName: "figure.2.and.child.holdinghands")
                                 .foregroundColor(.grayDark)
