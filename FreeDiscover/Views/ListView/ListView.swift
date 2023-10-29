@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct ListView: View {
+    // MARK: Variable externes
     /// Importation des variables globales
     @EnvironmentObject var globalVariables : GlobalVariables
     
+    // MARK: Fonctions de la vue
     func searchActivities() {
         globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
     }
     
+    // MARK: Vue
     var body: some View {
             VStack(spacing:15){
                 Spacer().frame(height: 75)

@@ -24,13 +24,13 @@ struct MapView: View {
     /// Propriété d'état qui stocke qui ajuste la postion de la caméra sur la région de l'utilisateur.
     @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
     
-    /// Propriété d'état d'un tableau avec toutes les activtés de freeDiscover à épingler sur la map.
+    /// Propriété d'état d'un tableau avec toutes les activtés de freeDiscover à épingler sur la map à l'ouverture de l'app.
     @State private var freeDiscover: [FreeDiscover] = FreeDiscover.allFreeDiscover
     
     /// Propriété d'état contrôlant l'affcihage de la modal `SheetViewSearch`.
     @State private var isShowingSheetViewSearch: Bool = true
     
-    // variable à utiliser pour authoriser la sélection d'item sur la map
+    /// variable à utiliser pour authoriser la sélection d'item sur la map
     @State private var selectedTag : Int?
     
     // MARK: Variables héritées d'autres vues
@@ -40,7 +40,13 @@ struct MapView: View {
     /// Importation des variables globales
     @EnvironmentObject var globalVariables : GlobalVariables
     
-       
+    // MARK: Fonctions de la vue
+    /// Fonction de recherche appliquée à la map
+    func searchActivities() {
+        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
+    }
+    
+    // MARK: VUE
     var body: some View {
         /// 1) - Map
         Map(position: $cameraPosition,selection: $selectedTag) {
@@ -108,7 +114,15 @@ struct MapView: View {
             locationManager.requestLocation()
         })
         .onChange(of: selectedTag){
-            showActivityPreview = true
+           
+            globalVariables.selectedActivityInSearch = globalVariables.isSearchOngoing ? globalVariables.searchResults[selectedTag!] : freeDiscover[selectedTag!]
+            
+            
+
+                   // Vous pouvez maintenant utiliser `selectedObject` qui est l'objet associé au tag sélectionné.
+                   // Par exemple, pour mettre à jour l'état pour afficher un aperçu de l'activité :
+                   showActivityPreview = true
+                   // Et si vous avez une propriété d'état pour stocker l'objet sélectionné, vous pouvez également le mettre à jour ici
         }
         .onChange(of: globalVariables.launchSearch){
             searchActivities()
@@ -121,37 +135,7 @@ struct MapView: View {
     MapView(showActivityPreview: .constant(false)).environmentObject(GlobalVariables())
 }
 
-// MARK: logique de recherche
-/// 1- extension du Type string pour rajouter une fonction `containsAny(of)` de recherche avec un ensemble de mot
-extension String {
-    /// Vérifie si la chaîne contient au moins un des mots spécifiés.
-    func containsAny(of words: [String]) -> Bool {
-        for word in words {
-            if self.localizedCaseInsensitiveContains(word) {
-                return true
-            }
-        }
-        return false
-    }
-}
-
-/// extension du type array (restraint aux array d'élément de type FreeDiscover) pour ajouter la fonction `filter` qui s'appuie sur `containsAny()`
-extension Array where Element == FreeDiscover {
-    /// Renvoie une liste d'activités dont le champ `summary` contient au moins un des mots spécifiés.
-    func filter(searchText: String) -> [FreeDiscover] {
-        let searchWords = searchText.split(separator: " ").map { String($0) }
-        return self.filter { $0.summary.containsAny(of: searchWords) }
-    }
-}
-
-/// Extension pour la classe `mapView` pour ajouter la fonction `searchActivities()` pour appeler la fonction `filter`
-extension MapView {
-    func searchActivities() {
-        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
-    }
-}
-
-// MARK: extentions pour la map
+// MARK: Extentions
 /// Une extension qui contient l'emplacement géographique de l'utilisateur.
 extension CLLocationCoordinate2D {
     static var userLocation = CLLocationCoordinate2D(

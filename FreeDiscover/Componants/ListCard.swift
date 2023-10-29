@@ -28,6 +28,7 @@ struct ListCard: View {
                         .font(.subheadline)
                         .fontWeight(.light)
                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                     Text("12.4 km")
                         .font(.subheadline.weight(.light))
                         .foregroundColor(Color("GrayDark"))

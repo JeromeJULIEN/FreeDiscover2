@@ -70,11 +70,11 @@ struct HomepageView: View {
                 .sheet(isPresented: $showCarroussel){
                     CarrousselBonPlan()
                         .sheet(isPresented: $showActivityPreview){
-                            ActivityPreview()
+                            ActivityPreview(activity: globalVariables.selectedActivityInSearch)
                         }
                 }
                 .sheet(isPresented: $showActivityPreview){
-                    ActivityPreview()
+                    ActivityPreview(activity: globalVariables.selectedActivityInSearch)
                 }
                 .overlay(alignment: .top, content: {
                     SearchView(showSearchView: $showSearchView)

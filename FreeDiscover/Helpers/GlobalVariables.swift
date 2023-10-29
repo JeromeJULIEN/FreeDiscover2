@@ -17,4 +17,6 @@ class GlobalVariables :ObservableObject {
     @Published var isSearchOngoing : Bool = false
     /// Resultat de la recherche en cours
     @Published var searchResults : [FreeDiscover] = []
+    /// Activité sélectionnée dans la vue map
+    @Published var selectedActivityInSearch = FreeDiscover()
 }
