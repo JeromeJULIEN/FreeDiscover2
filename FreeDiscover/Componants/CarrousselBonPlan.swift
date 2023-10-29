@@ -39,6 +39,7 @@ struct CarrousselBonPlan: View {
                                         .font(.headline)
                                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                                 }
                                 .frame(width: 110)
 
@@ -55,10 +56,10 @@ struct CarrousselBonPlan: View {
             .padding(.top,20)
             /// limitation de la taille de la sheet
             .presentationDetents([.height(200)])
-            
             .presentationCornerRadius(20)
             /// bloquer la possibilité de fermer la sheet avec un swipe down
             /// .interactiveDismissDisabled()
+            .presentationDragIndicator(.visible)
         }
     }
 }

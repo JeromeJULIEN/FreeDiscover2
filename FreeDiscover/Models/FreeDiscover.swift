@@ -174,9 +174,27 @@ extension FreeDiscover {
     
     )
     
+    static let social1 = FreeDiscover(
+        name: "Brocante du bois sacré",
+        image: "vide-grenier",
+        location: CLLocationCoordinate2D(latitude: 43.282387, longitude: 5.37092),
+        shortDescription: "Habits et jouets à chiner au pied de la bonne mère",
+        summary: "Au pied de la Bonne Mère, trouvez des trésors d'antan dans notre marché de charme. Chinez des habits vintage et jouets rétro, et plongez dans une atmosphère accueillante imprégnée d'histoire marseillaise.",
+        voteCounter: 15,
+        accessibiliy: true,
+        family: true,
+        favorite: false,
+        type: ActivityTypes.social,
+        temporary: true,
+        date: .distantFuture,
+        startingDate: .distantFuture,
+        endingDate: .distantFuture
+    
+    )
+    
     /// Tableau de statistique ` allFreeDiscover` regroupant tous les modèles de `FreeDiscover` disponible.
     /// 
-    static let allFreeDiscover = [musee1, sport1, nature1, bonPlan1]
+    static let allFreeDiscover = [musee1, sport1, nature1, bonPlan1,social1]
 
 }
 

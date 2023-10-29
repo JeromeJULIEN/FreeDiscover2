@@ -11,7 +11,7 @@ struct ActivityPreview: View {
     var activity : FreeDiscover
     
     var body: some View {
-        HStack{
+        HStack(alignment:.top){
             VStack(alignment:.leading){
                 Text("\(activity.name)")
                     .font(.headline)
@@ -22,11 +22,13 @@ struct ActivityPreview: View {
                     Spacer()
                     VoteCountDisplay(voteCount: activity.voteCounter)
                 }
-                Text("\(activity.summary)")
+                Spacer()
+                Text("\(activity.shortDescription)")
                     .font(.headline)
                     .fontWeight(.regular)
                     .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                     .lineLimit(4)
+                Spacer()
 
             }
             Spacer()
@@ -40,6 +42,7 @@ struct ActivityPreview: View {
         .presentationDetents([ .height(200)])
         .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
         .presentationCornerRadius(20)
+        .presentationDragIndicator(.visible)
     }
        
 }

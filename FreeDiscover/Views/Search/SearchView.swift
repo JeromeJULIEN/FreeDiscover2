@@ -23,12 +23,7 @@ struct SearchView : View {
         
     /// Propriété d'état pour l'animation du bouton `Cancel`.
     @State private var animateButtonCancel: Double = 0.3
-    
-    /// varaible d'état pour selection des catégories
-    @State var isNatureSelected : Bool = true
-    @State var isCultureSelected : Bool = true
-    @State var isSportSelected : Bool = true
-    
+        
     // MARK: Variables héritées
     /// gestion de l'affichage de la vue de recherche
     @Binding var showSearchView : Bool
@@ -68,9 +63,11 @@ struct SearchView : View {
                                     cornerRadius: 8,
                                     style: .continuous))
                 HStack(spacing:50){
-                    SelectableActivitySymbol(activityType: ActivityTypes.nature, isSelected: $isNatureSelected)
-                    SelectableActivitySymbol(activityType: ActivityTypes.sport, isSelected: $isSportSelected)
-                    SelectableActivitySymbol(activityType: ActivityTypes.culture, isSelected: $isCultureSelected)
+                    SelectableActivitySymbol(activityType: ActivityTypes.nature, isSelected: $globalVariables.isNatureSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.sport, isSelected: $globalVariables.isSportSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.culture, isSelected: $globalVariables.isCultureSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.social, isSelected: $globalVariables.isSocialSelectedForSearch)
+                    
                 }
                 Button(action: {
                     globalVariables.launchSearch.toggle()

@@ -43,7 +43,7 @@ struct MapView: View {
     // MARK: Fonctions de la vue
     /// Fonction de recherche appliquée à la map
     func searchActivities() {
-        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
+        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent,lookForNature: globalVariables.isNatureSelectedForSearch,lookForSport: globalVariables.isSportSelectedForSearch,lookForCulture: globalVariables.isCultureSelectedForSearch,lookForSocial: globalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: VUE
@@ -114,15 +114,10 @@ struct MapView: View {
             locationManager.requestLocation()
         })
         .onChange(of: selectedTag){
-           
+            /// Définie l'objet sélectionné dans les variables globales et à afficher dans `activityPreview`
             globalVariables.selectedActivityInSearch = globalVariables.isSearchOngoing ? globalVariables.searchResults[selectedTag!] : freeDiscover[selectedTag!]
-            
-            
-
-                   // Vous pouvez maintenant utiliser `selectedObject` qui est l'objet associé au tag sélectionné.
-                   // Par exemple, pour mettre à jour l'état pour afficher un aperçu de l'activité :
-                   showActivityPreview = true
-                   // Et si vous avez une propriété d'état pour stocker l'objet sélectionné, vous pouvez également le mettre à jour ici
+            /// Affiche la modale `activityPreview`
+            showActivityPreview = true
         }
         .onChange(of: globalVariables.launchSearch){
             searchActivities()

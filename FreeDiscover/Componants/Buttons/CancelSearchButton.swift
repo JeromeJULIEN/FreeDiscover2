@@ -14,6 +14,11 @@ struct CancelSearchButton: View {
         Button {
             globalVariables.isSearchOngoing = false
             globalVariables.searchContent = ""
+            globalVariables.isNatureSelectedForSearch = true
+            globalVariables.isSportSelectedForSearch = true
+            globalVariables.isCultureSelectedForSearch = true
+            globalVariables.isSocialSelectedForSearch = true
+
         } label:{
             ZStack{
                 Circle()

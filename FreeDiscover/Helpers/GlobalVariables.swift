@@ -19,4 +19,10 @@ class GlobalVariables :ObservableObject {
     @Published var searchResults : [FreeDiscover] = []
     /// Activité sélectionnée dans la vue map
     @Published var selectedActivityInSearch = FreeDiscover()
+    /// Filtre par catégorie pour la recherche
+    @Published var isNatureSelectedForSearch : Bool = true
+    @Published var isSportSelectedForSearch : Bool = true
+    @Published var isCultureSelectedForSearch : Bool = true
+    @Published var isSocialSelectedForSearch : Bool = true
+
 }

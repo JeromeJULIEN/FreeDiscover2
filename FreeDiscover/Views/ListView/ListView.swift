@@ -14,11 +14,12 @@ struct ListView: View {
     
     // MARK: Fonctions de la vue
     func searchActivities() {
-        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent)
+        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent,lookForNature: globalVariables.isNatureSelectedForSearch,lookForSport: globalVariables.isSportSelectedForSearch,lookForCulture: globalVariables.isCultureSelectedForSearch,lookForSocial: globalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: Vue
     var body: some View {
+        ScrollView(showsIndicators: false){
             VStack(spacing:15){
                 Spacer().frame(height: 75)
                 if(globalVariables.isSearchOngoing == false){
@@ -54,6 +55,7 @@ struct ListView: View {
             .onChange(of:globalVariables.isSearchOngoing){
                 searchActivities()
             }
+        }
     }
 }
                

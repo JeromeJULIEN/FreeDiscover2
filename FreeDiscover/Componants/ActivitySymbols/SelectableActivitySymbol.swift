@@ -22,7 +22,7 @@ struct SelectableActivitySymbol: View {
                         ZStack{
                             Circle()
                                 .frame(width:40)
-                                .foregroundColor(isSelected ? .green : .gray)
+                                .foregroundColor(isSelected ? .natureGreen : .gray)
                                 .shadow(radius: 2)
                             Image(systemName: "leaf.fill")
                                 .foregroundColor(.white)
@@ -41,7 +41,7 @@ struct SelectableActivitySymbol: View {
                         ZStack{
                             Circle()
                                 .frame(width:40)
-                                .foregroundColor(isSelected ? .orange : .gray)
+                                .foregroundColor(isSelected ? .sportOrange : .gray)
                                 .shadow(radius: 2)
                             Image(systemName: "figure.run")
                                 .foregroundColor(.white)
@@ -60,7 +60,7 @@ struct SelectableActivitySymbol: View {
                         ZStack{
                             Circle()
                                 .frame(width:40)
-                                .foregroundColor(isSelected ? .blue : .gray)
+                                .foregroundColor(isSelected ? .cultureBlue : .gray)
                                 .shadow(radius: 2)
                             Image(systemName: "building.columns.fill")
                                 .foregroundColor(.white)
@@ -71,7 +71,26 @@ struct SelectableActivitySymbol: View {
                             .foregroundColor(.grayDark)
                     }
                 })
-                default:
+            case .social:
+                Button(action: {
+                    isSelected.toggle()
+                }, label: {
+                    VStack {
+                        ZStack{
+                            Circle()
+                                .frame(width:40)
+                                .foregroundColor(isSelected ? .socialRed : .gray)
+                                .shadow(radius: 2)
+                            Image(systemName: "figure.socialdance")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                        }
+                        Text("\(activityType.rawValue)")
+                            .font(.caption)
+                            .foregroundColor(.grayDark)
+                    }
+                })
+            default:
                 Circle().foregroundColor(.black).frame(width:44)
             }
             
