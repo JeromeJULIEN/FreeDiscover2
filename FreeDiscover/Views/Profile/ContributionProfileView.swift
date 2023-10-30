@@ -18,12 +18,9 @@ struct ContributionProfileView: View {
             ProfileSwitchButton()
                 .padding()
             
-            ScrollView {
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
-            }
+//            ScrollView {
+//                CarrouselFavoriteEV()    
+//            }
             
             .padding()
             Spacer()
