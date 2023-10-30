@@ -34,7 +34,6 @@ struct CreateActivityView: View {
         return formatter
     }
     @State var activityDate = Date()
-    @State var pickedCategory: activityCategory
     @State var buttonColor = Color.lightBlue
     @State var shouldChangeColor = false
     
@@ -42,7 +41,7 @@ struct CreateActivityView: View {
         
         ScrollView {
             VStack {
-                CategoryPicker(currentCategory: currentCategory, pickedCategory: pickedCategory)
+                CategoryPicker(currentCategory: currentCategory)
                     .padding()
                 
                 TextField(("Nom de l'activité..."),
@@ -141,5 +140,5 @@ struct CreateActivityView: View {
 }
 
 #Preview {
-    CreateActivityView(currentCategory: .nature, isTemporary: false, pickedCategory: culture)
+    CreateActivityView(currentCategory: .nature, isTemporary: false)
 }
