@@ -15,32 +15,78 @@ struct ActivitySymbol: View {
         ZStack {
             switch activityType {
                 case "nature":
+                ZStack{
                     Circle()
                         .frame(width:36)
-                        .foregroundColor(.green)
+                        .foregroundColor(.natureGreen)
                         .shadow(radius: 2)
-                        .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
                     Image(systemName: "leaf.fill")
                         .foregroundColor(.white)
                         .imageScale(.large)
+                    ZStack{
+                        Rectangle()
+                            .frame(width: 15,height: 12)
+                            .foregroundColor(.white)
+                        Image(systemName: "calendar")
+                    }
+                    .offset(x:15 , y:-15)
+                    .opacity(temporary ? 1 : 0)
+                    
+                }
                 case "sport":
+                ZStack{
                     Circle()
                         .frame(width:36)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.sportOrange)
                         .shadow(radius: 2)
-                        .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
                     Image(systemName: "figure.run")
                         .foregroundColor(.white)
                         .imageScale(.large)
+                    ZStack{
+                        Rectangle()
+                            .frame(width: 15,height: 12)
+                            .foregroundColor(.white)
+                        Image(systemName: "calendar")
+                    }
+                    .offset(x:15 , y:-15)
+                    .opacity(temporary ? 1 : 0)
+                }
                 case "culture":
+                ZStack{
                     Circle()
                         .frame(width:36)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cultureBlue)
                         .shadow(radius: 2)
-                        .overlay(Circle().stroke(temporary ? Color.white : Color.clear, lineWidth: 4)).shadow(radius: 2)
                     Image(systemName: "building.columns.fill")
                         .foregroundColor(.white)
                         .imageScale(.large)
+                    ZStack{
+                        Rectangle()
+                            .frame(width: 15,height: 12)
+                            .foregroundColor(.white)
+                        Image(systemName: "calendar")
+                    }
+                    .offset(x:15 , y:-15)
+                    .opacity(temporary ? 1 : 0)
+                }
+                case "social":
+                ZStack{
+                    Circle()
+                        .frame(width:36)
+                        .foregroundColor(.socialRed)
+                        .shadow(radius: 2)
+                    Image(systemName: "figure.socialdance")
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                    ZStack{
+                        Rectangle()
+                            .frame(width: 15,height: 12)
+                            .foregroundColor(.white)
+                        Image(systemName: "calendar")
+                    }
+                    .offset(x:15 , y:-15)
+                    .opacity(temporary ? 1 : 0)
+                }
                 default:
                 Circle().foregroundColor(.black).frame(width:36)
             }

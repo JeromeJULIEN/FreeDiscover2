@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ActivitySymbolSmall: View {
+
 //    var activityType : String
-    var activityType : ActivityTypes = .nature
+
+    var activityType : ActivityTypes
+    
+
     var body: some View {
         ZStack {
             switch activityType {
             case .nature:
                     Circle()
                         .frame(width:20)
-                        .foregroundColor(.green)
+                        .foregroundColor(.natureGreen)
                         .shadow(radius: 2)
                        
                     Image(systemName: "leaf.fill")
@@ -25,7 +29,7 @@ struct ActivitySymbolSmall: View {
             case .sport:
                     Circle()
                         .frame(width:20)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.sportOrange)
                         .shadow(radius: 2)
                     Image(systemName: "figure.run")
                         .foregroundColor(.white)
@@ -33,13 +37,22 @@ struct ActivitySymbolSmall: View {
             case .culture:
                     Circle()
                         .frame(width:20)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.cultureBlue)
                         .shadow(radius: 2)
                         
                     Image(systemName: "building.columns.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 10))
-                default:
+            case .social:
+                    Circle()
+                        .frame(width:20)
+                        .foregroundColor(.socialRed)
+                        .shadow(radius: 2)
+                        
+                    Image(systemName: "figure.socialdance")
+                        .foregroundColor(.white)
+                        .font(.system(size: 10))
+            default:
                 Circle().foregroundColor(.black).frame(width:44)
             }
             
