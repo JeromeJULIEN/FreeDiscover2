@@ -151,7 +151,7 @@ extension FreeDiscover {
         family: false,
         favorite: true,
         type: activityTypes.nature,
-        temporary: true,
+        temporary: false,
         date: .now
 
     )

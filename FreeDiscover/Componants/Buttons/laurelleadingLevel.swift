@@ -1,5 +1,5 @@
 //
-//  ShareButton.swift
+//  laurelleadingLevel.swift
 //  FreeDiscover
 //
 //  Created by apprenant70 on 26/10/2023.
@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct ShareButton: View {
+struct laurelleadingLevel: View {
     var body: some View {
-        Image(systemName: "square.and.arrow.up")
-            .imageScale(.large)
+        Image(systemName: "laurel.leading")
+            .imageScale(.small)
             .padding(10)
-            .foregroundStyle(.white)
+            .foregroundStyle(.black)
             .background(Color.accentColor, in: Circle())
             .shadow(color: Color.secondary, radius: 4)
     }
 }
 
 #Preview {
-    ShareButton()
+    laurelleadingLevel()
 }

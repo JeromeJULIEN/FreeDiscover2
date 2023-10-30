@@ -23,7 +23,7 @@ struct CarrousselBonPlan: View {
                     HStack(spacing:40){
                         ForEach(getTemporaryActivities(),id: \.id){
                             activity in
-                            NavigationLink(destination:ActivityDetailView()){
+                            NavigationLink(destination:ActivityDetailView(activity: activity)){
                                 VStack(alignment:.leading){
                                     Image("\(activity.image)")
                                        .resizable()

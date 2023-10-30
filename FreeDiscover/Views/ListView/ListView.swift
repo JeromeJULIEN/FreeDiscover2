@@ -12,11 +12,12 @@ struct ListView: View {
         VStack(spacing:15){
             Spacer().frame(height: 60)
             ForEach(FreeDiscover.allFreeDiscover){activity in
-                NavigationLink(destination:ActivityDetailView()){
+                NavigationLink(destination:ActivityDetailView(activity: activity)){
                     ListCard(activity: activity)
                 }.accentColor(Color("GrayDark"))
             }
-        }.padding()
+        }
+        .padding()
     }
 }
                

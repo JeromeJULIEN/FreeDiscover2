@@ -2,14 +2,19 @@
 //  ThumbsdownButton.swift
 //  FreeDiscover
 //
-//  Created by apprenant70 on 24/10/2023.
+//  Created by apprenant70 on 26/10/2023.
 //
 
 import SwiftUI
 
 struct ThumbsdownButton: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: "hand.thumbsdown.fill")
+            .imageScale(.small)
+            .padding(10)
+            .foregroundStyle(.white)
+            .background(.grayDark, in: Circle())
+            .shadow(color: Color.secondary, radius: 4)
     }
 }
 
