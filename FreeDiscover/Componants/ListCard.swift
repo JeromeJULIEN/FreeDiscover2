@@ -28,12 +28,13 @@ struct ListCard: View {
                         .font(.subheadline)
                         .fontWeight(.light)
                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                     Text("12.4 km")
                         .font(.subheadline.weight(.light))
                         .foregroundColor(Color("GrayDark"))
                     Spacer()
                     HStack{
-                        ActivitySymbolSmall(activityType: "\(activity.type)")
+                        ActivitySymbolSmall(activityType: activity.type)
                         if(activity.family){
                             Image(systemName: "figure.2.and.child.holdinghands")
                                 .foregroundColor(.grayDark)

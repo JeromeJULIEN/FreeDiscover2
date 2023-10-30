@@ -13,7 +13,7 @@
 
 import SwiftUI
 
-struct SheetViewShearch: View {
+struct SearchViewBaseOlivier: View {
     
     ///
     @Environment (\.dismiss) var dismiss
@@ -83,13 +83,7 @@ struct SheetViewShearch: View {
                     
                 }
                 
-            }
-//            .presentationDetents([.height(200), .large])
-//            .presentationBackground(.secondary)
-            .presentationCornerRadius(16)
-            .presentationDragIndicator(.visible)
-            .presentationBackgroundInteraction(.enabled(upThrough: .large))
-            
+            }.background(.white)
         }
 
     }
@@ -97,6 +91,6 @@ struct SheetViewShearch: View {
 
 #Preview {
     NavigationStack {
-        SheetViewShearch()
+        SearchViewBaseOlivier()
     }
 }

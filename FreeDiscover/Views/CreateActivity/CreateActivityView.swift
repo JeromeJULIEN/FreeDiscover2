@@ -22,7 +22,7 @@ struct CreateActivityView: View {
     @State var activityName: String = ""
     @State var activityDescription: String = ""
     @State var symbolSelection: Int = 1
-    @State var activityCategory: activityTypes
+    @State var activityCategory: ActivityTypes
     @State var isTemporary: Bool
     //
     @StateObject var viewModel = UserModel()

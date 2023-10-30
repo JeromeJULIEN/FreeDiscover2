@@ -12,13 +12,17 @@ struct CarrousselBonPlan: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .ignoresSafeArea()
-                .frame(height: 200)
+                .frame(height: 220)
                 .foregroundColor(.white)
                 .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
             VStack(alignment : .leading){
-                Text("Nos bon plan du moment")
-                    .font(.headline)
+                HStack {
+                    Spacer()
+                    Text("Nos bons plans du moment")
+                        .font(.headline)
                     .foregroundColor(.grayDark)
+                    Spacer()
+                }
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing:40){
                         ForEach(getTemporaryActivities(),id: \.id){
@@ -35,6 +39,7 @@ struct CarrousselBonPlan: View {
                                         .font(.headline)
                                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                                         .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
                                 }
                                 .frame(width: 110)
 
@@ -44,9 +49,17 @@ struct CarrousselBonPlan: View {
                 }
                 
             }
+            /// autoriser les interaction avec la carte malgré l'affichage de la sheet carroussel
+            .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
             .padding(.leading,10)
-            .presentationDetents([.height(200), .large])
+            .padding(.top,20)
+            /// limitation de la taille de la sheet
+            .presentationDetents([.height(200)])
+            .presentationCornerRadius(20)
+            /// bloquer la possibilité de fermer la sheet avec un swipe down
+            /// .interactiveDismissDisabled()
+            .presentationDragIndicator(.visible)
         }
     }
 }
