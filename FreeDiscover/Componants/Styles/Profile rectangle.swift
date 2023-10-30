@@ -32,13 +32,35 @@ struct Profile_rectangle: View {
                     Text(userName)
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
-                        .font(.title2)
-                    
-                    Text(userStatus)
-                    Text("\(userContribution) contributions")
-                        .fontWeight(.light)
-                        .foregroundColor(.gray)
-                    
+                        .font(.title)
+                    HStack {
+                        Text(userStatus)
+                        Image(systemName: "laurel.leading")
+//                        récupérer le logo sur page de Flo à la place . Puis après voir pour le lier au nombre de contribution
+                        
+                    }
+                        Text("\(userContribution) contributions")
+                            
+                            .foregroundColor(.gray)
+                        .padding(.top, 10)
+                     
+                    NavigationLink(destination: CreateActivityView(activityCategory: ActivityTypes.nature, isTemporary: true)){
+                        HStack {
+                            Image(systemName:"plus.circle.fill")
+                                .foregroundColor(.gray)
+                                .fontWeight(.light)
+                            Text("Ajouter une activité")
+                                .foregroundColor(.gray)
+                            
+                        } }
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .frame(width: 160, height: 44)
+//                            .foregroundColor(.grayLight)
+//                        Text("Ajouter une contribution")
+//                            .fontWeight(.bold)
+//                            .foregroundColor(.accentColor)
+//                    }
                 }
                 .padding()
             }

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct CategoryPicker: View {
+
     @State var currentCategory: ActivityTypes
     @State var pickedCategory: activityCategory
     @State var buttonColor = Color.natureGreen
     @State var selectedCategory: String = "Category1"
+    @State var activityCategory: ActivityTypes
+    
     var body: some View {
         
         ZStack{

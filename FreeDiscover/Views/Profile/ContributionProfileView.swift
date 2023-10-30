@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContributionProfileView: View {
-    let columns = [GridItem(.fixed(120)), GridItem(.fixed(120)),  GridItem(.fixed(120))]
+  
     var user: UserProfile
     
     var body: some View {
@@ -18,30 +18,10 @@ struct ContributionProfileView: View {
             ProfileSwitchButton()
                 .padding()
             
-            HStack {
-//                ActivitySymbolSmall(activityType: "nature")
-                Text("Mes activités proposées")
-                    .font(.title2)
-                    .padding(.trailing, 120.0)
-            }
-            ScrollView(.horizontal) {
+//            ScrollView {
+//                CarrouselFavoriteEV()    
+//            }
             
-                LazyVGrid(columns:columns) { content: do {
-                    Image("calanque-en-vau")
-                        .resizable()
-                        .frame(width: 110, height: 110)
-                    Image("jardin-borely")
-                        .resizable()
-                        .frame(width: 110, height: 110)
-                    Image("plage-generique")
-                        .resizable()
-                        .frame(width: 110, height: 110)
-                    Image("calanque-en-vau")
-                        .resizable()
-                        .frame(width: 110, height: 110)
-                }
-                }
-            }
             .padding()
             Spacer()
         }

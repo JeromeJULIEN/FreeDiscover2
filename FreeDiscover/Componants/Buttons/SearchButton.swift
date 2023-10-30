@@ -13,16 +13,21 @@
 import SwiftUI
 
 struct SearchButton: View {
+    
+    @Binding var showSearchModal : Bool
+    
     var body: some View {
-        Image(systemName:  "magnifyingglass")
-            .imageScale(.large)
-            .padding(10)
-            .foregroundStyle(.white)
-            .background(Color.accentColor, in: Circle())
-            .shadow(color: Color.secondary, radius: 4)
+        Button {showSearchModal = !showSearchModal} label:{
+            Image(systemName:  "magnifyingglass")
+                .imageScale(.large)
+                .padding(10)
+                .foregroundStyle(.white)
+                .background(Color.accentColor, in: Circle())
+                .shadow(color: Color.secondary, radius: 4)
+        }        
     }
 }
 
 #Preview {
-    SearchButton()
+    SearchButton(showSearchModal: .constant(true))
 }

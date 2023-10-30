@@ -23,6 +23,7 @@ struct CreateActivityView: View {
     @State var activityDescription: String = ""
     @State var symbolSelection: Int = 1
     @State var currentCategory: ActivityTypes
+    @State var activityCategory: ActivityTypes
     @State var isTemporary: Bool
     @State var isPickerShowing = false
     //
