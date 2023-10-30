@@ -20,7 +20,7 @@ import SwiftUI
 ///
 /// Cette énumaération se conforme au protocole standard `String`.
 ///
-enum activityTypes : String {
+enum ActivityTypes : String, CaseIterable {
     case nature = "nature"
     case culture = "culture"
     case sport = "sport"

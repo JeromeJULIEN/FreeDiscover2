@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryPicker: View {
-    @State var activityCategory: activityTypes
+    @State var activityCategory: ActivityTypes
     
     var body: some View {
         

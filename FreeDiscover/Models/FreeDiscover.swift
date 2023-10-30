@@ -55,7 +55,7 @@ struct FreeDiscover: Identifiable {
     var favorite: Bool
     
     /// Type de l'activité.
-    var type: activityTypes
+    var type: ActivityTypes
     
     /// Activité ponctuelle.
     var temporary: Bool
@@ -84,7 +84,7 @@ struct FreeDiscover: Identifiable {
     ///   - type: Catégorise le type de l'activité.
     ///   - temporary: Activité ponctuelle.
     ///   - date: Ajoute une date de création de l'activité.
-    init(id: UUID = UUID(), name: String, image: String, location: CLLocationCoordinate2D, shortDescription: String, summary: String, voteCounter: Int, accessibiliy: Bool, family: Bool, favorite: Bool, type: activityTypes, temporary: Bool, date: Date, startingDate: Date? = nil, endingDate: Date? = nil) {
+    init(id: UUID = UUID(), name: String, image: String, location: CLLocationCoordinate2D, shortDescription: String, summary: String, voteCounter: Int, accessibiliy: Bool, family: Bool, favorite: Bool, type: ActivityTypes, temporary: Bool, date: Date, startingDate: Date? = nil, endingDate: Date? = nil) {
         self.id = id
         self.name = name
         self.image = image
@@ -118,7 +118,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: true,
         favorite: false,
-        type: activityTypes.culture,
+        type: .culture,
         temporary: false,
         date: .now
         
@@ -134,7 +134,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: false,
-        type: activityTypes.sport,
+        type: .sport,
         temporary: true,
         date: .distantPast
 
@@ -150,7 +150,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: activityTypes.nature,
+        type: .nature,
         temporary: true,
         date: .now
 
@@ -166,7 +166,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: activityTypes.culture,
+        type: .culture,
         temporary: true,
         date: .distantFuture,
         startingDate: .distantFuture,
