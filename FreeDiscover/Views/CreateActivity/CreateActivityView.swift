@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import HorizonCalendar
 
 enum DurationMode {
     case temporary, permanent
@@ -14,25 +15,35 @@ enum DurationMode {
 
 
 struct CreateActivityView: View {
-    //  @State private var currentCategory: CategoryMode = .nature
-    //  @State private var currentActivityType = "Nature"
-    // let activityTypes =  ["Nature", "Culture", "Sport", "Social"]
+    
     @State private var dates: Set<DateComponents> = []
-    @State private var showingSheet = false
+    @State private var date = Date()
+    @State private var showingCalendar = false
     @State var activityName: String = ""
     @State var activityDescription: String = ""
     @State var symbolSelection: Int = 1
-    @State var activityCategory: activityTypes
+    @State var currentCategory: ActivityTypes
     @State var isTemporary: Bool
+    @State var isPickerShowing = false
     //
     @StateObject var viewModel = UserModel()
-    
+    @State var selectedImage: UIImage?
+
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+    @State var activityDate = Date()
+    @State var pickedCategory: activityCategory
+    @State var buttonColor = Color.lightBlue
+    @State var shouldChangeColor = false
     
     var body : some View {
         
         ScrollView {
             VStack {
-                CategoryPicker(activityCategory: .nature)
+                CategoryPicker(currentCategory: currentCategory, pickedCategory: pickedCategory)
                     .padding()
                 
                 TextField(("Nom de l'activité..."),
@@ -53,7 +64,16 @@ struct CreateActivityView: View {
                 .padding()
                 //    .textFieldStyle(.roundedBorder)
                 
+                
+                Button(action: {
+                    print("pouet")
+                }) {
+                    CtaButton(ctaText: "Sélectionner l'emplacement", ctaIcon: "location", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
+                        .frame(minWidth: 340)
+                }
                 Toggle("Il s'agit d'une activité temporaire", isOn: $isTemporary)
+                    .toggleStyle(.switch)
+                    .tint(.accentColor)
                     .foregroundColor(Color.grayDark)
                     .padding()
                     .background(Color.grayLight)
@@ -61,62 +81,57 @@ struct CreateActivityView: View {
                     .padding()
                 
                 if isTemporary == true {
-                    Button(action: {
-                        showingSheet = true
-                    }) {
-                        CtaButton(ctaText: "Sélectionner une date", ctaIcon: "calendar", ctaBgColor: .grayLight, ctaFgColor: .accentColor)
-                            .padding()
-                    }
+                    
+                        DatePicker(
+                            "Date :",
+                            selection: $date, in: Date.now...,
+                            displayedComponents: [.date]
+                        )
+                        .padding(.horizontal, 60)
+                    
                 } else {
-                    Text("")
-                        .frame(width:280, height:52)
-                        .padding()
+                   // Text("")
+                     //   .frame(width:280, height:52)
+                    //    .padding()
                     
                 }
             }
             
-            
-            
-            
-            //       Button(action: {
-            //           print("pouet")
-            //       }) {
-            //            CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: .lightBlue, ctaFgColor: .grayDark)
-            //           
-            //       }
-            //       .frame(minWidth: 340)
-            
-            EditableDisplayedImage(viewModel: viewModel)
-            
+         
             Button(action: {
-                print("pouet")
+                isPickerShowing = true
             }) {
-                CtaButton(ctaText: "Sélectionner l'emplacement", ctaIcon: "location", ctaBgColor: .lightBlue, ctaFgColor: .grayDark)
+                CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
                     .frame(minWidth: 340)
             }
-            
-            
-            .sheet(isPresented: $showingSheet) {
-                MultiDatePicker("Sélectionner une date", selection: $dates)
+            .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
+                
+                //Image picker
+                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
             }
             
-            Button(action: {
-                print("pouet")
-            }) {
-                CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: .lightBlue, ctaFgColor: .grayDark)
-                    .frame(minWidth: 340)
+            if selectedImage != nil {
+               
+                    
+                    Image(uiImage: selectedImage!)
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .cornerRadius(10)
+                    
             }
             HStack {
                 Button(action: {
-                    self.symbolSelection = 1
+                    print("")
                 }) {
-                    AccessibilitySymbol(symbolSelection: 2, accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
+                    AccessibilitySymbol(accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
                 }
                 Button(action: {
-                    self.symbolSelection = 0
+                    print("")
                 }) {
-                    AccessibilitySymbol(symbolSelection: 2, accessSymbol: "figure.roll", accessName: "Accessible")
+                    AccessibilitySymbol(accessSymbol: "figure.roll", accessName: "Accessible")
                 }
+                
+            
                 
             }
             Spacer()
@@ -127,5 +142,5 @@ struct CreateActivityView: View {
 }
 
 #Preview {
-    CreateActivityView(activityCategory: .nature, isTemporary: false)
+    CreateActivityView(currentCategory: .nature, isTemporary: false, pickedCategory: culture)
 }

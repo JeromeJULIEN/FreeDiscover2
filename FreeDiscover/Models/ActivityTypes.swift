@@ -20,10 +20,26 @@ import SwiftUI
 ///
 /// Cette énumaération se conforme au protocole standard `String`.
 ///
-enum activityTypes : String {
+enum ActivityTypes: String, CaseIterable {
     case nature = "nature"
     case culture = "culture"
     case sport = "sport"
     case social = "social"
 
 }
+
+
+struct activityCategory {
+    var name: ActivityTypes
+    var color: Color
+    var symbol: String
+    
+    
+}
+
+let nature = activityCategory(name: .nature, color: .natureGreen, symbol: "leaf")
+let culture = activityCategory(name: .culture, color: .cultureBlue, symbol: "building.columns")
+let sport = activityCategory(name: .sport, color: .sportOrange, symbol: "figure.walk")
+let social = activityCategory(name: .social, color: .socialRed, symbol: "figure.socialdance")
+        
+

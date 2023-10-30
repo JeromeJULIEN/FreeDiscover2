@@ -38,6 +38,7 @@
 		C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42D2AE7AC1900DEE84F /* UserModel.swift */; };
 		C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */; };
 		C75F398E2AE7F050005DD9AA /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */; };
+		C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C770A4C32AE904F700A60BB8 /* ImagePicker.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
 		C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */; };
 		F2E031582AE17D98001ECF38 /* ActivityTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E031572AE17D98001ECF38 /* ActivityTypes.swift */; };
@@ -83,6 +84,7 @@
 		C71FB42D2AE7AC1900DEE84F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		C770A4C32AE904F700A60BB8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
 		C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySymbol.swift; sourceTree = "<group>"; };
 		F2E031572AE17D98001ECF38 /* ActivityTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypes.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				7C7385BD2AE12D1A0024DDCC /* CreateActivityView.swift */,
 				C71FB42D2AE7AC1900DEE84F /* UserModel.swift */,
 				C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */,
+				C770A4C32AE904F700A60BB8 /* ImagePicker.swift */,
 			);
 			path = CreateActivity;
 			sourceTree = "<group>";
@@ -332,6 +335,8 @@
 			dependencies = (
 			);
 			name = FreeDiscover;
+			packageProductDependencies = (
+			);
 			productName = FreeDiscover;
 			productReference = 7C7385902AE113EC0024DDCC /* FreeDiscover.app */;
 			productType = "com.apple.product-type.application";
@@ -360,6 +365,8 @@
 				Base,
 			);
 			mainGroup = 7C7385872AE113EC0024DDCC;
+			packageReferences = (
+			);
 			productRefGroup = 7C7385912AE113EC0024DDCC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -389,6 +396,7 @@
 				7C0F47742AE18A56004F8033 /* ActivitySymbolSmall.swift in Sources */,
 				7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */,
 				7C7385C02AE12D260024DDCC /* ProfileView.swift in Sources */,
+				C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */,
 				7C9ACD852AE6B7690083E3C2 /* UserSymbolMapPosition.swift in Sources */,
 				4364CD372AE6663C001A100A /* ProfileSwitchButton.swift in Sources */,
 				43944F6F2AE271C100E03E84 /* UserProfile.swift in Sources */,
