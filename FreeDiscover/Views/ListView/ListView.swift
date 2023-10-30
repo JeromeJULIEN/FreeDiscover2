@@ -24,14 +24,14 @@ struct ListView: View {
                 Spacer().frame(height: 75)
                 if(globalVariables.isSearchOngoing == false){
                     ForEach(FreeDiscover.allFreeDiscover){activity in
-                        NavigationLink(destination:ActivityDetailView()){
+                        NavigationLink(destination:ActivityDetailView(activity: activity)){
                             ListCard(activity: activity)
                         }.accentColor(Color("GrayDark"))
                     }
                 }
                 if(globalVariables.isSearchOngoing == true){
                     ForEach(globalVariables.searchResults){activity in
-                        NavigationLink(destination:ActivityDetailView()){
+                        NavigationLink(destination:ActivityDetailView(activity: activity)){
                             ListCard(activity: activity)
                         }.accentColor(Color("GrayDark"))
                     }

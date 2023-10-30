@@ -57,7 +57,7 @@ struct ActivityDetailView: View {
                 VStack {
                         VStack{
                         HStack (){
-                            ActivitySymbolSmall(activityType: "\(activity.type)")
+                            ActivitySymbolSmall(activityType: activity.type)
                             //                                if(activity.family){
                             //                                    Image(systemName: "figure.2.and.child.holdinghands")
                             //                                        .foregroundColor(.grayDark)

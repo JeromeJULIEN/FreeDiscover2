@@ -13,7 +13,6 @@ struct CategoryPicker: View {
     @State var pickedCategory: activityCategory
     @State var buttonColor = Color.natureGreen
     @State var selectedCategory: String = "Category1"
-    @State var activityCategory: ActivityTypes
     
     var body: some View {
         

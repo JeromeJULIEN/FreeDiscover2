@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import HorizonCalendar
 
 enum DurationMode {
     case temporary, permanent
@@ -23,7 +22,6 @@ struct CreateActivityView: View {
     @State var activityDescription: String = ""
     @State var symbolSelection: Int = 1
     @State var currentCategory: ActivityTypes
-    @State var activityCategory: ActivityTypes
     @State var isTemporary: Bool
     @State var isPickerShowing = false
     //

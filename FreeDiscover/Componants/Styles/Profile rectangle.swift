@@ -44,7 +44,7 @@ struct Profile_rectangle: View {
                             .foregroundColor(.gray)
                         .padding(.top, 10)
                      
-                    NavigationLink(destination: CreateActivityView(activityCategory: ActivityTypes.nature, isTemporary: true)){
+                    NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true, pickedCategory: nature)){
                         HStack {
                             Image(systemName:"plus.circle.fill")
                                 .foregroundColor(.gray)
@@ -52,7 +52,8 @@ struct Profile_rectangle: View {
                             Text("Ajouter une activité")
                                 .foregroundColor(.gray)
                             
-                        } }
+                        }
+                    }
 //                    ZStack {
 //                        RoundedRectangle(cornerRadius: 10)
 //                            .frame(width: 160, height: 44)
