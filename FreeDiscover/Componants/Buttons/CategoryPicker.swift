@@ -10,7 +10,6 @@ import SwiftUI
 struct CategoryPicker: View {
 
     @State var currentCategory: ActivityTypes
-    @State var pickedCategory: activityCategory
     @State var buttonColor = Color.natureGreen
     @State var selectedCategory: String = "Category1"
     
@@ -65,8 +64,7 @@ struct CategoryPicker: View {
                     }
         
                 })
-                Button(action: {currentCategory = .sport;
-                    pickedCategory = sport}, label: {
+                Button(action: {currentCategory = .sport}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
@@ -84,8 +82,7 @@ struct CategoryPicker: View {
                     }
         
                 })
-                Button(action: {currentCategory = .social;
-                    pickedCategory = social}, label: {
+                Button(action: {currentCategory = .social}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
@@ -112,5 +109,5 @@ struct CategoryPicker: View {
 }
 
 #Preview {
-    CategoryPicker(currentCategory: .nature, pickedCategory: nature)
+    CategoryPicker(currentCategory: .nature)
 }

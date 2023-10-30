@@ -44,7 +44,7 @@ struct Profile_rectangle: View {
                             .foregroundColor(.gray)
                         .padding(.top, 10)
                      
-                    NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true, pickedCategory: nature)){
+                    NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true)){
                         HStack {
                             Image(systemName:"plus.circle.fill")
                                 .foregroundColor(.gray)
