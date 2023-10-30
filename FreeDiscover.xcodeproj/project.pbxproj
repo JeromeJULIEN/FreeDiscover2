@@ -49,6 +49,10 @@
 		7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */; };
 		7C9ACD912AE6C3230083E3C2 /* GetActivityByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */; };
 		7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */; };
+		9FDED9B52AEA89C0001BAD95 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */; };
+		9FDED9B72AEA90F8001BAD95 /* ThumbsupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */; };
+		9FDED9B92AEA9121001BAD95 /* ThumbsdownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B82AEA9121001BAD95 /* ThumbsdownButton.swift */; };
+		9FDED9BB2AEA97C4001BAD95 /* laurelleadingLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9BA2AEA97C4001BAD95 /* laurelleadingLevel.swift */; };
 		7CE35FF22AEE6B2100209FF6 /* SearchFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */; };
 		C705EC802AE80E3000A7D759 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C705EC7F2AE80E3000A7D759 /* LikeButton.swift */; };
 		C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42D2AE7AC1900DEE84F /* UserModel.swift */; };
@@ -110,6 +114,10 @@
 		7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrousselBonPlan.swift; sourceTree = "<group>"; };
 		7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityByType.swift; sourceTree = "<group>"; };
 		7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTemporaryActivity.swift; sourceTree = "<group>"; };
+		9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
+		9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbsupButton.swift; sourceTree = "<group>"; };
+		9FDED9B82AEA9121001BAD95 /* ThumbsdownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbsdownButton.swift; sourceTree = "<group>"; };
+		9FDED9BA2AEA97C4001BAD95 /* laurelleadingLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = laurelleadingLevel.swift; sourceTree = "<group>"; };
 		7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFunctions.swift; sourceTree = "<group>"; };
 		C705EC7F2AE80E3000A7D759 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		C71FB42D2AE7AC1900DEE84F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -142,6 +150,10 @@
 				4364CD362AE6663C001A100A /* ProfileSwitchButton.swift */,
 				C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */,
 				C705EC7F2AE80E3000A7D759 /* LikeButton.swift */,
+				9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */,
+				9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */,
+				9FDED9B82AEA9121001BAD95 /* ThumbsdownButton.swift */,
+				9FDED9BA2AEA97C4001BAD95 /* laurelleadingLevel.swift */,
 				7C5F00B82AEBEB4300E0AEAE /* CancelSearchButton.swift */,
 			);
 			path = Buttons;
@@ -433,10 +445,13 @@
 				7C0F47742AE18A56004F8033 /* ActivitySymbolSmall.swift in Sources */,
 				7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */,
 				7C7385C02AE12D260024DDCC /* ProfileView.swift in Sources */,
+				9FDED9B52AEA89C0001BAD95 /* ShareButton.swift in Sources */,
 				7C9ACD852AE6B7690083E3C2 /* UserSymbolMapPosition.swift in Sources */,
 				4364CD372AE6663C001A100A /* ProfileSwitchButton.swift in Sources */,
 				43944F6F2AE271C100E03E84 /* UserProfile.swift in Sources */,
 				C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */,
+				9FDED9B72AEA90F8001BAD95 /* ThumbsupButton.swift in Sources */,
+				9FDED9BB2AEA97C4001BAD95 /* laurelleadingLevel.swift in Sources */,
 				7C0F476E2AE174CB004F8033 /* ProfileButton.swift in Sources */,
 				4364CD352AE6655E001A100A /* ContributionProfileView.swift in Sources */,
 				7C5F009F2AE945D100E0AEAE /* UserDataModel.swift in Sources */,
@@ -469,6 +484,7 @@
 				43A0083F2AE8095500D9431F /* GetFavorite.swift in Sources */,
 				7C7385C82AE12DBE0024DDCC /* ActivityDetailView.swift in Sources */,
 				C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */,
+				9FDED9B92AEA9121001BAD95 /* ThumbsdownButton.swift in Sources */,
 				7C5F00972AE8FA6500E0AEAE /* UserPositionSymbol.swift in Sources */,
 				43A008352AE7E4E900D9431F /* CarrouselFavoriteEV.swift in Sources */,
 				7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */,
