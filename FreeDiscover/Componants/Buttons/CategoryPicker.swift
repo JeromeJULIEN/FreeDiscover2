@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct CategoryPicker: View {
+
+    @State var currentCategory: ActivityTypes
+    @State var pickedCategory: activityCategory
+    @State var buttonColor = Color.natureGreen
+    @State var selectedCategory: String = "Category1"
     @State var activityCategory: ActivityTypes
     
     var body: some View {
@@ -23,72 +28,76 @@ struct CategoryPicker: View {
              //   .foregroundColor(Color.accentColor)
             HStack{
                 
-                Button(action: {activityCategory = .nature}, label: {
+                Button(action: {currentCategory = .nature;
+                    buttonColor = .natureGreen}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
-                            .foregroundColor(activityCategory == .nature ? .natureGreen : Color.clear)
+                            .foregroundColor(currentCategory == .nature ? .natureGreen : Color.clear)
                         VStack {
                             Image(systemName: "leaf")
-                                .foregroundColor(activityCategory == .nature ? .white : Color.grayDark)
-                            Text("Nature")
+                                .foregroundColor(currentCategory == .nature ? .white : Color.grayDark)
+                            Text("Nature").tag("Category1")
                                 .font(.footnote)
                                 .bold()
-                                .foregroundColor(activityCategory == .nature ? .white : Color.grayDark)
+                                .foregroundColor(currentCategory == .nature ? .white : Color.grayDark)
                                 .frame(width: 80)
                             
                         }
                     }
         
                 })
-                Button(action: {activityCategory = .culture}, label: {
+                Button(action: {currentCategory = .culture;
+                    buttonColor = .cultureBlue}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
-                            .foregroundColor(activityCategory == .culture ? .cultureBlue : Color.clear)
+                            .foregroundColor(currentCategory == .culture ? .cultureBlue : Color.clear)
                         VStack {
                             Image(systemName: "building.columns")
-                                .foregroundColor(activityCategory == .culture ? .white : Color.grayDark)
-                            Text("Culture")
+                                .foregroundColor(currentCategory == .culture ? .white : Color.grayDark)
+                            Text("Culture").tag("Category2")
                                 .font(.footnote)
                                 .bold()
-                                .foregroundColor(activityCategory == .culture ? .white : Color.grayDark)
+                                .foregroundColor(currentCategory == .culture ? .white : Color.grayDark)
                                 .frame(width: 80)
                             
                         }
                     }
         
                 })
-                Button(action: {activityCategory = .sport}, label: {
+                Button(action: {currentCategory = .sport;
+                    pickedCategory = sport}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
-                            .foregroundColor(activityCategory == .sport ? .sportOrange : Color.clear)
+                            .foregroundColor(currentCategory == .sport ? .sportOrange : Color.clear)
                         VStack {
                             Image(systemName: "figure.walk")
-                                .foregroundColor(activityCategory == .sport ? .white : Color.grayDark)
-                            Text("Sport")
+                                .foregroundColor(currentCategory == .sport ? .white : Color.grayDark)
+                            Text("Sport").tag("Category3")
                                 .font(.footnote)
                                 .bold()
-                                .foregroundColor(activityCategory == .sport ? .white : Color.grayDark)
+                                .foregroundColor(currentCategory == .sport ? .white : Color.grayDark)
                                 .frame(width: 80)
                             
                         }
                     }
         
                 })
-                Button(action: {activityCategory = .social}, label: {
+                Button(action: {currentCategory = .social;
+                    pickedCategory = social}, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
                             .frame(width: 80, height: 40)
-                            .foregroundColor(activityCategory == .social ? .socialRed : Color.clear)
+                            .foregroundColor(currentCategory == .social ? .socialRed : Color.clear)
                         VStack {
                             Image(systemName: "figure.socialdance")
-                                .foregroundColor(activityCategory == .social ? .white : Color.grayDark)
-                            Text("Social")
+                                .foregroundColor(currentCategory == .social ? .white : Color.grayDark)
+                            Text("Social").tag("Category4")
                                 .font(.footnote)
                                 .bold()
-                                .foregroundColor(activityCategory == .social ? .white : Color.grayDark)
+                                .foregroundColor(currentCategory == .social ? .white : Color.grayDark)
                                 .frame(width: 80)
                             
                         }
@@ -104,5 +113,5 @@ struct CategoryPicker: View {
 }
 
 #Preview {
-    CategoryPicker(activityCategory: .nature)
+    CategoryPicker(currentCategory: .nature, pickedCategory: nature)
 }
