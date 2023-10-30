@@ -84,6 +84,7 @@ struct FreeDiscover: Identifiable {
     ///   - type: Catégorise le type de l'activité.
     ///   - temporary: Activité ponctuelle.
     ///   - date: Ajoute une date de création de l'activité.
+
     init(id: UUID = UUID(), name: String = "", image: String = "", location: CLLocationCoordinate2D = .init(), shortDescription: String = "", summary: String = "", voteCounter: Int = 0, accessibiliy: Bool = false, family: Bool = false, favorite: Bool = false, type: ActivityTypes = .nature, temporary: Bool = false, date: Date = Date(), startingDate: Date? = nil, endingDate: Date? = nil) {
         self.id = id
         self.name = name
@@ -118,7 +119,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: true,
         favorite: false,
-        type: ActivityTypes.culture,
+        type: .culture,
         temporary: false,
         date: .now
         
@@ -134,7 +135,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: false,
-        type: ActivityTypes.sport,
+        type: .sport,
         temporary: true,
         date: .distantPast
 
@@ -150,7 +151,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: ActivityTypes.nature,
+        type: .nature,
         temporary: true,
         date: .now
 
@@ -166,7 +167,7 @@ extension FreeDiscover {
         accessibiliy: false,
         family: false,
         favorite: true,
-        type: ActivityTypes.culture,
+        type: .culture,
         temporary: true,
         date: .distantFuture,
         startingDate: .distantFuture,

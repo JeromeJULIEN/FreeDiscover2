@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ActivitySymbolSmall: View {
+
+//    var activityType : String
+
     var activityType : ActivityTypes
     
+
     var body: some View {
         ZStack {
             switch activityType {
@@ -58,5 +62,5 @@ struct ActivitySymbolSmall: View {
 }
 
 #Preview {
-    ActivitySymbolSmall(activityType: ActivityTypes.nature)
+    ActivitySymbolSmall(activityType: .nature)
 }

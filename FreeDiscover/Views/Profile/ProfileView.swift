@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+   @State var activityType: ActivityTypes = .nature
     var user: UserProfile
     var body: some View {
         VStack {
@@ -15,17 +16,21 @@ struct ProfileView: View {
             ProfileSwitchButton()
                 .padding()
             ScrollView {
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
-                CarrouselFavoriteEV()
+                ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                    HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                            .padding(.leading)
+                        Text(activity.rawValue.capitalized)
+                        Spacer()
+                    }
+                        CarrouselFavoriteEV(activityType: activity) }
+
             }
         }
     }
 }
 
 #Preview {
-    ProfileView(user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial discoverer", userContribution: 0, userPoints: 0))
+    ProfileView(activityType: .nature, user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial discoverer", userContribution: 0, userPoints: 0))
 }
 
 
