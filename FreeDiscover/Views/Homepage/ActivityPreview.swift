@@ -23,7 +23,7 @@ struct ActivityPreview: View {
                     VoteCountDisplay(voteCount: activity.voteCounter)
                 }
                 Spacer()
-                Text("\(activity.shortDescription)")
+                Text("\(activity.description)")
                     .font(.headline)
                     .fontWeight(.regular)
                     .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
@@ -32,7 +32,7 @@ struct ActivityPreview: View {
 
             }
             Spacer()
-            Image("\(activity.image)")
+            Image("\(activity.image[0])")
                .resizable()
                .aspectRatio(contentMode: .fill)
                .frame(width: 160, height: 160)

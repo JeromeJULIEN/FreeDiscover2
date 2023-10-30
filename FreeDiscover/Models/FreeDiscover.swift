@@ -25,22 +25,19 @@ import MapKit
 struct FreeDiscover: Identifiable {
     
     /// Identifiant unique.
-    var id = UUID()
+    var id : Int
     
     /// Nom de l'activité.
     var name: String
     
     /// Photo de l'activité.
-    var image: String
+    var image: [String]
     
     /// Propriété  `location` qui stocke  les données géographique de l'endroit ou ce trouve l'activité.
     var location: CLLocationCoordinate2D
     
-    /// Courte description de l'activité.
-    var shortDescription: String
-    
     /// Description de l'activité.
-    var summary: String
+    var description: String
     
     /// Vote pour l'activité.
     var voteCounter: Int
@@ -50,22 +47,21 @@ struct FreeDiscover: Identifiable {
     
     /// Activité adaptée pour la famille.
     var family: Bool
-    
-    /// Ajoute l'activité au favoris.
-    var favorite: Bool
-    
+        
     /// Type de l'activité.
     var type: ActivityTypes
     
     /// Activité ponctuelle.
     var temporary: Bool
     
-    /// Date de création de l'activité.
-    var date: Date
-    
+    /// Date de début
     var startingDate: Date?
     
+    /// Date de fin
     var endingDate: Date?
+    
+    /// Index de l'utilisateur ayant créé l'activité
+    var contributor: Int
     
     
     /// Crée des activités pour la map.
@@ -85,23 +81,20 @@ struct FreeDiscover: Identifiable {
     ///   - temporary: Activité ponctuelle.
     ///   - date: Ajoute une date de création de l'activité.
 
-    init(id: UUID = UUID(), name: String = "", image: String = "", location: CLLocationCoordinate2D = .init(), shortDescription: String = "", summary: String = "", voteCounter: Int = 0, accessibiliy: Bool = false, family: Bool = false, favorite: Bool = false, type: ActivityTypes = .nature, temporary: Bool = false, date: Date = Date(), startingDate: Date? = nil, endingDate: Date? = nil) {
+    init(id: Int = 0, name: String = "", image: [String] = [""], location: CLLocationCoordinate2D = .init(), description: String = "", voteCounter: Int = 0, accessibiliy: Bool = false, family: Bool = false, favorite: Bool = false, type: ActivityTypes = .nature, temporary: Bool = false, date: Date = Date(), startingDate: Date? = nil, endingDate: Date? = nil, contributor: Int = 0) {
         self.id = id
         self.name = name
         self.image = image
         self.location = location
-        self.shortDescription = shortDescription
-        self.summary = summary
+        self.description = description
         self.voteCounter = voteCounter
         self.accessibiliy = accessibiliy
         self.family = family
-        self.favorite = favorite
         self.type = type
-        self.date = date
         self.temporary = temporary
         self.startingDate = startingDate
         self.endingDate = endingDate
-        
+        self.contributor = contributor
     }
     
 }
@@ -110,87 +103,81 @@ struct FreeDiscover: Identifiable {
 ///
 extension FreeDiscover {
     static let musee1 = FreeDiscover(
+        id:1,
         name: "Musée d'histoires naturelles",
-        image: "musee-archeo",
+        image: ["musee-archeo"],
         location: CLLocationCoordinate2D(latitude: 43.303727, longitude: 5.394671),
-        shortDescription: "Parcours semi-marathon mythique.",
-        summary: "Ce musée est célèbre pour le semi-marathon. Ce n'est pas pour l'entraînement, mais pour la course. Les défis incluent le boulevard Michelet, une étendue de béton, et la montée du col de la Gineste. Après, on découvre le port de Cassis, un lieu emblématique couru par de nombreux sportifs marseillais. Il est recommandé de s'entraîner sur d'autres parcours avant de s'y lancer.",
+        description: "Ce musée est célèbre pour le semi-marathon. Ce n'est pas pour l'entraînement, mais pour la course. Les défis incluent le boulevard Michelet, une étendue de béton, et la montée du col de la Gineste. Après, on découvre le port de Cassis, un lieu emblématique couru par de nombreux sportifs marseillais. Il est recommandé de s'entraîner sur d'autres parcours avant de s'y lancer.",
         voteCounter: 1,
-        accessibiliy: false,
+        accessibiliy: true,
         family: true,
-        favorite: false,
         type: .culture,
         temporary: false,
-        date: .now
-        
+        contributor: 1
     )
     
     static let sport1 = FreeDiscover(
+        id:2,
         name: "Canoe-Calanques",
-        image: "canoe-calanques",
+        image: ["canoe-calanques"],
         location: CLLocationCoordinate2D(latitude: 43.21265, longitude: 5.354158),
-        shortDescription: "Calanques & canoë",
-        summary: "Au départ du petit port de Callelongue, surnommé le « bout du monde » par les Marseillais, naviguez jusqu'à Marseilleveyre en traversant la calanque de la Mounine aux eaux turquoise. Cette balade en canoë offre une vue imprenable sur les îles de l'Archipel du Riou et la beauté marine du littoral marseillais. N'oubliez pas votre masque et tuba pour explorer la faune et la flore des Calanques en nageant.",
+        description: "Au départ du petit port de Callelongue, surnommé le « bout du monde » par les Marseillais, naviguez jusqu'à Marseilleveyre en traversant la calanque de la Mounine aux eaux turquoise. Cette balade en canoë offre une vue imprenable sur les îles de l'Archipel du Riou et la beauté marine du littoral marseillais. N'oubliez pas votre masque et tuba pour explorer la faune et la flore des Calanques en nageant.",
         voteCounter: 4,
         accessibiliy: false,
-        family: false,
-        favorite: false,
+        family: true,
         type: .sport,
-        temporary: true,
-        date: .distantPast
+        temporary: false,
+        contributor: 1
 
     )
     
     static let nature1 = FreeDiscover(
+        id:3,
         name: "Calanque d'en vau",
-        image: "calanque-en-vau",
+        image: ["calanque-en-vau"],
         location: CLLocationCoordinate2D(latitude: 43.20233894144298, longitude: 5.498078687708157),
-        shortDescription: "Calanque grandiose, eaux turquoise.",
-        summary: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.",
+        description: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.",
         voteCounter: 10,
         accessibiliy: false,
         family: false,
-        favorite: true,
         type: .nature,
-        temporary: true,
-        date: .now
+        temporary: false,
+        contributor: 2
 
     )
     
     static let bonPlan1 = FreeDiscover(
+        id:4,
         name: "Concert-vieux-port",
-        image: "concert-vieux-port",
+        image: ["concert-vieux-port"],
         location: CLLocationCoordinate2D(latitude: 43.29534870002289, longitude: 5.374253259297408),
-        shortDescription: "Ambiance folf et blues pour ce concert en plein air",
-        summary: "Ambiance folf et blues pour ce concert en plein air",
+        description: "Ambiance folf et blues pour ce concert en plein air",
         voteCounter: 20,
         accessibiliy: false,
         family: false,
         favorite: true,
         type: .culture,
         temporary: true,
-        date: .distantFuture,
         startingDate: .distantFuture,
-        endingDate: .distantFuture
+        endingDate: .distantFuture,
+        contributor: 3
     
     )
     
     static let social1 = FreeDiscover(
+        id:5,
         name: "Brocante du bois sacré",
-        image: "vide-grenier",
+        image: ["vide-grenier"],
         location: CLLocationCoordinate2D(latitude: 43.282387, longitude: 5.37092),
-        shortDescription: "Habits et jouets à chiner au pied de la bonne mère",
-        summary: "Au pied de la Bonne Mère, trouvez des trésors d'antan dans notre marché de charme. Chinez des habits vintage et jouets rétro, et plongez dans une atmosphère accueillante imprégnée d'histoire marseillaise.",
+        description: "Au pied de la Bonne Mère, trouvez des trésors d'antan dans notre marché de charme. Chinez des habits vintage et jouets rétro, et plongez dans une atmosphère accueillante imprégnée d'histoire marseillaise.",
         voteCounter: 15,
         accessibiliy: true,
         family: true,
-        favorite: false,
         type: ActivityTypes.social,
         temporary: true,
-        date: .distantFuture,
         startingDate: .distantFuture,
-        endingDate: .distantFuture
-    
+        endingDate: .distantFuture,
+        contributor: 4
     )
     
     /// Tableau de statistique ` allFreeDiscover` regroupant tous les modèles de `FreeDiscover` disponible.

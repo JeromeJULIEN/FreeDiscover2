@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CarrouselFavoriteEV: View {
   var activityType : ActivityTypes
+    var user : UserProfile
     var body: some View {
         HStack {
 //            ActivitySymbolSmall(activityType: .culture)
@@ -22,9 +23,9 @@ struct CarrouselFavoriteEV: View {
         }
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.flexible())], content: {
-                ForEach(getFavorite(type: activityType),id: \.id){
+                ForEach(getFavoriteFromUserByType(userFavorites: user.userFavorites, type: activityType),id: \.id){
                     favorite in
-                Image("\(favorite.image)")
+                Image("\(favorite.image[0])")
                     .resizable()
                     .frame(width: 140, height: 140)
                     .cornerRadius(10)
@@ -35,4 +36,8 @@ struct CarrouselFavoriteEV: View {
 
                     Divider()
     }
+}
+
+#Preview {
+    CarrouselFavoriteEV(activityType: .nature, user: UserProfile.marion)
 }

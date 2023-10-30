@@ -29,7 +29,7 @@ struct SearchView : View {
     @Binding var showSearchView : Bool
     
     /// variable pour lancer une recherche
-    @EnvironmentObject var globalVariables : GlobalVariables
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
 
     
     
@@ -55,7 +55,7 @@ struct SearchView : View {
                 }
                 .padding(.top,30)
                 Divider()
-                TextField("Indiquez ce que vous recherchez", text: $globalVariables.searchContent)
+                TextField("Indiquez ce que vous recherchez", text: $searchGlobalVariables.searchContent)
                     .padding(10)
                     .padding(.horizontal, 25)
                     .background(Color.gray.opacity(0.2),
@@ -63,15 +63,15 @@ struct SearchView : View {
                                     cornerRadius: 8,
                                     style: .continuous))
                 HStack(spacing:50){
-                    SelectableActivitySymbol(activityType: ActivityTypes.nature, isSelected: $globalVariables.isNatureSelectedForSearch)
-                    SelectableActivitySymbol(activityType: ActivityTypes.sport, isSelected: $globalVariables.isSportSelectedForSearch)
-                    SelectableActivitySymbol(activityType: ActivityTypes.culture, isSelected: $globalVariables.isCultureSelectedForSearch)
-                    SelectableActivitySymbol(activityType: ActivityTypes.social, isSelected: $globalVariables.isSocialSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.nature, isSelected: $searchGlobalVariables.isNatureSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.sport, isSelected: $searchGlobalVariables.isSportSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.culture, isSelected: $searchGlobalVariables.isCultureSelectedForSearch)
+                    SelectableActivitySymbol(activityType: ActivityTypes.social, isSelected: $searchGlobalVariables.isSocialSelectedForSearch)
                     
                 }
                 Button(action: {
-                    globalVariables.launchSearch.toggle()
-                    globalVariables.isSearchOngoing = true
+                    searchGlobalVariables.launchSearch.toggle()
+                    searchGlobalVariables.isSearchOngoing = true
                     showSearchView.toggle()
                 }, label: {
                     ZStack{
@@ -96,6 +96,6 @@ struct SearchView : View {
 
 #Preview {
     NavigationStack {
-        SearchView(showSearchView: .constant(true)).environmentObject(GlobalVariables())
+        SearchView(showSearchView: .constant(true)).environmentObject(SearchGlobalVariables())
     }
 }

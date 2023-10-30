@@ -10,7 +10,6 @@ import SwiftUI
 struct Profile_rectangle: View {
     var userName: String
     var userPicture: String
-    var userStatus: String
     var userContribution: Int
     
     var body: some View {
@@ -34,7 +33,7 @@ struct Profile_rectangle: View {
                         .fontWeight(.bold)
                         .font(.title)
                     HStack {
-                        Text(userStatus)
+                        Text("userStatus à calculer")
                         Image(systemName: "laurel.leading")
 //                        récupérer le logo sur page de Flo à la place . Puis après voir pour le lier au nombre de contribution
                         
@@ -70,5 +69,5 @@ struct Profile_rectangle: View {
     }
 }
 #Preview {
-    Profile_rectangle(userName: "Marion", userPicture: "marion", userStatus: "Serial Discoverer", userContribution: 0)
+    Profile_rectangle(userName: "Marion", userPicture: "marion", userContribution: 0)
 }
