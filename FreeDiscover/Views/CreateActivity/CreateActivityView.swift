@@ -27,7 +27,9 @@ struct CreateActivityView: View {
     //
     @StateObject var viewModel = UserModel()
     @State var selectedImage: UIImage?
-
+    @State var selectedImages: [UIImage]?
+   // @Binding var images: [UIImage]
+    
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -83,22 +85,22 @@ struct CreateActivityView: View {
                 
                 if isTemporary == true {
                     
-                        DatePicker(
-                            "Date :",
-                            selection: $date, in: Date.now...,
-                            displayedComponents: [.date]
-                        )
-                        .padding(.horizontal, 60)
+                    DatePicker(
+                        "Date :",
+                        selection: $date, in: Date.now...,
+                        displayedComponents: [.date]
+                    )
+                    .padding(.horizontal, 60)
                     
                 } else {
-                   // Text("")
-                     //   .frame(width:280, height:52)
+                    // Text("")
+                    //   .frame(width:280, height:52)
                     //    .padding()
                     
                 }
             }
             
-         
+            
             Button(action: {
                 isPickerShowing = true
             }) {
@@ -108,18 +110,37 @@ struct CreateActivityView: View {
             .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
                 
                 //Image picker
-                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+                ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
             }
             
-            if selectedImage != nil {
-               
-                    
-                    Image(uiImage: selectedImage!)
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                        .cornerRadius(10)
-                    
+            if selectedImages != nil {
+                
+                ScrollView(.horizontal) {
+                    HStack(spacing: 10) {
+                        ForEach(Array(selectedImages?.indices ?? 0..<0), id: \.self) { index in
+                            if let image = selectedImages?[index] {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .overlay(
+                                        Button(action: {
+                                            selectedImages?.remove(at: index)
+                                        }) {
+                                            Image(systemName: "x.circle.fill")
+                                                .foregroundColor(.white)
+                                        }
+                                            .padding(0)
+                                            .shadow(radius: 1)
+                                            .opacity(0.8)
+                                        , alignment: .topTrailing)
+                                    .frame(width: 150, height: 150)
+                                    .clipShape(RoundedRectangle(cornerRadius:10))
+                            }
+                        }
+                    }
+                    .padding()
+                }
             }
+        }
             HStack {
                 Button(action: {
                     print("")
@@ -140,7 +161,7 @@ struct CreateActivityView: View {
                 .padding()
         }
     }
-}
+
 
 #Preview {
     CreateActivityView(currentCategory: .nature, isTemporary: false)
