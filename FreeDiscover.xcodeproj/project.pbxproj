@@ -60,6 +60,7 @@
 		C71FB4302AE7AE7000DEE84F /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */; };
 		C75F398E2AE7F050005DD9AA /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */; };
 		C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C770A4C32AE904F700A60BB8 /* ImagePicker.swift */; };
+		C77343A92AF0F95D00F551EB /* PHPickerViewMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
 		C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */; };
 		C7FB10602AEFE54900BFA605 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */; };
@@ -128,6 +129,7 @@
 		C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		C770A4C32AE904F700A60BB8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerViewMultiple.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
 		C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySymbol.swift; sourceTree = "<group>"; };
 		C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				C71FB42F2AE7AE7000DEE84F /* ProfileImage.swift */,
 				C770A4C32AE904F700A60BB8 /* ImagePicker.swift */,
 				C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */,
+				C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */,
 			);
 			path = CreateActivity;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				7C5F00972AE8FA6500E0AEAE /* UserPositionSymbol.swift in Sources */,
 				43A008352AE7E4E900D9431F /* CarrouselFavoriteEV.swift in Sources */,
 				7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */,
+				C77343A92AF0F95D00F551EB /* PHPickerViewMultiple.swift in Sources */,
 				C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */,
 				7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */,
 				7CE35FF22AEE6B2100209FF6 /* SearchFunctions.swift in Sources */,
