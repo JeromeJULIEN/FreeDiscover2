@@ -24,7 +24,7 @@ struct ListCard: View {
                 VStack(alignment: .leading, spacing: 0){
                     Text("\(activity.name)")
                         .font(.title3.bold())
-                    Text("\(activity.shortDescription)")
+                    Text("\(activity.description)")
                         .font(.subheadline)
                         .fontWeight(.light)
                         .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
@@ -54,7 +54,7 @@ struct ListCard: View {
                 }
                 .frame(height: 110)
                 ZStack(alignment:.topTrailing) {
-                    Image("\(activity.image)")
+                    Image("\(activity.image[0])")
                        .resizable()
                        .aspectRatio(contentMode: .fill)
                        .frame(width: 110, height: 110)

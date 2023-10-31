@@ -34,7 +34,7 @@ struct ActivityDetailView: View {
                 
                 ZStack (alignment: .topTrailing){
                     //  Image("calanque-en-vau")
-                    Image(activity.image)
+                    Image(activity.image[0])
                         .resizable()
                         .scaledToFill()
                         .frame(maxHeight: 250)

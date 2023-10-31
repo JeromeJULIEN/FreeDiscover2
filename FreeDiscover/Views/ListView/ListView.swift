@@ -10,7 +10,7 @@ import SwiftUI
 struct ListView: View {
     // MARK: Variable externes
     /// Importation des variables globales
-    @EnvironmentObject var globalVariables : GlobalVariables
+    @EnvironmentObject var globalVariables : SearchGlobalVariables
     
     // MARK: Fonctions de la vue
     func searchActivities() {
@@ -61,5 +61,5 @@ struct ListView: View {
                
 
 #Preview {
-    ListView().environmentObject(GlobalVariables())
+    ListView().environmentObject(SearchGlobalVariables())
 }
