@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivityDetailView: View {
     // activity to display
-    var activity : FreeDiscover
+    @State var activity : FreeDiscover
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
@@ -110,7 +110,7 @@ struct ActivityDetailView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                VoteCountDisplay2(voteCount: -3)
+                VoteCountDisplay2(activity: $activity)
 //                    .frame(height: 110)
                 //            Text ("Accessible toute l'année")
                 //                .font(.title3)
@@ -155,6 +155,6 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.nature1)
+    ActivityDetailView(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
 }
 

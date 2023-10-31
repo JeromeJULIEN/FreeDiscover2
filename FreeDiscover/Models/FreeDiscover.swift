@@ -102,7 +102,7 @@ struct FreeDiscover: Identifiable {
 /// Une extension facilitant la crèation, la gestion, et l'affichage détaillée d'une activité dans l'interface utilisateur.
 ///
 extension FreeDiscover {
-    static let musee1 = FreeDiscover(
+    static var musee1 = FreeDiscover(
         id:1,
         name: "Musée d'histoires naturelles",
         image: ["musee-archeo"],
@@ -116,7 +116,7 @@ extension FreeDiscover {
         contributor: 1
     )
     
-    static let sport1 = FreeDiscover(
+    static var sport1 = FreeDiscover(
         id:2,
         name: "Canoe-Calanques",
         image: ["canoe-calanques"],
@@ -131,7 +131,7 @@ extension FreeDiscover {
 
     )
     
-    static let nature1 = FreeDiscover(
+    static var nature1 = FreeDiscover(
         id:3,
         name: "Calanque d'en vau",
         image: ["calanque-en-vau"],
@@ -146,7 +146,7 @@ extension FreeDiscover {
 
     )
     
-    static let bonPlan1 = FreeDiscover(
+    static var bonPlan1 = FreeDiscover(
         id:4,
         name: "Concert-vieux-port",
         image: ["concert-vieux-port"],
@@ -164,7 +164,7 @@ extension FreeDiscover {
     
     )
     
-    static let social1 = FreeDiscover(
+    static var social1 = FreeDiscover(
         id:5,
         name: "Brocante du bois sacré",
         image: ["vide-grenier"],
@@ -182,7 +182,19 @@ extension FreeDiscover {
     
     /// Tableau de statistique ` allFreeDiscover` regroupant tous les modèles de `FreeDiscover` disponible.
     /// 
-    static let allFreeDiscover = [musee1, sport1, nature1, bonPlan1,social1]
+    static var allFreeDiscover = [musee1, sport1, nature1, bonPlan1,social1]
 
+}
+
+extension FreeDiscover {
+    
+    /// Incrémente le compteur de votes de l'activité si elle est de type nature.
+    mutating func upVote() {
+        self.voteCounter += 1
+    }
+    
+    mutating func downVote(){
+        self.voteCounter -= 1
+    }
 }
 

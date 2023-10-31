@@ -10,11 +10,11 @@ import SwiftUI
 struct ListView: View {
     // MARK: Variable externes
     /// Importation des variables globales
-    @EnvironmentObject var globalVariables : SearchGlobalVariables
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     
     // MARK: Fonctions de la vue
     func searchActivities() {
-        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent,lookForNature: globalVariables.isNatureSelectedForSearch,lookForSport: globalVariables.isSportSelectedForSearch,lookForCulture: globalVariables.isCultureSelectedForSearch,lookForSocial: globalVariables.isSocialSelectedForSearch)
+        searchGlobalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: Vue
@@ -22,20 +22,20 @@ struct ListView: View {
         ScrollView(showsIndicators: false){
             VStack(spacing:15){
                 Spacer().frame(height: 75)
-                if(globalVariables.isSearchOngoing == false){
+                if(searchGlobalVariables.isSearchOngoing == false){
                     ForEach(FreeDiscover.allFreeDiscover){activity in
                         NavigationLink(destination:ActivityDetailView(activity: activity)){
                             ListCard(activity: activity)
                         }.accentColor(Color("GrayDark"))
                     }
                 }
-                if(globalVariables.isSearchOngoing == true){
-                    ForEach(globalVariables.searchResults){activity in
+                if(searchGlobalVariables.isSearchOngoing == true){
+                    ForEach(searchGlobalVariables.searchResults){activity in
                         NavigationLink(destination:ActivityDetailView(activity: activity)){
                             ListCard(activity: activity)
                         }.accentColor(Color("GrayDark"))
                     }
-                    if(globalVariables.searchResults.count == 0){
+                    if(searchGlobalVariables.searchResults.count == 0){
                         ZStack{
                             RoundedRectangle(cornerRadius: 25)
                                 .frame(width: 300,height: 50)
@@ -50,9 +50,9 @@ struct ListView: View {
                 
             }
             .frame(maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
-                   alignment: (globalVariables.isSearchOngoing == true && globalVariables.searchResults.count == 0) ? .center : .top)
+                   alignment: (searchGlobalVariables.isSearchOngoing == true && searchGlobalVariables.searchResults.count == 0) ? .center : .top)
             .padding()
-            .onChange(of:globalVariables.isSearchOngoing){
+            .onChange(of:searchGlobalVariables.isSearchOngoing){
                 searchActivities()
             }
         }
@@ -61,5 +61,5 @@ struct ListView: View {
                
 
 #Preview {
-    ListView().environmentObject(SearchGlobalVariables())
+    ListView().environmentObject(SearchGlobalVariables()).environmentObject(UserGlobalVariables())
 }
