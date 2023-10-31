@@ -52,5 +52,7 @@ struct ActivityPreview: View {
 }
 
 #Preview {
-    ActivityPreview(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
+    ActivityPreview(activity: FreeDiscover.nature1)
+        .environmentObject(UserGlobalVariables())
+//        .environmentObject(ActivityGlobalVariables())
 }

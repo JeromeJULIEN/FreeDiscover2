@@ -22,7 +22,7 @@ import MapKit
 ///
 /// Cette structure ce conforme aux protocoles standards `Identifiable` et `Hashable`.
 ///
-struct FreeDiscover: Identifiable {
+class FreeDiscover: Identifiable, ObservableObject {
     
     /// Identifiant unique.
     var id : Int
@@ -40,7 +40,7 @@ struct FreeDiscover: Identifiable {
     var description: String
     
     /// Vote pour l'activité.
-    var voteCounter: Int
+    @Published var voteCounter: Int
     
     /// Accès aux personnes à mobilité réduite.
     var accessibiliy: Bool
@@ -189,11 +189,11 @@ extension FreeDiscover {
 extension FreeDiscover {
     
     /// Incrémente le compteur de votes de l'activité si elle est de type nature.
-    mutating func upVote() {
+    func upVote() {
         self.voteCounter += 1
     }
     
-    mutating func downVote(){
+    func downVote(){
         self.voteCounter -= 1
     }
 }

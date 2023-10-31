@@ -125,25 +125,25 @@ struct ActivityDetailView: View {
 //                    .padding(5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false){
-                    HStack(spacing:55){
-                        ForEach(getTemporaryActivities(),id: \.id){
-                            activity in
-                            
-                            //       VStack(alignment:.leading){
-                            Image("\(activity.image[0])")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                            //    Text("\(activity.name)")
-                            //      .foregroundColor(.grayDark)
-                            //    .font(.headline)
-                            //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                            // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                            //     }
-                                .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
-                        }
-                    }
+//                    HStack(spacing:55){
+//                        ForEach(getTemporaryActivities(),id: \.id){
+//                            activity in
+//                            
+//                            //       VStack(alignment:.leading){
+//                            Image("\(activity.image[0])")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                                .frame(width: 150, height: 150)
+//                                .clipShape(RoundedRectangle(cornerRadius: 8))
+//                            //    Text("\(activity.name)")
+//                            //      .foregroundColor(.grayDark)
+//                            //    .font(.headline)
+//                            //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+//                            // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+//                            //     }
+//                                .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
+//                        }
+//                    }
                 }
                 
                 

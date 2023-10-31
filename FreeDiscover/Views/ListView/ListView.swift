@@ -11,10 +11,11 @@ struct ListView: View {
     // MARK: Variable externes
     /// Importation des variables globales
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
     
     // MARK: Fonctions de la vue
     func searchActivities() {
-        searchGlobalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
+        searchGlobalVariables.searchResults = activityGlobalVariables.activities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: Vue
@@ -62,4 +63,5 @@ struct ListView: View {
 
 #Preview {
     ListView().environmentObject(SearchGlobalVariables()).environmentObject(UserGlobalVariables())
+        .environmentObject(ActivityGlobalVariables())
 }
