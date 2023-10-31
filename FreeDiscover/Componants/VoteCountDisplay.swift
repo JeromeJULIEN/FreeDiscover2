@@ -27,5 +27,5 @@ struct VoteCountDisplay: View {
 }
 
 #Preview {
-    VoteCountDisplay(voteCount: 10)
+    VoteCountDisplay(voteCount: -3)
 }

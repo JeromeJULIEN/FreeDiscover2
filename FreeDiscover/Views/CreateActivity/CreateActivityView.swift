@@ -20,10 +20,10 @@ struct CreateActivityView: View {
     @State private var showingCalendar = false
     @State var activityName: String = ""
     @State var activityDescription: String = ""
-    @State var symbolSelection: Int = 1
     @State var currentCategory: ActivityTypes
     @State var isTemporary: Bool
     @State var isPickerShowing = false
+    @State var isLocationPickerShowing = false
     //
     @StateObject var viewModel = UserModel()
     @State var selectedImage: UIImage?
@@ -64,10 +64,13 @@ struct CreateActivityView: View {
                 
                 
                 Button(action: {
-                    print("pouet")
+                    isLocationPickerShowing = true
                 }) {
                     CtaButton(ctaText: "Sélectionner l'emplacement", ctaIcon: "location", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
                         .frame(minWidth: 340)
+                }
+                .sheet(isPresented: $isLocationPickerShowing, onDismiss: nil) {
+                    LocationPickerView()
                 }
                 Toggle("Il s'agit d'une activité temporaire", isOn: $isTemporary)
                     .toggleStyle(.switch)
