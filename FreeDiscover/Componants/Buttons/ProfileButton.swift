@@ -14,9 +14,10 @@ import SwiftUI
 
 struct ProfileButton: View {
     @Binding var showCarroussel : Bool
+    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
     
     var body: some View {
-        NavigationLink(destination: ProfileView(user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial Discoverer", userContribution: 13, userPoints: 0))){
+        NavigationLink(destination: ProfileView(user: userGlobalVariables.connectedUser)){
             Image(systemName: "person")
                 .imageScale(.large)
                 .padding(10)
@@ -31,5 +32,5 @@ struct ProfileButton: View {
 }
 
 #Preview {
-    ProfileButton(showCarroussel: .constant(false))
+    ProfileButton(showCarroussel: .constant(false)).environmentObject(UserGlobalVariables())
 }

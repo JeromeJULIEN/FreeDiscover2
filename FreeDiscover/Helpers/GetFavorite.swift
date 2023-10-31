@@ -8,9 +8,17 @@
 import Foundation
 
 //@dev : function to filter all the temporary Activities of the data base
-func getFavorite(type: ActivityTypes) -> [FreeDiscover] {
+//func getFavorite(type: ActivityTypes) -> [FreeDiscover] {
+//    var filteredArray = [FreeDiscover] ()
+//    filteredArray = FreeDiscover.allFreeDiscover.filter {
+//        $0.favorite == true && $0.type == type }
+//    return filteredArray
+//}
+//
+func getFavoriteFromUserByType(userFavorites : [Int],type : ActivityTypes)->[FreeDiscover]{
     var filteredArray = [FreeDiscover] ()
-    filteredArray = FreeDiscover.allFreeDiscover.filter {
-        $0.favorite == true && $0.type == type }
+    filteredArray = FreeDiscover.allFreeDiscover.filter {activity in
+        userFavorites.contains(activity.id) && activity.type == type
+    }
     return filteredArray
 }
