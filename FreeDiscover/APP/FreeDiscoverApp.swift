@@ -11,13 +11,17 @@ import SwiftUI
 @main
 struct FreeDiscoverApp: App {
     
-    // Importation des variables d'environnement de l'application
-    @StateObject var globalVariables = GlobalVariables()
+    // Importation des variables d'environnement pour les rendre dispo dans toute l'application
+    @StateObject var searchGlobalVariables = SearchGlobalVariables()
+    @StateObject var userGlobalVariables = UserGlobalVariables()
+
 
     
     var body: some Scene {
         WindowGroup {
             HomepageView()
-        }.environmentObject(globalVariables)
+        }
+        .environmentObject(searchGlobalVariables)
+        .environmentObject(userGlobalVariables)
     }
 }

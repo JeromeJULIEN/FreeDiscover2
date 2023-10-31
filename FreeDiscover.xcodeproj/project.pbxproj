@@ -284,7 +284,7 @@
 				7C7385AC2AE1151D0024DDCC /* Styles */,
 				7C0F47712AE18061004F8033 /* ListCard.swift */,
 				7C0F47752AE18B70004F8033 /* VoteCountDisplay.swift */,
-				C7FB10372AEFBCAD00BFA605 /* VoteCountDisplay2.swift */,
+				9FDED9BC2AEFC000001BAD95 /* VoteCountDisplay2.swift */,
 				7C9ACD842AE6B7690083E3C2 /* UserSymbolMapPosition.swift */,
 				7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */,
 			);
@@ -505,7 +505,7 @@
 				7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */,
 				C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */,
 				7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */,
-				C7FB10382AEFBCAD00BFA605 /* VoteCountDisplay2.swift in Sources */,
+				9FDED9BD2AEFC000001BAD95 /* VoteCountDisplay2.swift in Sources */,
 				7CE35FF22AEE6B2100209FF6 /* SearchFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

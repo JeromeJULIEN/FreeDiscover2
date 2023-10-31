@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CancelSearchButton: View {
-    @EnvironmentObject var globalVariables : GlobalVariables
+    @EnvironmentObject var globalVariables : SearchGlobalVariables
     
     var body: some View {
         Button {

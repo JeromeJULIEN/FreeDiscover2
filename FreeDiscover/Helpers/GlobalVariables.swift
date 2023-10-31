@@ -7,8 +7,10 @@
 
 import Foundation
 
-// MARK: Ensemble des variables devant être accessible dans toute l'application
-class GlobalVariables :ObservableObject {
+// MARK: Fichier regroupant l'ensemble des variables devant être accessible dans toute l'application
+
+// Variables liées à la recherche
+class SearchGlobalVariables :ObservableObject {
     /// Variable servant à lancer une recherche
     @Published var launchSearch : Bool = true
     /// Contenu du champ de recherche textuel
@@ -25,4 +27,10 @@ class GlobalVariables :ObservableObject {
     @Published var isCultureSelectedForSearch : Bool = true
     @Published var isSocialSelectedForSearch : Bool = true
 
+}
+
+// Variables liées au user connecté
+class UserGlobalVariables : ObservableObject {
+    /// User par défaut pour lancer l'app
+    @Published var connectedUser : UserProfile = UserProfile.marion
 }

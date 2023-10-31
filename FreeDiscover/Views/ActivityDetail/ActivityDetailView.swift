@@ -13,32 +13,38 @@ struct ActivityDetailView: View {
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
-    
+    private let url = URL(string: "https://www.freediscover.fr")!
+
     var body: some View {
         
         //VStack de la vue entiere
         VStack{
-            ShareButton()
-                .padding(5)
+            //ShareButton()
+            VStack {
+                ShareLink(item: url) {
+                    Image(systemName: "square.and.arrow.up")
+                }            }
+          
+          //      .padding(5)
             
             //partie 1 fiche de l'activité
             
             // VStack de  photo + titre + créé par + laurier
-            VStack (alignment: .leading) {
+            VStack () {
                 
                 ZStack (alignment: .topTrailing){
                     //  Image("calanque-en-vau")
-                    Image(activity.image)
+                    Image(activity.image[0])
                         .resizable()
                         .scaledToFill()
                         .frame(maxHeight: 250)
                         .clipped()
                         .cornerRadius(10)
-                        .padding(5)
+//.padding(5)
                     Button(action : {isFavorite = !isFavorite}){
                         ZStack {
                             Image(systemName: "heart.fill")
-                                .padding(10)
+                        //        .padding(10)
                                 .foregroundStyle(.accent)
                                 .opacity(isFavorite ? 1 : 0)
                                 .bold()
@@ -58,65 +64,57 @@ struct ActivityDetailView: View {
                         VStack{
                         HStack (){
                             ActivitySymbolSmall(activityType: activity.type)
-                            //                                if(activity.family){
-                            //                                    Image(systemName: "figure.2.and.child.holdinghands")
-                            //                                        .foregroundColor(.grayDark)
-                            //                                }
-                            //                                if(activity.accessibiliy){
-                            //                                    Image(systemName: "figure.roll")
-                            //                                        .foregroundColor(.grayDark)
-                            //                                }
-                            //                                if(activity.temporary){
-                            //                                    Image(systemName: "calendar")
-                            //                                        .foregroundColor(.grayDark)
-                            //                                }
+                                                            if(activity.family){
+                                                                Image(systemName: "figure.2.and.child.holdinghands")
+                                                                    .foregroundColor(.grayDark)
+                                                            }
+                                                            if(activity.accessibiliy){
+                                                                Image(systemName: "figure.roll")
+                                                                    .foregroundColor(.grayDark)
+                                                            }
+//                                                            if(activity.temporary){
+//                                                                Image(systemName: "calendar")
+//                                                                    .foregroundColor(.grayDark)
+//                                                            }
                             Text("\(activity.name)")
-                            //                            Text("Calanque d'en Vau")
                                 .font(.title2.bold())
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            Spacer()
-                            
-                            VoteCountDisplay(voteCount: activity.voteCounter)
-                            //                                .padding(15)                            }
-                            Spacer()
-                            
-                            
-                            //                                .padding(.trailing, 100)
-                            
                         }
-                        //     Text("12,4 km")
-                        //       .font(.subheadline.weight(.light))
-                        //     .foregroundColor(Color("GrayDark"))
-                        //     .frame(maxWidth: .infinity, alignment: .leading)
-                        //   .padding(5)
+                            Spacer()
+
                             HStack{
                                 laurelleadingLevel()
-                                    .frame(width: 50, height: 50)
-                                    .padding(5)
                                 Text ("Créé par Marion")
+                           //     Text("\(activity.contributor)")
                                     .font(.subheadline)
                                     .foregroundColor(Color("GrayDark"))
                                     .frame(maxWidth: .infinity, alignment: .leading)                     .padding(5)
+                            }
+                            if (activity.temporary == true){
+                                Text ("Date: Toute l'année")
+                                    .font(.subheadline)
+                                    .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
                             }
                         }
                 }
                 Divider()
                 
                 Text ("En quelques mots...")
-                    .font(.title3)
-                    .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                 //Afficher s'il y a une date si c'est social sinon ne pas afficher
-                if (activity.temporary == true){
-                    Text ("Date: Toute l'année")
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
-                }
-                Text("Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.")
-                    .font(.subheadline)
-                    .frame(width: 400, height: 50)
+
+                Spacer()
+
+                Text("\(activity.summary)")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                VoteCountDisplay2(voteCount: -3)
+//                    .frame(height: 110)
                 //            Text ("Accessible toute l'année")
                 //                .font(.title3)
-                //                .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
+                .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
                 //            //picto accessibilité et famille
                 Divider ()
                 
@@ -124,7 +122,7 @@ struct ActivityDetailView: View {
                 //Partie 2 : photos/vidéos
                 Text("Photos/vidéos")
                     .font(.title3.bold())
-                    .padding(5)
+//                    .padding(5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false){
                     HStack(spacing:55){
@@ -143,7 +141,7 @@ struct ActivityDetailView: View {
                             //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                             // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                             //     }
-                                .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
+                                .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
                         }
                     }
                 }
@@ -151,7 +149,7 @@ struct ActivityDetailView: View {
                 
             }
         }
-//        .padding()
+        .padding()
     }
     
 }

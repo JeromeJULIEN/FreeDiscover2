@@ -38,7 +38,7 @@ struct MapView: View {
     @Binding var showActivityPreview : Bool
       
     /// Importation des variables globales
-    @EnvironmentObject var globalVariables : GlobalVariables
+    @EnvironmentObject var globalVariables : SearchGlobalVariables
     
     // MARK: Fonctions de la vue
     /// Fonction de recherche appliquée à la map
@@ -127,7 +127,7 @@ struct MapView: View {
 //}
 
 #Preview {
-    MapView(showActivityPreview: .constant(false)).environmentObject(GlobalVariables())
+    MapView(showActivityPreview: .constant(false)).environmentObject(SearchGlobalVariables())
 }
 
 // MARK: Extentions

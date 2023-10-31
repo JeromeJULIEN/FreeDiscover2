@@ -13,7 +13,7 @@ struct ContributionProfileView: View {
     
     var body: some View {
         VStack {
-            Profile_rectangle(userName: user.userName, userPicture: user.userPicture, userStatus: user.userStatus, userContribution: user.userContribution)
+            Profile_rectangle(userName: user.userName, userPicture: user.userPicture,  userContribution: user.userContributions.count)
             
             ProfileSwitchButton()
                 .padding()
@@ -30,5 +30,5 @@ struct ContributionProfileView: View {
         
 
 #Preview {
-    ContributionProfileView(user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial discoverer", userContribution: 0, userPoints: 0))
+    ContributionProfileView(user: UserProfile(id: 1, userName: "Marion", userPicture: "marion",  userContributions: [1,2] ))
 }

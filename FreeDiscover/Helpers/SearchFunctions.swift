@@ -43,7 +43,7 @@ extension Array where Element == FreeDiscover {
                        doesTypeMatch = false
                }
             /// Vérifiez si le titre, le résumé ou la description contiennent l'un des mots de recherche.
-            let doesSummaryMatch = activity.summary.containsAny(of: searchWords) || activity.name.containsAny(of: searchWords) || activity.shortDescription.containsAny(of: searchWords)
+            let doesSummaryMatch = activity.description.containsAny(of: searchWords) || activity.name.containsAny(of: searchWords)
             /// On retourne l'activité si les deux critères sont valides
             return doesTypeMatch && doesSummaryMatch }
     }

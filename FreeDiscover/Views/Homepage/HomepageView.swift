@@ -20,7 +20,7 @@ struct HomepageView: View {
     @State var showCarroussel : Bool = true
     @State var showActivityPreview : Bool = false
     
-    @EnvironmentObject var globalVariables : GlobalVariables
+    @EnvironmentObject var globalVariables : SearchGlobalVariables
     
     var body: some View {
         NavigationView{
@@ -85,5 +85,5 @@ struct HomepageView: View {
 }
 
 #Preview {
-    HomepageView().environmentObject(GlobalVariables())
+    HomepageView().environmentObject(SearchGlobalVariables())
 }

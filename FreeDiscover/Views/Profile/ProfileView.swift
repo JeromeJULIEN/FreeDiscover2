@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ProfileView: View {
    @State var activityType: ActivityTypes = .nature
+    
+//    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
     var user: UserProfile
+    
     var body: some View {
         VStack {
-            Profile_rectangle(userName: user.userName, userPicture: user.userPicture, userStatus: user.userStatus, userContribution: user.userContribution)
+            Profile_rectangle(userName: user.userName, userPicture: user.userPicture,  userContribution: user.userContributions.count)
             ProfileSwitchButton()
                 .padding()
             ScrollView {
@@ -22,7 +25,7 @@ struct ProfileView: View {
                         Text(activity.rawValue.capitalized)
                         Spacer()
                     }
-                        CarrouselFavoriteEV(activityType: activity) }
+                    CarrouselFavoriteEV(activityType: activity, user : user) }
 
             }
         }
@@ -30,7 +33,7 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView(activityType: .nature, user: UserProfile(userName: "Marion", userPicture: "marion", userStatus: "Serial discoverer", userContribution: 0, userPoints: 0))
+    ProfileView(activityType: .nature, user: UserProfile.marion)
 }
 
 

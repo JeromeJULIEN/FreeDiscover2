@@ -2,7 +2,7 @@
 //  VoteCountDisplay2.swift
 //  FreeDiscover
 //
-//  Created by apprenant92 on 30/10/2023.
+//  Created by apprenant70 on 30/10/2023.
 //
 
 import SwiftUI
@@ -27,7 +27,7 @@ struct VoteCountDisplay2: View {
                         )
                     )
                 HStack{
-        
+
                     Text("\(voteCount) pts")
                         .font(.caption.bold())
                 }
@@ -71,5 +71,5 @@ struct VoteCountDisplay2: View {
 }
 
 #Preview {
-    VoteCountDisplay2(voteCount: -2)
+    VoteCountDisplay2(voteCount: -3)
 }
