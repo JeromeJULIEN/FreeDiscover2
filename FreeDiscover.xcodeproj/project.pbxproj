@@ -50,6 +50,7 @@
 		7C9ACD912AE6C3230083E3C2 /* GetActivityByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */; };
 		7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */; };
 		7CE35FF22AEE6B2100209FF6 /* SearchFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */; };
+		7CE725272AF0F6170092B623 /* VoteCOuntDisplay2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE725262AF0F6170092B623 /* VoteCOuntDisplay2.swift */; };
 		9FDED9B52AEA89C0001BAD95 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */; };
 		9FDED9B72AEA90F8001BAD95 /* ThumbsupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */; };
 		9FDED9B92AEA9121001BAD95 /* ThumbsdownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B82AEA9121001BAD95 /* ThumbsdownButton.swift */; };
@@ -61,7 +62,6 @@
 		C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C770A4C32AE904F700A60BB8 /* ImagePicker.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
 		C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */; };
-		C7FB10382AEFBCAD00BFA605 /* VoteCountDisplay2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB10372AEFBCAD00BFA605 /* VoteCountDisplay2.swift */; };
 		C7FB10602AEFE54900BFA605 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */; };
 		F2E031582AE17D98001ECF38 /* ActivityTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E031572AE17D98001ECF38 /* ActivityTypes.swift */; };
 		F2E0315A2AE17DAE001ECF38 /* FreeDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E031592AE17DAE001ECF38 /* FreeDiscover.swift */; };
@@ -118,6 +118,7 @@
 		7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetActivityByType.swift; sourceTree = "<group>"; };
 		7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTemporaryActivity.swift; sourceTree = "<group>"; };
 		7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFunctions.swift; sourceTree = "<group>"; };
+		7CE725262AF0F6170092B623 /* VoteCOuntDisplay2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCOuntDisplay2.swift; sourceTree = "<group>"; };
 		9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareButton.swift; sourceTree = "<group>"; };
 		9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbsupButton.swift; sourceTree = "<group>"; };
 		9FDED9B82AEA9121001BAD95 /* ThumbsdownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbsdownButton.swift; sourceTree = "<group>"; };
@@ -129,7 +130,6 @@
 		C770A4C32AE904F700A60BB8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
 		C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySymbol.swift; sourceTree = "<group>"; };
-		C7FB10372AEFBCAD00BFA605 /* VoteCountDisplay2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCountDisplay2.swift; sourceTree = "<group>"; };
 		C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
 		F2E031572AE17D98001ECF38 /* ActivityTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypes.swift; sourceTree = "<group>"; };
 		F2E031592AE17DAE001ECF38 /* FreeDiscover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeDiscover.swift; sourceTree = "<group>"; };
@@ -284,9 +284,9 @@
 				7C7385AC2AE1151D0024DDCC /* Styles */,
 				7C0F47712AE18061004F8033 /* ListCard.swift */,
 				7C0F47752AE18B70004F8033 /* VoteCountDisplay.swift */,
-				9FDED9BC2AEFC000001BAD95 /* VoteCountDisplay2.swift */,
 				7C9ACD842AE6B7690083E3C2 /* UserSymbolMapPosition.swift */,
 				7C9ACD8C2AE6B9E40083E3C2 /* CarrousselBonPlan.swift */,
+				7CE725262AF0F6170092B623 /* VoteCOuntDisplay2.swift */,
 			);
 			path = Componants;
 			sourceTree = "<group>";
@@ -460,6 +460,7 @@
 				7C7385C02AE12D260024DDCC /* ProfileView.swift in Sources */,
 				C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */,
 				9FDED9B52AEA89C0001BAD95 /* ShareButton.swift in Sources */,
+				7CE725272AF0F6170092B623 /* VoteCOuntDisplay2.swift in Sources */,
 				7C9ACD852AE6B7690083E3C2 /* UserSymbolMapPosition.swift in Sources */,
 				4364CD372AE6663C001A100A /* ProfileSwitchButton.swift in Sources */,
 				43944F6F2AE271C100E03E84 /* UserProfile.swift in Sources */,
@@ -505,7 +506,6 @@
 				7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */,
 				C71FB42E2AE7AC1900DEE84F /* UserModel.swift in Sources */,
 				7C9ACD8D2AE6B9E40083E3C2 /* CarrousselBonPlan.swift in Sources */,
-				9FDED9BD2AEFC000001BAD95 /* VoteCountDisplay2.swift in Sources */,
 				7CE35FF22AEE6B2100209FF6 /* SearchFunctions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

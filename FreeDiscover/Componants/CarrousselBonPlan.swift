@@ -63,7 +63,7 @@ struct CarrousselBonPlan: View {
             }
         }
         .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
-        .presentationDetents([.height(200)])
+        .presentationDetents([.height(200),.large])
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
     }

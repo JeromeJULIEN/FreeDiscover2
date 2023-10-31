@@ -106,7 +106,7 @@ struct ActivityDetailView: View {
 
                 Spacer()
 
-                Text("\(activity.summary)")
+                Text("\(activity.description)")
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
@@ -130,7 +130,7 @@ struct ActivityDetailView: View {
                             activity in
                             
                             //       VStack(alignment:.leading){
-                            Image("\(activity.image)")
+                            Image("\(activity.image[0])")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 150, height: 150)

@@ -27,7 +27,6 @@ struct VoteCountDisplay2: View {
                         )
                     )
                 HStack{
-
                     Text("\(voteCount) pts")
                         .font(.caption.bold())
                 }
