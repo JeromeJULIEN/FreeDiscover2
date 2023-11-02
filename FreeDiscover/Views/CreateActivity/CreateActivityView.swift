@@ -15,29 +15,24 @@ enum DurationMode {
 
 struct CreateActivityView: View {
     
-    @State private var dates: Set<DateComponents> = []
-    @State private var date = Date()
-    @State private var showingCalendar = false
+    @State private var startDate = Date()
+    @State private var endDate = Date()
     @State var activityName: String = ""
     @State var activityDescription: String = ""
     @State var currentCategory: ActivityTypes
     @State var isTemporary: Bool
     @State var isPickerShowing = false
     @State var isLocationPickerShowing = false
-    //
-    @StateObject var viewModel = UserModel()
-    @State var selectedImage: UIImage?
     @State var selectedImages: [UIImage]?
-   // @Binding var images: [UIImage]
     
-    var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        return formatter
-    }
-    @State var activityDate = Date()
+//    var dateFormatter: DateFormatter {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .long
+//        return formatter
+//    }
+    
     @State var buttonColor = Color.lightBlue
-    @State var shouldChangeColor = false
+
     
     var body : some View {
         
@@ -86,8 +81,15 @@ struct CreateActivityView: View {
                 if isTemporary == true {
                     
                     DatePicker(
-                        "Date :",
-                        selection: $date, in: Date.now...,
+                        "Date de début :",
+                        selection: $startDate, in: Date.now...,
+                        displayedComponents: [.date]
+                    )
+                    .padding(.horizontal, 60)
+                    
+                    DatePicker(
+                        "Date de fin :",
+                        selection: $endDate, in: startDate...,
                         displayedComponents: [.date]
                     )
                     .padding(.horizontal, 60)
