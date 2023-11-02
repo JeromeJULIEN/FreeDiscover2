@@ -11,6 +11,7 @@ import PhotosUI
 
 struct UserImage: View {
     let imageState: UserModel.ImageState
+    var userPicture: String
     
     var body: some View {
         switch imageState {
@@ -20,8 +21,8 @@ struct UserImage: View {
             ProgressView()
         case .empty:
             ZStack {
-               // Image(systemName: "plus.square")
-                //    .font(.system(size: 30))
+                Image(userPicture)
+                  //  .font(.system(size: 30))
                 //    .foregroundColor(.white)
                 Text("")
                     .foregroundColor(Color.grayDark)
@@ -37,9 +38,10 @@ struct UserImage: View {
 // ressource existante pour la photo de profil
 struct CircularProfileImage: View {
     let imageState: UserModel.ImageState
+    var userPicture: String
     
     var body: some View {
-        UserImage(imageState: imageState)
+        UserImage(imageState: imageState, userPicture: userPicture)
             .scaledToFill()
             .clipShape(Circle())
             .frame(width: 100, height: 100)
@@ -57,9 +59,10 @@ struct CircularProfileImage: View {
 // ressource existante pour le bouton + de la photo de profil
 struct EditableCircularProfileImage: View {
     @ObservedObject var viewModel: UserModel
+    var userPicture: String
     
     var body: some View {
-        CircularProfileImage(imageState: viewModel.imageState)
+        CircularProfileImage(imageState: viewModel.imageState, userPicture: userPicture)
             .overlay(alignment: .bottomTrailing) {
                 PhotosPicker(selection: $viewModel.imageSelection,
                              matching: .images,
