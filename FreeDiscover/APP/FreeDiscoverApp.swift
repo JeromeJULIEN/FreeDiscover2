@@ -13,7 +13,7 @@ struct FreeDiscoverApp: App {
     
     // Importation des variables d'environnement pour les rendre dispo dans toute l'application
     @StateObject var searchGlobalVariables = SearchGlobalVariables()
-    @StateObject var userGlobalVariables = UserGlobalVariables()
+    @StateObject var userGlobalVariables = APIUserRequestModel()
     @StateObject var activityGlobalVariables = ActivityGlobalVariables()
 
 
@@ -25,5 +25,6 @@ struct FreeDiscoverApp: App {
         .environmentObject(searchGlobalVariables)
         .environmentObject(userGlobalVariables)
         .environmentObject(activityGlobalVariables)
+        
     }
 }
