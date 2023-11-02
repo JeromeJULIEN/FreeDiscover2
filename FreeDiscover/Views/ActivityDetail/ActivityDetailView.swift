@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivityDetailView: View {
     // activity to display
-    @State var activity : FreeDiscover
+    @State var activity : Activity
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
@@ -34,12 +34,21 @@ struct ActivityDetailView: View {
                 
                 ZStack (alignment: .topTrailing){
                     //  Image("calanque-en-vau")
-                    Image(activity.image[0])
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxHeight: 250)
-                        .clipped()
-                        .cornerRadius(10)
+                    if let imageFound = activity.photos.first {
+                        AsyncImage(url: URL(string: imageFound.url)) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } else if phase.error != nil {
+                                Text("Image indisponible")
+                            } else {
+                                ProgressView()
+                            }
+                        }
+                       .frame(maxHeight: 250)
+                       .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
 //.padding(5)
                     Button(action : {isFavorite = !isFavorite}){
                         ZStack {
@@ -63,19 +72,19 @@ struct ActivityDetailView: View {
                 VStack {
                         VStack{
                         HStack (){
-                            ActivitySymbolSmall(activityType: activity.type)
-                                                            if(activity.family){
+                            ActivitySymbolSmall(activityType: activity.typeActivite)
+                            if(activity.famille == "true"){
                                                                 Image(systemName: "figure.2.and.child.holdinghands")
                                                                     .foregroundColor(.grayDark)
                                                             }
-                                                            if(activity.accessibiliy){
+                            if(activity.accessibilite == "true"){
                                                                 Image(systemName: "figure.roll")
                                                                     .foregroundColor(.grayDark)
                                                             }
-//                                                            if(activity.temporary){
-//                                                                Image(systemName: "calendar")
-//                                                                    .foregroundColor(.grayDark)
-//                                                            }
+                            if(activity.temporaire == "true"){
+                                Image(systemName: "calendar")
+                                    .foregroundColor(.grayDark)
+                            }
                             Text("\(activity.name)")
                                 .font(.title2.bold())
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -90,7 +99,7 @@ struct ActivityDetailView: View {
                                     .foregroundColor(Color("GrayDark"))
                                     .frame(maxWidth: .infinity, alignment: .leading)                     .padding(5)
                             }
-                            if (activity.temporary == true){
+                            if (activity.temporaire == "true"){
                                 Text ("Date: Toute l'année")
                                     .font(.subheadline)
                                     .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
@@ -110,7 +119,7 @@ struct ActivityDetailView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                VoteCountDisplay2(activity: $activity)
+//                VoteCountDisplay2(activity: $activity)
 //                    .frame(height: 110)
                 //            Text ("Accessible toute l'année")
                 //                .font(.title3)
@@ -155,6 +164,6 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
+    ActivityDetailView(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }
 

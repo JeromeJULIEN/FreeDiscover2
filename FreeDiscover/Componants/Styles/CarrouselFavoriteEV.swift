@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct CarrouselFavoriteEV: View {
-  var activityType : ActivityTypes
-    var user : UserProfile
+    
+    @EnvironmentObject var activityGlobalVariable : APIActivityRequestModel
+    
+    var activityType : String
+    var user : User
     var body: some View {
         HStack {
 //            ActivitySymbolSmall(activityType: .culture)
@@ -23,12 +26,23 @@ struct CarrouselFavoriteEV: View {
         }
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.flexible())], content: {
-                ForEach(getFavoriteFromUserByType(userFavorites: user.userFavorites, type: activityType),id: \.id){
+                ForEach(getFavoriteFromUserByType(activityDataBase: activityGlobalVariable.allActivities, userFavorites: user.idFromFavorite, type: activityType),id: \.id){
                     favorite in
-                Image("\(favorite.image[0])")
-                    .resizable()
-                    .frame(width: 140, height: 140)
-                    .cornerRadius(10)
+                    if let imageFound = favorite.photos.first {
+                        AsyncImage(url: URL(string: imageFound.url)) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } else if phase.error != nil {
+                                Text("Image indisponible")
+                            } else {
+                                ProgressView()
+                            }
+                        }
+                        .frame(width:140,height: 140)
+                       .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
                 }
             })
         }
@@ -39,5 +53,5 @@ struct CarrouselFavoriteEV: View {
 }
 
 #Preview {
-    CarrouselFavoriteEV(activityType: .nature, user: UserProfile.marion)
+    CarrouselFavoriteEV(activityType: "nature", user: User.marion)
 }

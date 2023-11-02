@@ -16,11 +16,7 @@ struct TestAPIView: View {
             Text("User list")
             
         }
-        .onAppear{
-            Task{
-                userRequest.allUser = await userRequest.fetchedUser()
-            }
-        }
+        
         
 
     }

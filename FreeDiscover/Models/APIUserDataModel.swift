@@ -31,14 +31,17 @@ struct UserRecord: Codable {
 
 //oubliez pas de rendre votre donnée finale (celle que vous voulez utiliser et travailler) Identifiable pour SwiftUI
 class User: Codable,Identifiable,ObservableObject {
-   let activities, userUpVote: [String]
-   let id: Int
-   let name: String
-   let userPicture: [ImageDataModel]
-   let favorite: [String]
-   let idFromFavorite, idFromActivities, idFromUserUpVote: [Int]
-   let userDownVote: [String]
-   let idFromUserDownVote: [Int]
+    @Published var activities : [String]
+    @Published var userUpVote: [String]
+    @Published var id: Int
+    @Published var name: String
+    @Published var userPicture: [ImageDataModel]
+    @Published var favorite: [String]
+    @Published var idFromFavorite: [Int]
+    @Published var idFromActivities: [Int]
+    @Published var idFromUserUpVote: [Int]
+    @Published var userDownVote: [String]
+    @Published var idFromUserDownVote: [Int]
 
     enum CodingKeys: String, CodingKey {
         case activities, userUpVote, id, name, userPicture, favorite
@@ -84,6 +87,28 @@ class User: Codable,Identifiable,ObservableObject {
         self.userDownVote = try container.decode([String].self, forKey: .userDownVote)
         self.idFromUserDownVote = try container.decode([Int].self, forKey: .idFromUserDownVote)
     }
+    
+    //Le principle pour encoder est le même, on utilise les CodingKeys pour ciblé la bonne propriété
+    //et on lui comment encoder
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(activities, forKey: .activities)
+        try container.encode(userUpVote, forKey: .userUpVote)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(userPicture, forKey: .userPicture)
+        try container.encode(favorite, forKey: .favorite)
+        try container.encode(idFromFavorite, forKey: .idFromFavorite)
+        try container.encode(idFromActivities, forKey: .idFromActivities)
+        try container.encode(idFromUserUpVote, forKey: .idFromUserUpVote)
+        try container.encode(userDownVote, forKey: .userDownVote)
+        try container.encode(idFromUserDownVote, forKey: .idFromUserDownVote)
+    }
+}
+
+extension User {
+    static let marion = User(activities: ["1","2","5","10","15"], userUpVote: ["1","2","3"], id: 1, name: "Marion", userPicture: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "marion", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))], favorite: ["1","2","5","9","14","3","4"], idFromFavorite: [1,2,5,9,14,3,4], idFromActivities: [1,2,5,10,15], idFromUserUpVote: [1,2,3], userDownVote: ["12","13"], idFromUserDownVote: [12,13])
 }
 
 

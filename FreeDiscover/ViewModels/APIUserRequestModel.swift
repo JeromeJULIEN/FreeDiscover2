@@ -16,6 +16,9 @@ class APIUserRequestModel : ObservableObject {
     //on veut savoir les faits et gestes des @Published tel un stalker
     @Published var allUsers = [User]()
     
+    /// User par défaut pour lancer l'app
+    @Published var connectedUser : User = User.marion
+    
     //on prépare une fonction asynchrone pour ne pas surcharger le main thread
     //cette méthode va être utiliser sur un autre thread secondaire
     //et on veut pouvoir utiliser de la donnée de type User donc on attend un array de ça en retour

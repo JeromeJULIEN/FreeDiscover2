@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ContributionProfileView: View {
   
-    var user: UserProfile
+    var user: User
     
     var body: some View {
         VStack {
-            Profile_rectangle(userName: user.userName, userPicture: user.userPicture,  userContribution: user.userContributions.count)
+            Profile_rectangle(user: user )
             
             ProfileSwitchButton()
                 .padding()
@@ -29,6 +29,6 @@ struct ContributionProfileView: View {
 }
         
 
-#Preview {
-    ContributionProfileView(user: UserProfile(id: 1, userName: "Marion", userPicture: "marion",  userContributions: [1,2] ))
-}
+//#Preview {
+//    ContributionProfileView(user: UserProfile(id: 1, userName: "Marion", userPicture: "marion",  userContributions: [1,2] ))
+//}

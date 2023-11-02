@@ -11,11 +11,11 @@ struct ListView: View {
     // MARK: Variable externes
     /// Importation des variables globales
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
-    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     // MARK: Fonctions de la vue
     func searchActivities() {
-        searchGlobalVariables.searchResults = activityGlobalVariables.activities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
+        searchGlobalVariables.searchResults = activityGlobalVariables.allActivities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: Vue
@@ -24,7 +24,7 @@ struct ListView: View {
             VStack(spacing:15){
                 Spacer().frame(height: 75)
                 if(searchGlobalVariables.isSearchOngoing == false){
-                    ForEach(FreeDiscover.allFreeDiscover){activity in
+                    ForEach(activityGlobalVariables.allActivities){activity in
                         NavigationLink(destination:ActivityDetailView(activity: activity)){
                             ListCard(activity: activity)
                         }.accentColor(Color("GrayDark"))
@@ -62,6 +62,6 @@ struct ListView: View {
                
 
 #Preview {
-    ListView().environmentObject(SearchGlobalVariables()).environmentObject(UserGlobalVariables())
-        .environmentObject(ActivityGlobalVariables())
+    ListView().environmentObject(SearchGlobalVariables()).environmentObject(APIUserRequestModel())
+        .environmentObject(APIActivityRequestModel())
 }
