@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ListCard: View {
     // activity to display
-    var activity : FreeDiscover
-    
-    // bool to manage heart icon color (temp : will be define with the airtable DB)
-    @State private var isFavorite : Bool = false
+    @State var activity : FreeDiscover
     
     var body: some View {
         ZStack{
@@ -48,7 +45,7 @@ struct ListCard: View {
                                 .foregroundColor(.grayDark)
                         }
                         Spacer()
-                        VoteCountDisplay(voteCount: activity.voteCounter)
+                        VoteCountDisplay2(activity: $activity)
                     }
                   
                 }
@@ -59,22 +56,8 @@ struct ListCard: View {
                        .aspectRatio(contentMode: .fill)
                        .frame(width: 110, height: 110)
                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                    Button(action : {isFavorite = !isFavorite}){
-                        ZStack {
-                            Image(systemName: "heart.fill")
-                                .padding(4)
-                                .foregroundStyle(.accent)
-                                .opacity(isFavorite ? 1 : 0)
-                                .bold()
-                                .font(.title2)
-                            Image(systemName: "heart")
-                                .padding(4)
-                                .foregroundStyle(.white)
-                                .bold()
-                                .font(.title2)
-                        }
-                        
-                    }
+                    FavoriteButton(activityId: activity.id)
+                    
                     
                 }
             }
@@ -84,5 +67,5 @@ struct ListCard: View {
 }
 
 #Preview {
-    ListCard(activity: FreeDiscover.nature1)
+    ListCard(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
 }

@@ -10,7 +10,7 @@ import PhotosUI
 
 struct ActivityDetailView: View {
     // activity to display
-    var activity : FreeDiscover
+    @State var activity : FreeDiscover
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
@@ -118,6 +118,7 @@ struct ActivityDetailView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
                             }
                         }
+
                     }
                     Divider()
                     
@@ -197,6 +198,7 @@ struct ActivityDetailView: View {
                     }
                     
                     
+
                 }
             }
             .padding()
@@ -206,6 +208,6 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.bonPlan1)
+    ActivityDetailView(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
 }
 

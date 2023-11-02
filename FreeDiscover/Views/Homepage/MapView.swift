@@ -38,12 +38,13 @@ struct MapView: View {
     @Binding var showActivityPreview : Bool
       
     /// Importation des variables globales
-    @EnvironmentObject var globalVariables : SearchGlobalVariables
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
     
     // MARK: Fonctions de la vue
     /// Fonction de recherche appliquée à la map
     func searchActivities() {
-        globalVariables.searchResults = FreeDiscover.allFreeDiscover.filter(searchText: globalVariables.searchContent,lookForNature: globalVariables.isNatureSelectedForSearch,lookForSport: globalVariables.isSportSelectedForSearch,lookForCulture: globalVariables.isCultureSelectedForSearch,lookForSocial: globalVariables.isSocialSelectedForSearch)
+        searchGlobalVariables.searchResults = activityGlobalVariables.activities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
     }
     
     // MARK: VUE
@@ -55,30 +56,30 @@ struct MapView: View {
             UserAnnotation()
             
             // Si pas de recherche en cours, affichage des activités en BDD
-            if(globalVariables.isSearchOngoing == false){
-                ForEach(freeDiscover.indices, id:\.self){index in
+            if(searchGlobalVariables.isSearchOngoing == false){
+                ForEach(activityGlobalVariables.activities.indices, id:\.self){index in
                     Annotation(
-                        "\(freeDiscover[index].name)",
-                        coordinate: freeDiscover[index].location,
+                        "\(activityGlobalVariables.activities[index].name)",
+                        coordinate: activityGlobalVariables.activities[index].location,
                         anchor: .center
                     
                     ){
-                        ActivitySymbol(activityType: freeDiscover[index].type.rawValue, temporary: freeDiscover[index].temporary)
+                        ActivitySymbol(activityType: activityGlobalVariables.activities[index].type.rawValue, temporary: activityGlobalVariables.activities[index].temporary)
                             .scaleEffect(selectedTag == index ? 1.2 : 1)
                         
                     }
                     .tag(index)
                 }
             }
-            if(globalVariables.isSearchOngoing == true){
-                ForEach(globalVariables.searchResults.indices, id:\.self){index in
+            if(searchGlobalVariables.isSearchOngoing == true){
+                ForEach(searchGlobalVariables.searchResults.indices, id:\.self){index in
                     Annotation(
-                        "\(globalVariables.searchResults[index].name)",
-                        coordinate: globalVariables.searchResults[index].location,
+                        "\(searchGlobalVariables.searchResults[index].name)",
+                        coordinate: searchGlobalVariables.searchResults[index].location,
                         anchor: .center
                     
                     ){
-                        ActivitySymbol(activityType: globalVariables.searchResults[index].type.rawValue, temporary: globalVariables.searchResults[index].temporary)
+                        ActivitySymbol(activityType: searchGlobalVariables.searchResults[index].type.rawValue, temporary: searchGlobalVariables.searchResults[index].temporary)
                             .scaleEffect(selectedTag == index ? 1.2 : 1)
                         
                     }
@@ -115,11 +116,11 @@ struct MapView: View {
         })
         .onChange(of: selectedTag){
             /// Définie l'objet sélectionné dans les variables globales et à afficher dans `activityPreview`
-            globalVariables.selectedActivityInSearch = globalVariables.isSearchOngoing ? globalVariables.searchResults[selectedTag!] : freeDiscover[selectedTag!]
+            searchGlobalVariables.selectedActivityInSearch = searchGlobalVariables.isSearchOngoing ? searchGlobalVariables.searchResults[selectedTag!] : freeDiscover[selectedTag!]
             /// Affiche la modale `activityPreview`
             showActivityPreview = true
         }
-        .onChange(of: globalVariables.launchSearch){
+        .onChange(of: searchGlobalVariables.launchSearch){
             searchActivities()
         }
     }
@@ -127,7 +128,7 @@ struct MapView: View {
 //}
 
 #Preview {
-    MapView(showActivityPreview: .constant(false)).environmentObject(SearchGlobalVariables())
+    MapView(showActivityPreview: .constant(false)).environmentObject(SearchGlobalVariables()).environmentObject(ActivityGlobalVariables())
 }
 
 // MARK: Extentions

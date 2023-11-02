@@ -34,3 +34,8 @@ class UserGlobalVariables : ObservableObject {
     /// User par défaut pour lancer l'app
     @Published var connectedUser : UserProfile = UserProfile.marion
 }
+
+// Variables liées aux activitées
+class ActivityGlobalVariables : ObservableObject {
+    @Published var activities : [FreeDiscover] = FreeDiscover.allFreeDiscover
+}
