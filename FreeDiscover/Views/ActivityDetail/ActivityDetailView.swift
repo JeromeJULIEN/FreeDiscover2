@@ -20,6 +20,9 @@ struct ActivityDetailView: View {
     @State var selectedImage: UIImage?
     @State var isPickerShowing = false
     @State var buttonColor = Color.lightBlue
+    
+    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
+
 
     var body: some View {
         ScrollView{
@@ -133,7 +136,7 @@ struct ActivityDetailView: View {
                     //                    .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
-                    VoteCountDisplay2(voteCount: -3)
+                    VoteCountDisplay2(activity: $activity)
                     //                    .frame(height: 110)
                     //            Text ("Accessible toute l'année")
                     //                .font(.title3)
@@ -177,7 +180,7 @@ struct ActivityDetailView: View {
                     }
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing:55){
-                            ForEach(getTemporaryActivities(),id: \.id){
+                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
                                 activity in
                                 
                                 //       VStack(alignment:.leading){
@@ -208,6 +211,8 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
+    ActivityDetailView(activity: FreeDiscover.nature1)
+        .environmentObject(UserGlobalVariables())
+        .environmentObject(ActivityGlobalVariables())
 }
 
