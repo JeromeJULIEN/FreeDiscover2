@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityPreview: View {
-    var activity : FreeDiscover
+    @State var activity : FreeDiscover
     
     var body: some View {
         HStack(alignment:.top){
@@ -20,7 +20,7 @@ struct ActivityPreview: View {
                 HStack{
                     ActivitySymbolSmall(activityType: activity.type)
                     Spacer()
-                    VoteCountDisplay(voteCount: activity.voteCounter)
+                    VoteCountDisplay2(activity: $activity)
                 }
                 Spacer()
                 Text("\(activity.description)")
@@ -32,11 +32,15 @@ struct ActivityPreview: View {
 
             }
             Spacer()
-            Image("\(activity.image[0])")
-               .resizable()
-               .aspectRatio(contentMode: .fill)
-               .frame(width: 160, height: 160)
-               .clipShape(RoundedRectangle(cornerRadius: 8))
+            ZStack(alignment : .topTrailing){
+                Image("\(activity.image[0])")
+                   .resizable()
+                   .aspectRatio(contentMode: .fill)
+                   .frame(width: 160, height: 160)
+                   .clipShape(RoundedRectangle(cornerRadius: 8))
+                FavoriteButton(activityId: activity.id)
+            }
+            
         }
         .padding()
         .presentationDetents([ .height(200)])
@@ -49,4 +53,6 @@ struct ActivityPreview: View {
 
 #Preview {
     ActivityPreview(activity: FreeDiscover.nature1)
+        .environmentObject(UserGlobalVariables())
+//        .environmentObject(ActivityGlobalVariables())
 }

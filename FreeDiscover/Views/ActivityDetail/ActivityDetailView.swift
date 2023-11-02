@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivityDetailView: View {
     // activity to display
-    var activity : FreeDiscover
+    @State var activity : FreeDiscover
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
@@ -110,7 +110,7 @@ struct ActivityDetailView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .multilineTextAlignment(.leading)
-                VoteCountDisplay2(voteCount: -3)
+                VoteCountDisplay2(activity: $activity)
 //                    .frame(height: 110)
                 //            Text ("Accessible toute l'année")
                 //                .font(.title3)
@@ -125,25 +125,25 @@ struct ActivityDetailView: View {
 //                    .padding(5)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false){
-                    HStack(spacing:55){
-                        ForEach(getTemporaryActivities(),id: \.id){
-                            activity in
-                            
-                            //       VStack(alignment:.leading){
-                            Image("\(activity.image[0])")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 150, height: 150)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                            //    Text("\(activity.name)")
-                            //      .foregroundColor(.grayDark)
-                            //    .font(.headline)
-                            //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                            // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                            //     }
-                                .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
-                        }
-                    }
+//                    HStack(spacing:55){
+//                        ForEach(getTemporaryActivities(),id: \.id){
+//                            activity in
+//                            
+//                            //       VStack(alignment:.leading){
+//                            Image("\(activity.image[0])")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                                .frame(width: 150, height: 150)
+//                                .clipShape(RoundedRectangle(cornerRadius: 8))
+//                            //    Text("\(activity.name)")
+//                            //      .foregroundColor(.grayDark)
+//                            //    .font(.headline)
+//                            //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+//                            // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+//                            //     }
+//                                .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
+//                        }
+//                    }
                 }
                 
                 
@@ -155,6 +155,6 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.nature1)
+    ActivityDetailView(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
 }
 

@@ -20,7 +20,7 @@ struct HomepageView: View {
     @State var showCarroussel : Bool = true
     @State var showActivityPreview : Bool = false
     
-    @EnvironmentObject var globalVariables : SearchGlobalVariables
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     
     var body: some View {
         NavigationView{
@@ -42,7 +42,7 @@ struct HomepageView: View {
                     }
                     .padding(.horizontal)
                     .padding(.bottom,1)
-                    if(globalVariables.isSearchOngoing == true){
+                    if(searchGlobalVariables.isSearchOngoing == true){
                         HStack{
                             CancelSearchButton()
                             Spacer()
@@ -70,11 +70,11 @@ struct HomepageView: View {
                 .sheet(isPresented: $showCarroussel){
                     CarrousselBonPlan()
                         .sheet(isPresented: $showActivityPreview){
-                            ActivityPreview(activity: globalVariables.selectedActivityInSearch)
+                            ActivityPreview(activity: searchGlobalVariables.selectedActivityInSearch)
                         }
                 }
                 .sheet(isPresented: $showActivityPreview){
-                    ActivityPreview(activity: globalVariables.selectedActivityInSearch)
+                    ActivityPreview(activity: searchGlobalVariables.selectedActivityInSearch)
                 }
                 .overlay(alignment: .top, content: {
                     SearchView(showSearchView: $showSearchView)
@@ -85,5 +85,6 @@ struct HomepageView: View {
 }
 
 #Preview {
-    HomepageView().environmentObject(SearchGlobalVariables())
+    HomepageView()
+        .environmentObject(SearchGlobalVariables())
 }

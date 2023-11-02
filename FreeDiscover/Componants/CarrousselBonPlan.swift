@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CarrousselBonPlan: View {
+    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
+
+    
     var body: some View {
         NavigationView{
             ZStack {
@@ -26,7 +29,7 @@ struct CarrousselBonPlan: View {
                     }
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing:40){
-                            ForEach(getTemporaryActivities(),id: \.id){
+                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
                                 activity in
                                 NavigationLink(destination:ActivityDetailView(activity: activity)){
                                     VStack(alignment:.leading){
@@ -70,5 +73,5 @@ struct CarrousselBonPlan: View {
 }
 
 #Preview {
-    CarrousselBonPlan()
+    CarrousselBonPlan().environmentObject(ActivityGlobalVariables())
 }
