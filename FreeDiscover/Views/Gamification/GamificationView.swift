@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct GamificationView: View {
-    var level: LevelGame 
+    var level: LevelGame
+    var userContribution: UserProfile
+
+//    var contribForNextLevel = level.nbOfContributionNeeded - userContribution.userContributions.count
     var body: some View {
         
         VStack {
@@ -39,25 +42,29 @@ struct GamificationView: View {
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.title)
                         
-//                    ProgressView(value: level.nbOfContributionNeeded, total: 100)
+                    ProgressView(value: Double(7), total: Double(level.nbOfContributionNeeded))
+                        .frame(width: 300)
+
 //                    barre de progression
-                    Text("En route vers le niveau Prout avancé")
-                    Text("Plus que \(level.nbOfContributionNeeded)-5 contributions")
+                    Text("En route vers le niveau Discoverer avancé")
+//                    Text("Plus que \(level.nbOfContributionNeeded)-5 contributions")
                 }
             }
             .padding()
             ForEach(levels, id:\.self) { level in
-                ExtractedView(level: level) }
+                ExtractedView(level: level, userContribution: UserProfile(id: 1)) }
         }
     }
 }
 
 #Preview {
-    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "laurel.leading", nbOfContributionNeeded: 0))
+    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "laurel.leading", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)
 }
 
 struct ExtractedView: View {
     var level: LevelGame
+    var userContribution: UserProfile
+//    var nbOfContrib = userContribution.userContributions.count
     var body: some View {
         HStack {
             ZStack {
@@ -75,7 +82,7 @@ struct ExtractedView: View {
             }
                 Spacer()
             VStack {
-                Text("8/\(level.nbOfContributionNeeded)")
+                Text("6 /\(level.nbOfContributionNeeded)")
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.title2)
                 Text("Contributions")
