@@ -46,6 +46,7 @@ struct ProfileView: View {
 //                }
 //            }
         }
+        .navigationTitle("Mon profil")
     }
 }
 
