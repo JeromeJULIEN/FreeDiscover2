@@ -17,10 +17,15 @@ struct ContributionProfileView: View {
             
             ProfileSwitchButton()
                 .padding()
-            
-//            ScrollView {
-//                CarrouselFavoriteEV()    
-//            }
+            ScrollView {
+                ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                    HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                            .padding(.leading)
+                        Text(activity.rawValue.capitalized)
+                        Spacer()
+                    }
+                    CarrouselContributionEV(activityType: activity, user : user) }
+            }
             
             .padding()
             Spacer()

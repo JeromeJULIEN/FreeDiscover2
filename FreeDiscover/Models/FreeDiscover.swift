@@ -174,10 +174,10 @@ extension FreeDiscover {
         accessibiliy: true,
         family: true,
         type: ActivityTypes.social,
-        temporary: true,
+        temporary: false,
         startingDate: .distantFuture,
         endingDate: .distantFuture,
-        contributor: 4
+        contributor: 1
     )
     
     /// Tableau de statistique ` allFreeDiscover` regroupant tous les modèles de `FreeDiscover` disponible.

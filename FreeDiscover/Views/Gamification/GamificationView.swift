@@ -21,7 +21,7 @@ struct GamificationView: View {
             
             ZStack{
                 RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
-                    .frame(width: 330, height: 200)
+                    .frame(width: 350, height: 200)
                     .foregroundColor(.white)
                     .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 VStack {
@@ -47,6 +47,8 @@ struct GamificationView: View {
 
 //                    barre de progression
                     Text("En route vers le niveau Discoverer avancé")
+                        .font(.callout)
+                        .foregroundColor(.grayDark)
 //                    Text("Plus que \(level.nbOfContributionNeeded)-5 contributions")
                 }
             }
