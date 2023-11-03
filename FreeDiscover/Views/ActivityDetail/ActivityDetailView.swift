@@ -17,35 +17,41 @@ struct ActivityDetailView: View {
     private let url = URL(string: "https://www.freediscover.fr")!
     
     @StateObject var viewModel = UserModel()
-    @State var selectedImage: UIImage?
+    //    @State var selectedImage: UIImage?
+    @State var selectedImages: [UIImage]?
     @State var isPickerShowing = false
     @State var buttonColor = Color.lightBlue
     
     @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
-
-
+    
+    
     var body: some View {
         ScrollView{
             //VStack de la vue entiere
             VStack{
-                //ShareButton()
-                //            VStack {
-                //                ShareLink(item: url) {
-                //                    Image(systemName: "square.and.arrow.up")
-                //                }
-                //            }
-                //            .swipeActions(){
-                //                Button(action: {
-                //                    let url = URL(string: "https://www.freediscover.fr")
-                //                    let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
-                //
-                //                    UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-                //                }) {
-                //                    Label("", systemImage: "square.and.arrow.up")
-                //                }
                 
-                //      .padding(5)
                 
+                //     ShareButton()
+//                VStack {
+//                    ShareLink(item: url) {
+//                        Image(systemName: "square.and.arrow.up")
+//                    }
+//                }
+//                .swipeActions(){
+//                    Button(action: {
+//                        let url = URL(string: "https://www.freediscover.fr")
+//                        let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
+//
+//                        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+//                    }) {
+//                        Label("", systemImage: "square.and.arrow.up")
+//                    }
+//                }
+               // .padding(5)
+                
+                
+                
+         //       ----------------------------------
                 //partie 1 fiche de l'activité
                 
                 // VStack de  photo + titre + créé par + laurier
@@ -94,12 +100,14 @@ struct ActivityDetailView: View {
                             Spacer()
                             
                             HStack{
-                                laurelleadingLevel()
+                                
                                 Text ("Créé par Marion")
                                 //     Text("\(activity.contributor)")
                                     .font(.subheadline)
                                     .foregroundColor(Color("GrayDark"))
                                     .frame(maxWidth: .infinity, alignment: .leading)                     .padding(5)
+                                laurelleadingLevel()
+                                    .padding(5)
                                 //Integrer la date //calendar.badge.clock
                             }
                             HStack{
@@ -121,7 +129,7 @@ struct ActivityDetailView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
                             }
                         }
-
+                        
                     }
                     Divider()
                     
@@ -165,54 +173,112 @@ struct ActivityDetailView: View {
                     }
                     .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
                         
-                        //Image picker
-                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
-                    }
-                    
-                    if selectedImage != nil {
                         
+                        //Image picker pour une seule
+                        //                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+                        //                    }
                         
-                        Image(uiImage: selectedImage!)
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                            .cornerRadius(10)
+                        //Image picker pour selectionner plusieurs photos en 1 fois
+                        
+                        ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
                         
                     }
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing:55){
-                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
-                                activity in
-                                
-                                //       VStack(alignment:.leading){
-                                Image("\(activity.image[0])")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 150, height: 150)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                //    Text("\(activity.name)")
-                                //      .foregroundColor(.grayDark)
-                                //    .font(.headline)
-                                //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                                // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                                //     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
+                    ScrollView(.horizontal) {
+
+                    if selectedImages != nil {
+                        //
+                            HStack(spacing: 10) {
+                                ForEach(Array(selectedImages?.indices ?? 0..<0), id: \.self) { index in
+                                    //                                    if selectedImages != nil {
+                                    
+                                    if let image = selectedImages?[index] {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .overlay(
+                                                Button(action: {
+                                                    selectedImages?.remove(at: index)
+                                                }) {
+                                                    Image(systemName: "x.circle.fill")
+                                                        .foregroundColor(.white)
+                                                }
+                                                    .padding(0)
+                                                    .shadow(radius: 1)
+                                                    .opacity(0.8)
+                                                , alignment: .topTrailing)
+                                            .frame(width: 150, height: 150)
+                                            .clipShape(RoundedRectangle(cornerRadius:10))
+                                    }
+                                }
                             }
+                            .padding()
                         }
+                        VStack(alignment:.leading){
+                                                        Image("\(activity.image[0])")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fill)
+                                                            .frame(width: 150, height: 150)
+                                           .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                        //    Text("\(activity.name)")
+                                                        //      .foregroundColor(.grayDark)
+                                                        //    .font(.headline)
+                                                        //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                                                        // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                                                            }
                     }
-                    
                     
 
+                    
+//AUTRE SCROLL
+                    //                    ScrollView(.horizontal, showsIndicators: false){
+                    //                        HStack(spacing:55){
+                    //                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
+                    //                                activity in
+                    //
+                    //                                if selectedImage != nil {
+                    //
+                    //
+                    //                                    Image(uiImage: selectedImage!)
+                    //                                        .resizable()
+                    //                                        .frame(width: 150, height: 150)
+                    //                                        .cornerRadius(10)
+                    //
+                    //                                }
+                    //                                //       VStack(alignment:.leading){
+                    //                                Image("\(activity.image[0])")
+                    //                                    .resizable()
+                    //                                    .aspectRatio(contentMode: .fill)
+                    //                                    .frame(width: 150, height: 150)
+                    //                   .clipShape(RoundedRectangle(cornerRadius: 8))
+                    //                                //    Text("\(activity.name)")
+                    //                                //      .foregroundColor(.grayDark)
+                    //                                //    .font(.headline)
+                    //                                //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                    //                                // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    //                                //     }
+                    //                                    .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
+                    //                            }
+                    //                        }
+                    //                    }
+                    //
+                    //
+                    //
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    
                 }
             }
-            .padding()
         }
-    }
-    
-}
+        .padding()
 
+    }
+}
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.nature1)
+    ActivityDetailView(activity: FreeDiscover.musee1)
         .environmentObject(UserGlobalVariables())
         .environmentObject(ActivityGlobalVariables())
 }
+
+
 
