@@ -131,11 +131,11 @@ struct MapView: View {
         )
         .onChange(of: selectedTag) { newSelectedTag in
             if let selectedTag = newSelectedTag {
-                let selectedActivity: FreeDiscover
+                let selectedActivity: Activity
                         if searchGlobalVariables.isSearchOngoing {
                             selectedActivity = searchGlobalVariables.searchResults[selectedTag]
                         } else {
-                            selectedActivity = freeDiscover[selectedTag]
+                            selectedActivity = activityGlobalVariables.allActivities[selectedTag]
                         }
                         
                         // Set the selected activity and show the ActivityPreview

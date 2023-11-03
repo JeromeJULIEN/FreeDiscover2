@@ -33,5 +33,5 @@ struct CarrouselContributionEV: View {
 }
 
 #Preview {
-    CarrouselFavoriteEV(activityType: .nature, user: UserProfile.marion)
+    CarrouselFavoriteEV(activityType: "nature", user: User.marion)
 }

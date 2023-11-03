@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListCardLarge: View {
-    @State var activity : FreeDiscover
+    @State var activity : Activity
     
     var body: some View {
         ZStack{
@@ -37,31 +37,41 @@ struct ListCardLarge: View {
                             .foregroundColor(Color.grayDark)
                         Spacer()
                         HStack{
-                            ActivitySymbolSmall(activityType: activity.type)
-                            if(activity.family){
+                            ActivitySymbolSmall(activityType: activity.typeActivite)
+                            if(activity.famille == "true"){
                                 Image(systemName: "figure.2.and.child.holdinghands")
                                     .foregroundColor(.grayDark)
                             }
-                            if(activity.accessibiliy){
+                            if(activity.accessibilite == "true"){
                                 Image(systemName: "figure.roll")
                                     .foregroundColor(.grayDark)
                             }
-                            if(activity.temporary){
+                            if(activity.temporaire == "true"){
                                 Image(systemName: "calendar")
                                     .foregroundColor(.grayDark)
                             }
                             Spacer()
-                            VoteCountDisplay2(activity: $activity)
+                            // VoteCountDisplay2(activity: $activity)
                         }
                         
                     }
                     .frame(height: 180)
                     ZStack(alignment:.topTrailing) {
-                        Image("\(activity.image[0])")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 150, height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                        if let imageFound = activity.photos.first {
+                            AsyncImage(url: URL(string: imageFound.url)) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                } else if phase.error != nil {
+                                    Text("Image indisponible")
+                                } else {
+                                    ProgressView()
+                                }
+                            }
+                           .frame(width: 110, height: 110)
+                           .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
                         FavoriteButton(activityId: activity.id)
                         
                         
@@ -74,6 +84,6 @@ struct ListCardLarge: View {
 }
 
 #Preview {
-    ListCardLarge(activity: FreeDiscover.musee1).environmentObject(UserGlobalVariables())
+    ListCardLarge(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }
 

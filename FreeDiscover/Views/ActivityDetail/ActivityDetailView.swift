@@ -22,7 +22,7 @@ struct ActivityDetailView: View {
     @State var isPickerShowing = false
     @State var buttonColor = Color.lightBlue
     
-    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     
     var body: some View {
@@ -65,15 +65,15 @@ struct ActivityDetailView: View {
                                 ProgressView()
                             }
                         }
-                       .frame(maxHeight: 250)
-                       .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .frame(maxHeight: 250)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-
-//.padding(5)
+                    
+                    //.padding(5)
                     Button(action : {isFavorite = !isFavorite}){
                         ZStack {
                             Image(systemName: "heart.fill")
-                        //        .padding(10)
+                            //        .padding(10)
                                 .foregroundStyle(.accent)
                                 .opacity(isFavorite ? 1 : 0)
                                 .bold()
@@ -86,11 +86,12 @@ struct ActivityDetailView: View {
                         }
                         
                     }
+                }
                     
                     VStack {
                         VStack{
                             HStack (){
-                                ActivitySymbolSmall(activityType: activity.type)
+                                ActivitySymbolSmall(activityType: activity.typeActivite)
                                 //                                                            if(activity.temporary){
                                 //                                                                Image(systemName: "calendar")
                                 //                                                                    .foregroundColor(.grayDark)
@@ -113,11 +114,11 @@ struct ActivityDetailView: View {
                                 //Integrer la date //calendar.badge.clock
                             }
                             HStack{
-                                if(activity.family == "true"){
+                                if(activity.famille == "true"){
                                     Image(systemName: "figure.2.and.child.holdinghands")
                                         .foregroundColor(.grayDark)
                                 }
-                                if(activity.accessibiliy == "true"){
+                                if(activity.accessibilite == "true"){
                                     Image(systemName: "figure.roll")
                                         .foregroundColor(.grayDark)
                                         .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
@@ -147,7 +148,7 @@ struct ActivityDetailView: View {
                     //                    .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
-                    VoteCountDisplay2(activity: $activity)
+                    //VoteCountDisplay2(activity: $activity)
                     //                    .frame(height: 110)
                     //            Text ("Accessible toute l'année")
                     //                .font(.title3)
@@ -216,11 +217,21 @@ struct ActivityDetailView: View {
                             .padding()
                         }
                         VStack(alignment:.leading){
-                                                        Image("\(activity.image[0])")
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fill)
-                                                            .frame(width: 150, height: 150)
-                                           .clipShape(RoundedRectangle(cornerRadius: 8))
+                            if let imageFound = activity.photos.first {
+                                AsyncImage(url: URL(string: imageFound.url)) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                    } else if phase.error != nil {
+                                        Text("Image indisponible")
+                                    } else {
+                                        ProgressView()
+                                    }
+                                }
+                               .frame(width: 150,height: 150)
+                               .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
                                                         //    Text("\(activity.name)")
                                                         //      .foregroundColor(.grayDark)
                                                         //    .font(.headline)
@@ -233,15 +244,16 @@ struct ActivityDetailView: View {
 
                 }
             }
+        .padding()
+
             
         }
-        .padding()
 
     }
 
     
         
-}
+
 
 
 #Preview {

@@ -21,26 +21,30 @@ struct ProfileView: View {
 
             if (currentMode == .favorite){
                 ScrollView {
-                   ForEach(ActivityTypes.allCases, id:\.self) { activity in
-                    HStack {
-                        ActivitySymbolSmall(activityType: activity.rawValue)
-                        .padding(.leading)
-                        Text(activity.rawValue.capitalized)
-                        Spacer()
-                    }
-                    CarrouselFavoriteEV(activityType: activity.rawValue, user : user)
-                } }
-            else {
-                ScrollView {
                     ForEach(ActivityTypes.allCases, id:\.self) { activity in
-                        HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                        HStack {
+                            ActivitySymbolSmall(activityType: activity.rawValue)
                                 .padding(.leading)
                             Text(activity.rawValue.capitalized)
                             Spacer()
                         }
-                        CarrouselContributionEV(activityType: activity, user : user) }
+                        CarrouselFavoriteEV(activityType: activity.rawValue, user : user)
+                    }
                 }
             }
+//            else if (currentMode == .contribution){
+//                ScrollView {
+//                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
+//                        HStack {
+//                            ActivitySymbolSmall(activityType: activity.rawValue)
+//                                .padding(.leading)
+//                            Text(activity.rawValue.capitalized)
+//                            Spacer()
+//                        }
+//                        CarrouselContributionEV(activityType: activity, user : user)
+//                    }
+//                }
+//            }
         }
     }
 }
