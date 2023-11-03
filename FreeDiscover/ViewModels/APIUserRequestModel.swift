@@ -89,5 +89,60 @@ class APIUserRequestModel : ObservableObject {
         return resultUser
     }
     
+    func addFavoriteToUser(userId : Int, currentFavorites: [Int], favoriteToAdd: Int) async {
+        // check de l'url
+        guard let url = URL(string : "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Users") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // définition de la requête
+        var request = URLRequest(url: url) //-> on pause la question a cette URL
+        request.httpMethod = "PATCH" // -> le type de la demande
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization") // -> info d'auth pour airtable
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Ajout de la nouvelle activité aux autres favoris
+        var updatedFavorites = currentFavorites
+        updatedFavorites.append(favoriteToAdd)
+        
+        // Préparez le corps de la demande avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux favoris
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": userId,
+                    "fields": [
+                        "favorite": [
+                            // Supposons que vous ajoutiez une seule activité favorite pour cet utilisateur
+                            updatedFavorites
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        
+        
+        // Encodez le corps de la mise à jour au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody, options: [])
+            request.httpBody = jsonData
+            
+            // Effectuez la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérifiez la réponse pour voir si la mise à jour a été réussie
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                print("API add favorite request wasn't successful with status code")
+                return
+            }
+            
+            // Vous pouvez ensuite décoder la réponse si nécessaire, ou simplement vérifier le code d'état HTTP
+            print("Update was successful : activity with id\(favoriteToAdd) was added to user with id\(userId)")
+        } catch let error {
+            // Gérez les erreurs de mise à jour ici
+            print("API ADD FAVORITE ERROR : ",error)
+        }
+    }
+    
     
 }

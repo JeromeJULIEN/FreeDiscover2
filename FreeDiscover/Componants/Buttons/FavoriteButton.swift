@@ -30,10 +30,17 @@ struct FavoriteButton: View {
                 /// action conditionnelle en fonction de si l'activité est déjà dans les fav ou non
                 {isFavorite(activityId: activityId) ? 
                 /// action si true
-                removeFromFavorites(activityId: activityId)
-                :
+                Task{
+                    do{
+                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
+                    }
+                }                :
                 /// action si false
-                addToFavorites(activityId: activityId)
+                Task{
+                    do{
+                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
+                    }
+                }
                 }){
             ZStack {
                 Image(systemName: "heart.fill")

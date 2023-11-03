@@ -49,6 +49,7 @@ struct ActivityDetailView: View {
                        .frame(maxHeight: 250)
                        .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
+
 //.padding(5)
                     Button(action : {isFavorite = !isFavorite}){
                         ZStack {
@@ -157,11 +158,14 @@ struct ActivityDetailView: View {
                 
                 
             }
+            
         }
         .padding()
     }
     
+        
 }
+
 
 #Preview {
     ActivityDetailView(activity: Activity.nature1).environmentObject(APIUserRequestModel())
