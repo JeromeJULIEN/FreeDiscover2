@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
    @State var activityType: ActivityTypes = .nature
-    
+    @State private var currentMode: ProfileViewMode = .favorite
 //    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
     var user: UserProfile
     
@@ -18,15 +18,28 @@ struct ProfileView: View {
             Profile_rectangle(userName: user.userName, userPicture: user.userPicture,  userContribution: user.userContributions.count)
             ProfileSwitchButton()
                 .padding()
-            ScrollView {
-                ForEach(ActivityTypes.allCases, id:\.self) { activity in
-                    HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
-                            .padding(.leading)
-                        Text(activity.rawValue.capitalized)
-                        Spacer()
-                    }
-                    CarrouselFavoriteEV(activityType: activity, user : user) }
-
+            if (currentMode == .favorite){
+                ScrollView {
+                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                        HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                                .padding(.leading)
+                            Text(activity.rawValue.capitalized)
+                                .font(.title2)
+                            Spacer()
+                        }
+                        //                        if (currentMode == .favorite){
+                        CarrouselFavoriteEV(activityType: activity, user : user) }
+                } }
+            else {
+                ScrollView {
+                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                        HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                                .padding(.leading)
+                            Text(activity.rawValue.capitalized)
+                            Spacer()
+                        }
+                        CarrouselContributionEV(activityType: activity, user : user) }
+                }
             }
         }
     }

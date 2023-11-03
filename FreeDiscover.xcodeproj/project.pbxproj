@@ -14,6 +14,9 @@
 		43A008352AE7E4E900D9431F /* CarrouselFavoriteEV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A008342AE7E4E900D9431F /* CarrouselFavoriteEV.swift */; };
 		43A0083F2AE8095500D9431F /* GetFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A0083E2AE8095500D9431F /* GetFavorite.swift */; };
 		43B862FB2AEFA68E00C8DAD5 /* LevelGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B862FA2AEFA68E00C8DAD5 /* LevelGame.swift */; };
+		43B862FD2AF3946D00C8DAD5 /* local.env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B862FC2AF3946D00C8DAD5 /* local.env.swift */; };
+		43B862FF2AF39B4000C8DAD5 /* GetContributions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B862FE2AF39B4000C8DAD5 /* GetContributions.swift */; };
+		43B863012AF39BDA00C8DAD5 /* CarrouselContributionEV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B863002AF39BDA00C8DAD5 /* CarrouselContributionEV.swift */; };
 		7C0F47692AE16A3D004F8033 /* ActivitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F47682AE16A3D004F8033 /* ActivitySymbol.swift */; };
 		7C0F476C2AE17392004F8033 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F476B2AE17392004F8033 /* SearchButton.swift */; };
 		7C0F476E2AE174CB004F8033 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F476D2AE174CB004F8033 /* ProfileButton.swift */; };
@@ -55,7 +58,6 @@
 		7CE7252B2AF103BA0092B623 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7252A2AF103BA0092B623 /* FavoriteButton.swift */; };
 		7CE7252F2AF29FFE0092B623 /* APIImageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7252E2AF29FFE0092B623 /* APIImageDataModel.swift */; };
 		7CE725312AF2AB110092B623 /* APIUserRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE725302AF2AB110092B623 /* APIUserRequestModel.swift */; };
-		7CE725322AF2AD710092B623 /* local.env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE7252D2AF29C950092B623 /* local.env.swift */; };
 		7CE725342AF2AEA40092B623 /* APIActivityRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE725332AF2AEA40092B623 /* APIActivityRequestModel.swift */; };
 		9FDED9B52AEA89C0001BAD95 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B42AEA89C0001BAD95 /* ShareButton.swift */; };
 		9FDED9B72AEA90F8001BAD95 /* ThumbsupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED9B62AEA90F8001BAD95 /* ThumbsupButton.swift */; };
@@ -81,6 +83,9 @@
 		43A008342AE7E4E900D9431F /* CarrouselFavoriteEV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrouselFavoriteEV.swift; sourceTree = "<group>"; };
 		43A0083E2AE8095500D9431F /* GetFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavorite.swift; sourceTree = "<group>"; };
 		43B862FA2AEFA68E00C8DAD5 /* LevelGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGame.swift; sourceTree = "<group>"; };
+		43B862FC2AF3946D00C8DAD5 /* local.env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = local.env.swift; sourceTree = "<group>"; };
+		43B862FE2AF39B4000C8DAD5 /* GetContributions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetContributions.swift; sourceTree = "<group>"; };
+		43B863002AF39BDA00C8DAD5 /* CarrouselContributionEV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrouselContributionEV.swift; sourceTree = "<group>"; };
 		7C0F47682AE16A3D004F8033 /* ActivitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySymbol.swift; sourceTree = "<group>"; };
 		7C0F476B2AE17392004F8033 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		7C0F476D2AE174CB004F8033 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
@@ -126,7 +131,6 @@
 		7CE725262AF0F6170092B623 /* VoteCOuntDisplay2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCOuntDisplay2.swift; sourceTree = "<group>"; };
 		7CE725282AF0FCD30092B623 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
 		7CE7252A2AF103BA0092B623 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
-		7CE7252D2AF29C950092B623 /* local.env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = local.env.swift; sourceTree = "<group>"; };
 		7CE7252E2AF29FFE0092B623 /* APIImageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImageDataModel.swift; sourceTree = "<group>"; };
 		7CE725302AF2AB110092B623 /* APIUserRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUserRequestModel.swift; sourceTree = "<group>"; };
 		7CE725332AF2AEA40092B623 /* APIActivityRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIActivityRequestModel.swift; sourceTree = "<group>"; };
@@ -269,13 +273,14 @@
 		7C7385A52AE114340024DDCC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7CE7252D2AF29C950092B623 /* local.env.swift */,
+				43B862FC2AF3946D00C8DAD5 /* local.env.swift */,
 				7C7385B82AE12C850024DDCC /* Empty.md */,
 				7C9ACD902AE6C3230083E3C2 /* GetActivityByType.swift */,
 				7C9ACD922AE6C3480083E3C2 /* GetTemporaryActivity.swift */,
 				7C5F009A2AE908D200E0AEAE /* LocationManager.swift */,
 				7C5F00A42AE9475100E0AEAE /* APIRequestViewModel.swift */,
 				43A0083E2AE8095500D9431F /* GetFavorite.swift */,
+				43B862FE2AF39B4000C8DAD5 /* GetContributions.swift */,
 				7C5F00B62AEBD96E00E0AEAE /* GlobalVariables.swift */,
 				7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */,
 				7CE725282AF0FCD30092B623 /* FavoriteManager.swift */,
@@ -312,6 +317,7 @@
 				7C7385CE2AE12DFD0024DDCC /* Empty.md */,
 				43944F702AE27EBB00E03E84 /* Profile rectangle.swift */,
 				43A008342AE7E4E900D9431F /* CarrouselFavoriteEV.swift */,
+				43B863002AF39BDA00C8DAD5 /* CarrouselContributionEV.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -470,8 +476,8 @@
 				43B862FB2AEFA68E00C8DAD5 /* LevelGame.swift in Sources */,
 				7C5F00B72AEBD96E00E0AEAE /* GlobalVariables.swift in Sources */,
 				7C5F00B92AEBEB4300E0AEAE /* CancelSearchButton.swift in Sources */,
+				43B863012AF39BDA00C8DAD5 /* CarrouselContributionEV.swift in Sources */,
 				7C5F00B12AEAA77B00E0AEAE /* SelectableActivitySymbol.swift in Sources */,
-				7CE725322AF2AD710092B623 /* local.env.swift in Sources */,
 				7C0F47742AE18A56004F8033 /* ActivitySymbolSmall.swift in Sources */,
 				7C9ACD932AE6C3480083E3C2 /* GetTemporaryActivity.swift in Sources */,
 				7C7385C02AE12D260024DDCC /* ProfileView.swift in Sources */,
@@ -498,6 +504,7 @@
 				7C5F00A52AE9475100E0AEAE /* APIRequestViewModel.swift in Sources */,
 				7C5F009B2AE908D200E0AEAE /* LocationManager.swift in Sources */,
 				F2E0315A2AE17DAE001ECF38 /* FreeDiscover.swift in Sources */,
+				43B862FD2AF3946D00C8DAD5 /* local.env.swift in Sources */,
 				7C7385C22AE12D680024DDCC /* GamificationView.swift in Sources */,
 				7C5F00992AE8FADD00E0AEAE /* SearchViewBaseOlivier.swift in Sources */,
 				7C5F00AD2AEA6E2800E0AEAE /* ActivityPreview.swift in Sources */,
@@ -514,6 +521,7 @@
 				7C5F00AF2AEAA02B00E0AEAE /* SearchView.swift in Sources */,
 				C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */,
 				7C7385CC2AE12DE30024DDCC /* HomepageView.swift in Sources */,
+				43B862FF2AF39B4000C8DAD5 /* GetContributions.swift in Sources */,
 				7CE7252B2AF103BA0092B623 /* FavoriteButton.swift in Sources */,
 				43A0083F2AE8095500D9431F /* GetFavorite.swift in Sources */,
 				C7FB10602AEFE54900BFA605 /* LocationPickerView.swift in Sources */,
