@@ -31,34 +31,30 @@ struct Profile_rectangle: View {
                             ProgressView()
                         }
                     }
-                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 100)
-                   .clipShape(RoundedRectangle(cornerRadius: 8))
-                   .padding()
+                    .frame(width: 120,height: 120)
+                   .clipShape(Circle())
+//                   .padding()
                 }
                 VStack(alignment: .leading) {
                     Text("\(user.name)")
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
                         .font(.largeTitle)
-                    NavigationLink(destination: GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "laurel.leading", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)) {
+                    NavigationLink(destination: GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)) {
                         HStack {
                             Text("Discoverer en herbe")
                                 .foregroundColor(.black)
-                            ZStack {
-                                Circle()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.blueFD)
-                                Image(systemName: "laurel.leading")
+                                Image("Badge1")
                                     .resizable()
                                     .foregroundColor(.black)
-                                    .frame(width: 15, height: 15)
-                            }
+                                    .frame(width: 30, height: 30)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                     Text("\(user.activities.count) contributions")
                             
                             .foregroundColor(.gray)
-                        .padding(.top, 10)
+                        .padding(.top, 4)
                      
                     NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true)){
                         HStack {
@@ -67,19 +63,10 @@ struct Profile_rectangle: View {
                             Image(systemName:"plus.circle.fill")
                                 .foregroundColor(.gray)
                                 .fontWeight(.light)
-                            
                         }
                     }
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 10)
-//                            .frame(width: 160, height: 44)
-//                            .foregroundColor(.grayLight)
-//                        Text("Ajouter une contribution")
-//                            .fontWeight(.bold)
-//                            .foregroundColor(.accentColor)
-//                    }
                 }
-                .padding()
+                .padding(.leading)
             }
         }
     }
