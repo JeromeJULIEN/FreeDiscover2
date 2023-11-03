@@ -59,7 +59,7 @@ struct VoteCountDisplay2: View {
                         )
                     )
                 HStack{
-                    Text("\(activity.voteCounter) pts")
+                    Text("\(activity.voteCounter) \(activity.voteCounter > 1 ? "pts" : "pt")")
                         .font(.caption.bold())
                 }
                 .foregroundColor(.white)
