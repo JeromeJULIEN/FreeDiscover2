@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CarrousselBonPlan: View {
-    @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
 
     
     var body: some View {
@@ -29,15 +29,25 @@ struct CarrousselBonPlan: View {
                     }
                     ScrollView(.horizontal, showsIndicators: false){
                         HStack(spacing:40){
-                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
+                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.allActivities),id: \.id){
                                 activity in
                                 NavigationLink(destination:ActivityDetailView(activity: activity)){
                                     VStack(alignment:.leading){
-                                        Image("\(activity.image[0])")
-                                           .resizable()
-                                           .aspectRatio(contentMode: .fill)
+                                        if let imageFound = activity.photos.first {
+                                            AsyncImage(url: URL(string: imageFound.url)) { phase in
+                                                if let image = phase.image {
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                } else if phase.error != nil {
+                                                    Text("Image indisponible")
+                                                } else {
+                                                    ProgressView()
+                                                }
+                                            }
                                            .frame(width: 110, height: 110)
                                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        }
                                         Text("\(activity.name)")
                                             .foregroundColor(.grayDark)
                                             .font(.headline)
@@ -75,5 +85,5 @@ struct CarrousselBonPlan: View {
 }
 
 #Preview {
-    CarrousselBonPlan().environmentObject(ActivityGlobalVariables())
+    CarrousselBonPlan().environmentObject(APIActivityRequestModel())
 }

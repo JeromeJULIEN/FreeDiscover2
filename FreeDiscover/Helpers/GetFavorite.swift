@@ -15,10 +15,12 @@ import Foundation
 //    return filteredArray
 //}
 //
-func getFavoriteFromUserByType(userFavorites : [Int],type : ActivityTypes)->[FreeDiscover]{
-    var filteredArray = [FreeDiscover] ()
-    filteredArray = FreeDiscover.allFreeDiscover.filter {activity in
-        userFavorites.contains(activity.id) && activity.type == type
+
+
+func getFavoriteFromUserByType(activityDataBase: [Activity], userFavorites : [Int],type : String)->[Activity]{
+    var filteredArray = [Activity] ()
+    filteredArray = activityDataBase.filter {activity in
+        userFavorites.contains(activity.id) && activity.typeActivite == type
     }
     return filteredArray
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 //@dev : function to filter all the temporary Activities of the data base
-func getTemporaryActivities(activityList : [FreeDiscover]) -> [FreeDiscover] {
+func getTemporaryActivities(activityList : [Activity]) -> [Activity] {
     return activityList.filter {
-        $0.temporary == true
+        $0.temporaire == "true"
     }
 }

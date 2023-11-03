@@ -11,13 +11,13 @@ struct ActivitySymbolSmall: View {
 
 //    var activityType : String
 
-    var activityType : ActivityTypes
+    var activityType : String
     
 
     var body: some View {
         ZStack {
             switch activityType {
-            case .nature:
+            case "nature":
                     Circle()
                         .frame(width:20)
                         .foregroundColor(.natureGreen)
@@ -26,7 +26,7 @@ struct ActivitySymbolSmall: View {
                     Image(systemName: "leaf.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 10))
-            case .sport:
+            case "sport":
                     Circle()
                         .frame(width:20)
                         .foregroundColor(.sportOrange)
@@ -34,7 +34,7 @@ struct ActivitySymbolSmall: View {
                     Image(systemName: "figure.run")
                         .foregroundColor(.white)
                         .font(.system(size: 10))
-            case .culture:
+            case "culture":
                     Circle()
                         .frame(width:20)
                         .foregroundColor(.cultureBlue)
@@ -43,7 +43,7 @@ struct ActivitySymbolSmall: View {
                     Image(systemName: "building.columns.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 10))
-            case .social:
+            case "social":
                     Circle()
                         .frame(width:20)
                         .foregroundColor(.socialRed)
@@ -62,5 +62,5 @@ struct ActivitySymbolSmall: View {
 }
 
 #Preview {
-    ActivitySymbolSmall(activityType: .nature)
+    ActivitySymbolSmall(activityType: "nature")
 }

@@ -23,21 +23,21 @@ extension String {
 
 ///2- extension du type array (restraint aux array d'élément de type FreeDiscover) pour ajouter la fonction `filter` qui s'appuie sur `containsAny()`
 
-extension Array where Element == FreeDiscover {
+extension Array where Element == Activity {
     /// Renvoie une liste d'activités dont le champ `summary` contient au moins un des mots spécifiés et dont le type et sélectionné dans les filtres de recherche
-    func filter(searchText: String, lookForNature: Bool, lookForSport : Bool, lookForCulture : Bool,lookForSocial : Bool) -> [FreeDiscover] {
+    func filter(searchText: String, lookForNature: Bool, lookForSport : Bool, lookForCulture : Bool,lookForSocial : Bool) -> [Activity] {
         let searchWords = searchText.split(separator: " ").map { String($0) }
         return self.filter { activity in
             /// En fonction du type de l'activité, on vérifie si l'utilisateur à selectionné ce type
             let doesTypeMatch: Bool
-               switch activity.type {
-                   case .nature:
+            switch activity.typeActivite {
+                   case "nature":
                        doesTypeMatch = lookForNature
-                   case .sport:
+                   case "sport":
                        doesTypeMatch = lookForSport
-                   case .culture:
+                   case "culture":
                        doesTypeMatch = lookForCulture
-                   case .social:
+                   case "social":
                        doesTypeMatch = lookForSocial
                    default:
                        doesTypeMatch = false

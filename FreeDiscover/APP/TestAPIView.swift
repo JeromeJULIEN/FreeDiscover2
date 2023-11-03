@@ -9,19 +9,19 @@ import SwiftUI
 
 struct TestAPIView: View {
     
-    @StateObject var userRequest = UserAPIRequest()
+    @EnvironmentObject var userRequest : APIUserRequestModel
     
     var body: some View {
-        UserListView()
-            .onAppear{
-                Task{
-                    userRequest.allUser = await userRequest.fetchedUser()
-                }
-            }
-//            .environmentObject(UserRequest)
+        VStack{
+            Text("User list")
+            
+        }
+        
+        
+
     }
 }
 
 #Preview {
-    TestAPIView()
+    TestAPIView().environmentObject(APIUserRequestModel())
 }

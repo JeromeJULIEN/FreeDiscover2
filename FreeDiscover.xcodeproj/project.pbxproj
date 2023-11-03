@@ -68,6 +68,7 @@
 		C75F398E2AE7F050005DD9AA /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */; };
 		C766B5D82AF394090082200D /* local.env.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766B5D72AF394090082200D /* local.env.swift */; };
 		C766B5DE2AF3FC950082200D /* ListCardLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766B5DD2AF3FC950082200D /* ListCardLarge.swift */; };
+		C76D0DBD2AF506AB00E4BE48 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D0DBC2AF506AB00E4BE48 /* DateFormatter.swift */; };
 		C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C770A4C32AE904F700A60BB8 /* ImagePicker.swift */; };
 		C77343A92AF0F95D00F551EB /* PHPickerViewMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
@@ -145,6 +146,7 @@
 		C75F398D2AE7F050005DD9AA /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		C766B5D72AF394090082200D /* local.env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = local.env.swift; sourceTree = "<group>"; };
 		C766B5DD2AF3FC950082200D /* ListCardLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCardLarge.swift; sourceTree = "<group>"; };
+		C76D0DBC2AF506AB00E4BE48 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		C770A4C32AE904F700A60BB8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerViewMultiple.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				7C5F00B62AEBD96E00E0AEAE /* GlobalVariables.swift */,
 				7CE35FF12AEE6B2100209FF6 /* SearchFunctions.swift */,
 				7CE725282AF0FCD30092B623 /* FavoriteManager.swift */,
+				C76D0DBC2AF506AB00E4BE48 /* DateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				7C0F476E2AE174CB004F8033 /* ProfileButton.swift in Sources */,
 				4364CD352AE6655E001A100A /* ContributionProfileView.swift in Sources */,
 				7C5F009F2AE945D100E0AEAE /* APIUserDataModel.swift in Sources */,
+				C76D0DBD2AF506AB00E4BE48 /* DateFormatter.swift in Sources */,
 				7C0F47762AE18B70004F8033 /* VoteCountDisplay.swift in Sources */,
 				7C7385962AE113EC0024DDCC /* ContentView.swift in Sources */,
 				7C5F009D2AE9456500E0AEAE /* APIActivityDataModel.swift in Sources */,

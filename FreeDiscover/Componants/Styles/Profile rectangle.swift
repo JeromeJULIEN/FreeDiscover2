@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct Profile_rectangle: View {
-    var userName: String
-    var userPicture: String
-    var userContribution: Int
+    var user : User
     
     var body: some View {
         ZStack {
@@ -21,13 +19,24 @@ struct Profile_rectangle: View {
             
             
             HStack {
-                Image(userPicture)
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.gray)
+                if let imageFound = user.userPicture.first {
+                    AsyncImage(url: URL(string: imageFound.url)) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } else if phase.error != nil {
+                            Text("Image indisponible")
+                        } else {
+                            ProgressView()
+                        }
+                    }
+                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 100)
+                   .clipShape(RoundedRectangle(cornerRadius: 8))
+                   .padding()
+                }
                 VStack(alignment: .leading) {
-                    Text(userName)
+                    Text("\(user.name)")
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
                         .font(.largeTitle)
@@ -46,7 +55,7 @@ struct Profile_rectangle: View {
                             }
                         }
                     }
-                        Text("\(userContribution) contributions")
+                    Text("\(user.activities.count) contributions")
                             
                             .foregroundColor(.gray)
                         .padding(.top, 10)
@@ -76,5 +85,5 @@ struct Profile_rectangle: View {
     }
 }
 #Preview {
-    Profile_rectangle(userName: "Marion", userPicture: "marion", userContribution: 0)
+    Profile_rectangle(user : User.marion)
 }
