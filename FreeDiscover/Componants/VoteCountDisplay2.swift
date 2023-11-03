@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+/*
 struct VoteCountDisplay2: View {
     // MARK: Variables externes à la vue
-    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
+    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
     /// Id de l'activité à afficher
-    @Binding var activity : FreeDiscover
+    @Binding var activity : Activity
     
     // MARK: Fonctions de la vue
     /// fonctions pour vérifier si un vote a déjà été fait
@@ -108,5 +109,7 @@ struct VoteCountDisplay2: View {
 }
 
 #Preview {
-    VoteCountDisplay2(activity: .constant(FreeDiscover.nature1)).environmentObject(UserGlobalVariables())
+    VoteCountDisplay2(activity: .constant(FreeDiscover.nature1)).environmentObject(APIUserRequestModel())
 }
+*/
+

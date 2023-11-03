@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct FavoritesManager {
-    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
+    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
     
     
     // Functions to add and remove from cart
     func addToFavorites(activityId : Int) {
-        userGlobalVariables.connectedUser.userFavorites.append(activityId)
+        userGlobalVariables.connectedUser.idFromFavorite.append(activityId)
     }
     func removeFromFavorites(activityId : Int) {
-        userGlobalVariables.connectedUser.userFavorites = userGlobalVariables.connectedUser.userFavorites.filter { $0 != activityId }
+        userGlobalVariables.connectedUser.idFromFavorite = userGlobalVariables.connectedUser.idFromFavorite.filter { $0 != activityId }
     }
 }

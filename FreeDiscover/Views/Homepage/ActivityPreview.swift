@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ActivityPreview: View {
-    @State var activity : FreeDiscover
+
+    @State var activity : Activity
+
+
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
+
     
     var body: some View {
         HStack(alignment:.top){
@@ -22,9 +26,9 @@ struct ActivityPreview: View {
                 Text("12,7 km")
                     .font(.caption)
                 HStack{
-                    ActivitySymbolSmall(activityType: activity.type)
+                    ActivitySymbolSmall(activityType: activity.typeActivite)
                     Spacer()
-                    VoteCountDisplay2(activity: $activity)
+                    //VoteCountDisplay2(activity: $activity)
                 }
                 Spacer()
                 Text("\(activity.description)")
@@ -37,11 +41,21 @@ struct ActivityPreview: View {
             }
             Spacer()
             ZStack(alignment : .topTrailing){
-                Image("\(activity.image[0])")
-                   .resizable()
-                   .aspectRatio(contentMode: .fill)
-                   .frame(width: 160, height: 160)
+                if let imageFound = activity.photos.first {
+                    AsyncImage(url: URL(string: imageFound.url)) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } else if phase.error != nil {
+                            Text("Image indisponible")
+                        } else {
+                            ProgressView()
+                        }
+                    }
+                   .frame(width: 110, height: 110)
                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
                 FavoriteButton(activityId: activity.id)
             }
             
@@ -56,7 +70,7 @@ struct ActivityPreview: View {
 }
 
 #Preview {
-    ActivityPreview(activity: FreeDiscover.nature1)
-        .environmentObject(UserGlobalVariables())
+    ActivityPreview(activity: Activity.nature1)
+        .environmentObject(APIUserRequestModel())
 //        .environmentObject(ActivityGlobalVariables())
 }

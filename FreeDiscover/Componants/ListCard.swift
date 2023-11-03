@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListCard: View {
     // activity to display
-    @State var activity : FreeDiscover
+    @State var activity : Activity
     
     var body: some View {
         ZStack{
@@ -31,31 +31,41 @@ struct ListCard: View {
                         .foregroundColor(Color("GrayDark"))
                     Spacer()
                     HStack{
-                        ActivitySymbolSmall(activityType: activity.type)
-                        if(activity.family){
+                        ActivitySymbolSmall(activityType: activity.typeActivite)
+                        if(activity.famille == "true"){
                             Image(systemName: "figure.2.and.child.holdinghands")
                                 .foregroundColor(.grayDark)
                         }
-                        if(activity.accessibiliy){
+                        if(activity.accessibilite == "true"){
                             Image(systemName: "figure.roll")
                                 .foregroundColor(.grayDark)
                         }
-                        if(activity.temporary){
+                        if(activity.temporaire == "true"){
                             Image(systemName: "calendar")
                                 .foregroundColor(.grayDark)
                         }
                         Spacer()
-                        VoteCountDisplay2(activity: $activity)
+                        //VoteCountDisplay2(activity: $activity)
                     }
                   
                 }
                 .frame(height: 110)
                 ZStack(alignment:.topTrailing) {
-                    Image("\(activity.image[0])")
-                       .resizable()
-                       .aspectRatio(contentMode: .fill)
+                    if let imageFound = activity.photos.first {
+                        AsyncImage(url: URL(string: imageFound.url)) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } else if phase.error != nil {
+                                Text("Image indisponible")
+                            } else {
+                                ProgressView()
+                            }
+                        }
                        .frame(width: 110, height: 110)
                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
                     FavoriteButton(activityId: activity.id)
                     
                     
@@ -67,5 +77,5 @@ struct ListCard: View {
 }
 
 #Preview {
-    ListCard(activity: FreeDiscover.nature1).environmentObject(UserGlobalVariables())
+    ListCard(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }

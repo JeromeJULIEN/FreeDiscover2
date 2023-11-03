@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ActivitySymbol: View {
     var activityType : String
-    var temporary : Bool
+    var temporary : String
     
     var body: some View {
         ZStack {
@@ -30,7 +30,7 @@ struct ActivitySymbol: View {
                         Image(systemName: "calendar")
                     }
                     .offset(x:15 , y:-15)
-                    .opacity(temporary ? 1 : 0)
+                    .opacity(temporary == "true" ? 1 : 0)
                     
                 }
                 case "sport":
@@ -49,7 +49,7 @@ struct ActivitySymbol: View {
                         Image(systemName: "calendar")
                     }
                     .offset(x:15 , y:-15)
-                    .opacity(temporary ? 1 : 0)
+                    .opacity(temporary == "true" ? 1 : 0)
                 }
                 case "culture":
                 ZStack{
@@ -67,7 +67,7 @@ struct ActivitySymbol: View {
                         Image(systemName: "calendar")
                     }
                     .offset(x:15 , y:-15)
-                    .opacity(temporary ? 1 : 0)
+                    .opacity(temporary == "true" ? 1 : 0)
                 }
                 case "social":
                 ZStack{
@@ -85,7 +85,7 @@ struct ActivitySymbol: View {
                         Image(systemName: "calendar")
                     }
                     .offset(x:15 , y:-15)
-                    .opacity(temporary ? 1 : 0)
+                    .opacity(temporary == "true" ? 1 : 0)
                 }
                 default:
                 Circle().foregroundColor(.black).frame(width:36)
@@ -97,5 +97,5 @@ struct ActivitySymbol: View {
 }
 
 #Preview {
-    ActivitySymbol(activityType: "nature",temporary: true)
+    ActivitySymbol(activityType: "nature",temporary: "true")
 }

@@ -10,19 +10,19 @@ import SwiftUI
 struct FavoriteButton: View {
      
     // MARK: Variables externes à la vue
-    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
+    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
     /// Id de l'activité à afficher
     var activityId : Int
     /// Fonction pour vérifier si l'activité est dans les favoris du user connecté
     func isFavorite(activityId : Int) -> Bool {
-        return userGlobalVariables.connectedUser.userFavorites.contains(activityId)
+        return userGlobalVariables.connectedUser.idFromFavorite.contains(activityId)
     }
     /// Fonctions pour ajouter ou supprimer un favori
     func addToFavorites(activityId : Int) {
-        userGlobalVariables.connectedUser.userFavorites.append(activityId)
+        userGlobalVariables.connectedUser.idFromFavorite.append(activityId)
     }
     func removeFromFavorites(activityId : Int) {
-        userGlobalVariables.connectedUser.userFavorites = userGlobalVariables.connectedUser.userFavorites.filter { $0 != activityId }
+        userGlobalVariables.connectedUser.idFromFavorite = userGlobalVariables.connectedUser.idFromFavorite.filter { $0 != activityId }
     }
     
     var body: some View {
@@ -30,10 +30,17 @@ struct FavoriteButton: View {
                 /// action conditionnelle en fonction de si l'activité est déjà dans les fav ou non
                 {isFavorite(activityId: activityId) ? 
                 /// action si true
-                removeFromFavorites(activityId: activityId)
-                :
+                Task{
+                    do{
+                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
+                    }
+                }                :
                 /// action si false
-                addToFavorites(activityId: activityId)
+                Task{
+                    do{
+                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
+                    }
+                }
                 }){
             ZStack {
                 Image(systemName: "heart.fill")
@@ -54,5 +61,5 @@ struct FavoriteButton: View {
 }
 
 #Preview {
-    FavoriteButton(activityId: 1).environmentObject(UserGlobalVariables())
+    FavoriteButton(activityId: 1).environmentObject(APIUserRequestModel())
 }

@@ -10,7 +10,7 @@ import PhotosUI
 
 struct ActivityDetailView: View {
     // activity to display
-    @State var activity : FreeDiscover
+    @State var activity : Activity
     
     // bool to manage heart icon color (temp : will be define with the airtable DB)
     @State private var isFavorite : Bool = false
@@ -51,36 +51,38 @@ struct ActivityDetailView: View {
                 
                 
                 
-         //       ----------------------------------
-                //partie 1 fiche de l'activité
-                
-                // VStack de  photo + titre + créé par + laurier
-                VStack () {
-                    
-                    ZStack (alignment: .topTrailing){
-                        //  Image("calanque-en-vau")
-                        Image(activity.image[0])
-                            .resizable()
-                            .scaledToFill()
-                            .frame(maxHeight: 250)
-                            .clipped()
-                            .cornerRadius(10)
-                        //.padding(5)
-                        Button(action : {isFavorite = !isFavorite}){
-                            ZStack {
-                                Image(systemName: "heart.fill")
-                                //        .padding(10)
-                                    .foregroundStyle(.accent)
-                                    .opacity(isFavorite ? 1 : 0)
-                                    .bold()
-                                    .font(.title2)
-                                Image(systemName: "heart")
-                                    .padding(4)
-                                    .foregroundStyle(.white)
-                                    .bold()
-                                    .font(.title2)
+                ZStack (alignment: .topTrailing){
+                    //  Image("calanque-en-vau")
+                    if let imageFound = activity.photos.first {
+                        AsyncImage(url: URL(string: imageFound.url)) { phase in
+                            if let image = phase.image {
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } else if phase.error != nil {
+                                Text("Image indisponible")
+                            } else {
+                                ProgressView()
                             }
-                            
+                        }
+                       .frame(maxHeight: 250)
+                       .clipShape(RoundedRectangle(cornerRadius: 8))
+                    }
+
+//.padding(5)
+                    Button(action : {isFavorite = !isFavorite}){
+                        ZStack {
+                            Image(systemName: "heart.fill")
+                        //        .padding(10)
+                                .foregroundStyle(.accent)
+                                .opacity(isFavorite ? 1 : 0)
+                                .bold()
+                                .font(.title2)
+                            Image(systemName: "heart")
+                                .padding(4)
+                                .foregroundStyle(.white)
+                                .bold()
+                                .font(.title2)
                         }
                         
                     }
@@ -111,18 +113,19 @@ struct ActivityDetailView: View {
                                 //Integrer la date //calendar.badge.clock
                             }
                             HStack{
-                                if(activity.family){
+                                if(activity.family == "true"){
                                     Image(systemName: "figure.2.and.child.holdinghands")
                                         .foregroundColor(.grayDark)
                                 }
-                                if(activity.accessibiliy){
+                                if(activity.accessibiliy == "true"){
                                     Image(systemName: "figure.roll")
                                         .foregroundColor(.grayDark)
                                         .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                                     
                                 }
                             }
-                            if (activity.temporary == true){
+
+                            if (activity.temporaire == "true"){
                                 Text("La date est : ")
                                 //                                Text ("\(activity.startingDate)")
                                     .font(.subheadline)
@@ -227,58 +230,24 @@ struct ActivityDetailView: View {
                     }
                     
 
-                    
-//AUTRE SCROLL
-                    //                    ScrollView(.horizontal, showsIndicators: false){
-                    //                        HStack(spacing:55){
-                    //                            ForEach(getTemporaryActivities(activityList: activityGlobalVariables.activities),id: \.id){
-                    //                                activity in
-                    //
-                    //                                if selectedImage != nil {
-                    //
-                    //
-                    //                                    Image(uiImage: selectedImage!)
-                    //                                        .resizable()
-                    //                                        .frame(width: 150, height: 150)
-                    //                                        .cornerRadius(10)
-                    //
-                    //                                }
-                    //                                //       VStack(alignment:.leading){
-                    //                                Image("\(activity.image[0])")
-                    //                                    .resizable()
-                    //                                    .aspectRatio(contentMode: .fill)
-                    //                                    .frame(width: 150, height: 150)
-                    //                   .clipShape(RoundedRectangle(cornerRadius: 8))
-                    //                                //    Text("\(activity.name)")
-                    //                                //      .foregroundColor(.grayDark)
-                    //                                //    .font(.headline)
-                    //                                //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                    //                                // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                    //                                //     }
-                    //                                    .frame(maxWidth: .infinity, alignment: .leading)                     //           .padding(5)
-                    //                            }
-                    //                        }
-                    //                    }
-                    //
-                    //
-                    //
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    
+
                 }
             }
+            
         }
         .padding()
 
     }
+
+    
+        
 }
+
+
 #Preview {
-    ActivityDetailView(activity: FreeDiscover.musee1)
-        .environmentObject(UserGlobalVariables())
-        .environmentObject(ActivityGlobalVariables())
+    ActivityDetailView(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }
+
 
 
 
