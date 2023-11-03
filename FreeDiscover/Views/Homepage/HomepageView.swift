@@ -123,7 +123,7 @@ struct HomepageView: View {
                             ZStack(alignment: .bottom) {
                                 NavigationLink(destination:ActivityDetailView(activity: searchGlobalVariables.selectedActivityInSearch)){
                                     
-                                    ListCard(activity: searchGlobalVariables.selectedActivityInSearch)
+                                    ListCardLarge(activity: searchGlobalVariables.selectedActivityInSearch)
                                 }.accentColor(Color.grayDark)
                                         //.background(Color.white)
                                     //    .opacity(0.8)

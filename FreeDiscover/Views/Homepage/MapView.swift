@@ -80,6 +80,7 @@ struct MapView: View {
                             CLLocationCoordinate2D(latitude: searchGlobalVariables.searchResults[index].latitude, longitude: searchGlobalVariables.searchResults[index].longitude),
                             //searchGlobalVariables.searchResults[index].location,
                         anchor: .center
+                        
                     
                     ){
                         ActivitySymbol(activityType: searchGlobalVariables.searchResults[index].typeActivite, temporary: searchGlobalVariables.searchResults[index].temporaire)
