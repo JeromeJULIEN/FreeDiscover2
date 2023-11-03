@@ -13,6 +13,8 @@ struct ListView: View {
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     @EnvironmentObject var activityGlobalVariables : ActivityGlobalVariables
     
+    @State var showActivityPreview : Bool = false
+    
     // MARK: Fonctions de la vue
     func searchActivities() {
         searchGlobalVariables.searchResults = activityGlobalVariables.activities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)

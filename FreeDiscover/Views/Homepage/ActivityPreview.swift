@@ -9,12 +9,16 @@ import SwiftUI
 
 struct ActivityPreview: View {
     @State var activity : FreeDiscover
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     
     var body: some View {
         HStack(alignment:.top){
             VStack(alignment:.leading){
-                Text("\(activity.name)")
-                    .font(.headline)
+                NavigationLink(destination:ActivityDetailView(activity:activity))
+                {
+                    Text("\(activity.name)")
+                        .font(.headline)
+                }
                 Text("12,7 km")
                     .font(.caption)
                 HStack{
@@ -44,7 +48,7 @@ struct ActivityPreview: View {
         }
         .padding()
         .presentationDetents([ .height(200)])
-        .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
+      // .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
     }
