@@ -9,6 +9,7 @@ import SwiftUI
 
 
 @main
+
 struct FreeDiscoverApp: App {
     
     // Importation des variables d'environnement pour les rendre dispo dans toute l'application

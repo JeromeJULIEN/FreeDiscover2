@@ -31,6 +31,13 @@ struct LocationPickerView: View {
                 Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
                     MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                 }
+                .mapControls {
+                    MapUserLocationButton()
+                    MapPitchToggle()
+                    MapCompass()
+                    
+                }
+                .mapControlVisibility(.visible)
                 .frame(height: 300)
                 .onAppear(perform: {
                     locationManager.requestLocation()

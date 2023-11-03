@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
    @State var activityType: ActivityTypes = .nature
-    
+    @State private var currentMode: ProfileViewMode = .favorite
 //    @EnvironmentObject var userGlobalVariables : UserGlobalVariables
     var user: User
     
@@ -18,8 +18,10 @@ struct ProfileView: View {
             Profile_rectangle(user : user)
             ProfileSwitchButton()
                 .padding()
-            ScrollView {
-                ForEach(ActivityTypes.allCases, id:\.self) { activity in
+
+            if (currentMode == .favorite){
+                ScrollView {
+                   ForEach(ActivityTypes.allCases, id:\.self) { activity in
                     HStack {
                         ActivitySymbolSmall(activityType: activity.rawValue)
                         .padding(.leading)
@@ -27,6 +29,16 @@ struct ProfileView: View {
                         Spacer()
                     }
                     CarrouselFavoriteEV(activityType: activity.rawValue, user : user)
+                } }
+            else {
+                ScrollView {
+                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                        HStack { ActivitySymbolSmall(activityType: ActivityTypes(rawValue: activity.rawValue) ?? .nature)
+                                .padding(.leading)
+                            Text(activity.rawValue.capitalized)
+                            Spacer()
+                        }
+                        CarrouselContributionEV(activityType: activity, user : user) }
                 }
             }
         }

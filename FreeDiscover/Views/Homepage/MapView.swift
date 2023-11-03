@@ -36,6 +36,7 @@ struct MapView: View {
     // MARK: Variables héritées d'autres vues
     /// Gestion affichage de la modale  activity preview
     @Binding var showActivityPreview : Bool
+    
       
     /// Importation des variables globales
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
@@ -122,9 +123,37 @@ struct MapView: View {
 //            /// Affiche la modale `activityPreview`
 //            showActivityPreview = true
 //        }
-//        .onChange(of: searchGlobalVariables.launchSearch){
-//            searchActivities()
-//        }
+        .gesture(
+            TapGesture()
+                .onEnded { _ in
+                    selectedTag = nil
+                }
+        )
+        .onChange(of: selectedTag) { newSelectedTag in
+            if let selectedTag = newSelectedTag {
+                let selectedActivity: FreeDiscover
+                        if searchGlobalVariables.isSearchOngoing {
+                            selectedActivity = searchGlobalVariables.searchResults[selectedTag]
+                        } else {
+                            selectedActivity = freeDiscover[selectedTag]
+                        }
+                        
+                        // Set the selected activity and show the ActivityPreview
+                        searchGlobalVariables.selectedActivityInSearch = selectedActivity
+                        showActivityPreview = true
+            } else {
+
+                showActivityPreview = false
+            }
+        }
+        .onChange(of: searchGlobalVariables.launchSearch){
+            searchActivities()
+            
+        }
+        .onChange(of: searchGlobalVariables.isSearchOngoing) { _ in
+            // Reset selectedTag when the search state changes to clear the selection
+            selectedTag = nil
+        }
     }
 }
 //}

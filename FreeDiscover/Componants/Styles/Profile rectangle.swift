@@ -39,12 +39,21 @@ struct Profile_rectangle: View {
                     Text("\(user.name)")
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
-                        .font(.title)
-                    HStack {
-                        Text("userStatus à calculer")
-                        Image(systemName: "laurel.leading")
-//                        récupérer le logo sur page de Flo à la place . Puis après voir pour le lier au nombre de contribution
-                        
+                        .font(.largeTitle)
+                    NavigationLink(destination: GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "laurel.leading", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)) {
+                        HStack {
+                            Text("Discoverer en herbe")
+                                .foregroundColor(.black)
+                            ZStack {
+                                Circle()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.blueFD)
+                                Image(systemName: "laurel.leading")
+                                    .resizable()
+                                    .foregroundColor(.black)
+                                    .frame(width: 15, height: 15)
+                            }
+                        }
                     }
                     Text("\(user.activities.count) contributions")
                             
@@ -53,11 +62,11 @@ struct Profile_rectangle: View {
                      
                     NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true)){
                         HStack {
+                            Text("Ajouter une activité")
+                                .foregroundColor(.gray)
                             Image(systemName:"plus.circle.fill")
                                 .foregroundColor(.gray)
                                 .fontWeight(.light)
-                            Text("Ajouter une activité")
-                                .foregroundColor(.gray)
                             
                         }
                     }
@@ -73,7 +82,6 @@ struct Profile_rectangle: View {
                 .padding()
             }
         }
-        .padding()
     }
 }
 #Preview {
