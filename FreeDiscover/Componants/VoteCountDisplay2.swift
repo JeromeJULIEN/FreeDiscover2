@@ -52,12 +52,22 @@ struct VoteCountDisplay2: View {
     func voteDown(activityId : Int){
         if (hasVotedDown() == false && hasVotedUp() == false){
             print("DOWN VOTE")
-//            activity.downVote()
-//            userGlobalVariables.connectedUser.userDownVote.append(activityId)
+            Task{
+                await userGlobalVariables.addDownVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentDownVote: userGlobalVariables.connectedUser.userDownVote
+                )
+                await activityGlobalVariables.decreaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
         } else if(hasVotedDown() == true) {
             print("UP VOTE")
-//            activity.upVote()
-//            userGlobalVariables.connectedUser.userDownVote.removeAll{$0 == activityId}
+            Task{
+                await userGlobalVariables.removeDownVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentDownVote: userGlobalVariables.connectedUser.userDownVote
+                )
+                await activityGlobalVariables.increaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
         }
     }
     

@@ -372,6 +372,134 @@ class APIUserRequestModel : ObservableObject {
             print("API USER - REMOVE UP VOTE ERROR: ", error)
         }
     }
+    
+    
+    /// fonction pour ajouter un upVote sur une activité à un utilisateur
+    func addDownVoteToUser(userId: String, activityId: String, currentDownVote: [String]) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Users") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // ajout du up vote dans la fiche user
+        var updatedDownVote = currentDownVote
+        updatedDownVote.append(activityId)
+        print("update downvote from add function : ",updatedDownVote)
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": userId.description,
+                    "fields": [
+                        "userDownVote": updatedDownVote
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API USER add downvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) was added to down vote of user id \(userId)")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API USER - ADD DOWN VOTE ERROR: ", error)
+        }
+    }
+    
+    /// fonction pour supprimer un upVote sur une activité à un utilisateur
+    func removeDownVoteToUser(userId: String, activityId: String, currentDownVote: [String]) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Users") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // ajout du up vote dans la fiche user
+//        var updatedUpVote = currentUpVote
+//        updatedUpVote.append(activityId)
+//        print("update fav from remove function : ",updatedUpVote)
+        
+        // Retrait de l'activité des favoris
+        var updatedDownVote = currentDownVote
+        updatedDownVote.removeAll(where: { $0 == activityId })
+        print("update upvote from remove function : ",updatedDownVote)
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": userId.description,
+                    "fields": [
+                        "userDownVote": updatedDownVote
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API USER remove downvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) was removed to down vote of user id \(userId)")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API USER - REMOVE DOWN VOTE ERROR: ", error)
+        }
+    }
 
 
     
