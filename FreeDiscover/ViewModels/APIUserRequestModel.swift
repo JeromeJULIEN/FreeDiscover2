@@ -24,24 +24,25 @@ class APIUserRequestModel : ObservableObject {
     
     /// Fonction pour lancer une mise à jour des données
     func refreshData() async {
-            print("enter into refreshdata")
-            do {
-                let (users, userRecords) = try await fetchedUser()
-                DispatchQueue.main.async {
-                    self.allUsers = users
-                    self.allUsersRecord = userRecords
-                    self.connectedUser = self.allUsers[4]
-                    self.needsRefresh = false
-                }
-            } catch {
-                print(error)
+        print("enter into refreshdata")
+        do {
+            let (users, userRecords) = try await fetchedUser()
+            DispatchQueue.main.async {
+                self.allUsers = users
+                self.allUsersRecord = userRecords
+                self.connectedUser = self.allUsers[4]
+                self.needsRefresh = false
             }
-            print("end of refreshdata")
+        } catch {
+            print(error)
         }
+        print("end of refreshdata")
+    }
     
     //on prépare une fonction asynchrone pour ne pas surcharger le main thread
     //cette méthode va être utiliser sur un autre thread secondaire
     //et on veut pouvoir utiliser de la donnée de type User donc on attend un array de ça en retour
+    /// fonction pour récupérer les données de tous les users
     func fetchedUser() async -> ([User],[UserRecord]){
         print(":::::: entrée dans fetchedUser")
         var resultUser = [User]()
@@ -244,7 +245,136 @@ class APIUserRequestModel : ObservableObject {
             print("API REMOVE FAVORITE ERROR: ", error)
         }
     }
+    
+    /// fonction pour ajouter un upVote sur une activité à un utilisateur
+    func addUpVoteToUser(userId: String, activityId: String, currentUpVote: [String]) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Users") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // ajout du up vote dans la fiche user
+        var updatedUpVote = currentUpVote
+        updatedUpVote.append(activityId)
+        print("update upvote from add function : ",updatedUpVote)
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": userId.description,
+                    "fields": [
+                        "userUpVote": updatedUpVote
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API USER add upvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) was added to up vote of user id \(userId)")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API USER - ADD UP VOTE ERROR: ", error)
+        }
+    }
+    
+    /// fonction pour supprimer un upVote sur une activité à un utilisateur
+    func removeUpVoteToUser(userId: String, activityId: String, currentUpVote: [String]) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Users") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // ajout du up vote dans la fiche user
+//        var updatedUpVote = currentUpVote
+//        updatedUpVote.append(activityId)
+//        print("update fav from remove function : ",updatedUpVote)
+        
+        // Retrait de l'activité des favoris
+        var updatedUpVote = currentUpVote
+        updatedUpVote.removeAll(where: { $0 == activityId })
+        print("update upvote from remove function : ",updatedUpVote)
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": userId.description,
+                    "fields": [
+                        "userUpVote": updatedUpVote
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API USER remove upvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) was removed to up vote of user id \(userId)")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API USER - REMOVE UP VOTE ERROR: ", error)
+        }
+    }
 
+
+    
     
     
 }

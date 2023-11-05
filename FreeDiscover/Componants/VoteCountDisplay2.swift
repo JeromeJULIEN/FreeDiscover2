@@ -11,6 +11,7 @@ import SwiftUI
 struct VoteCountDisplay2: View {
     // MARK: Variables externes à la vue
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     /// Id de l'activité à afficher
     @Binding var activity : Activity
     
@@ -26,13 +27,25 @@ struct VoteCountDisplay2: View {
     /// fonctions pour ajouter/supprimer un vote
     func voteUp(activityId : Int){
         if (hasVotedUp() == false && hasVotedDown() == false){
-            print("UP VOTE")
+            print("ADD UP VOTE")
+            Task{
+                await userGlobalVariables.addUpVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                    activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                    currentUpVote: userGlobalVariables.connectedUser.userUpVote
+                )
+                await activityGlobalVariables.increaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
 //            activity.upVote()
 //            userGlobalVariables.connectedUser.userUpVote.append(activityId)
         } else if(hasVotedUp() == true) {
-            print("DOWN VOTE")
-//            activity.downVote()
-//            userGlobalVariables.connectedUser.userUpVote.removeAll{$0 == activityId}
+            print("REMOVE UP VOTE")
+            Task{
+            await userGlobalVariables.removeUpVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentUpVote: userGlobalVariables.connectedUser.userUpVote
+                )
+            await activityGlobalVariables.decreaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
         }
     }
     
@@ -106,6 +119,13 @@ struct VoteCountDisplay2: View {
         }
        
         .shadow(color: Color.secondary, radius: 1)
+        .onChange(of: activityGlobalVariables.needsRefresh) { newValue in
+                    if newValue {
+                        Task {
+                            await activityGlobalVariables.refreshData()
+                        }
+                    }
+                }
     }
     
         
@@ -113,7 +133,9 @@ struct VoteCountDisplay2: View {
 }
 
 #Preview {
-    VoteCountDisplay2(activity: .constant(Activity.nature1)).environmentObject(APIUserRequestModel())
+    VoteCountDisplay2(activity: .constant(Activity.nature1))
+        .environmentObject(APIUserRequestModel())
+        .environmentObject(APIActivityRequestModel())
 }
 
 

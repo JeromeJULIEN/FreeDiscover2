@@ -16,6 +16,24 @@ class APIActivityRequestModel : ObservableObject {
     //on veut savoir les faits et gestes des @Published tel un stalker
     @Published var allActivities = [Activity]()
     @Published var allActivitiesRecord = [ActivityRecord]()
+    @Published var needsRefresh: Bool = false // Cette propriété sera modifiée pour déclencher une actualisation
+
+    
+    /// Fonction pour lancer une mise à jour des données
+    func refreshData() async {
+        print("enter into activity refreshdata")
+        do {
+            let (activities, activitiesRecords) = try await fetchedActivity()
+            DispatchQueue.main.async {
+                self.allActivities = activities
+                self.allActivitiesRecord = activitiesRecords
+                self.needsRefresh = false
+            }
+        } catch {
+            print(error)
+        }
+        print("end of activity refreshdata")
+    }
     
     //on prépare une fonction asynchrone pour ne pas surcharger le main thread
     //cette méthode va être utiliser sur un autre thread secondaire
@@ -90,6 +108,122 @@ class APIActivityRequestModel : ObservableObject {
         }
         
         return (resultActivity,resultActivityRecord)
+    }
+    
+    /// fonction pour incrémenter le nbr de vote d'une activité
+    func increaseVoteCount(activityId: String, currentVoteCOunt: Int) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Activities") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+      
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": activityId.description,
+                    "fields": [
+                        "vote": currentVoteCOunt + 1
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API ACTIVITY add upvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) has increased upvote")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API ACTIVITY - ADD UP VOTE ERROR: ", error)
+        }
+    }
+    
+    /// fonction pour décrémenter le nbr de vote d'une activité
+    func decreaseVoteCount(activityId: String, currentVoteCOunt: Int) async {
+        // Check de l'URL
+        guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Activities") else {
+            print("URL unavailable")
+            return
+        }
+        
+        // Définition de la requête
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+      
+        
+        
+        // Préparation du corps de la requête avec l'ID de l'utilisateur et l'ID de l'activité à ajouter aux up votes
+        let updateBody: [String: Any] = [
+            "records": [
+                [
+                    "id": activityId.description,
+                    "fields": [
+                        "vote": currentVoteCOunt - 1
+                    ]
+                ]
+            ]
+        ]
+        
+        // Encodage du corps de la requête au format JSON
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: updateBody)
+            request.httpBody = jsonData
+            
+            // Exécution de la requête
+            let (_, response) = try await URLSession.shared.data(for: request)
+            
+            // Vérification de la réponse pour voir si la mise à jour a été réussie
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode != 200 {
+                    print("API ACTIVITY remove upvote request wasn't successful. Status code: \(httpResponse.statusCode)")
+                    if let data = try? Data(contentsOf: request.url!), let str = String(data: data, encoding: .utf8) {
+                        print("Response body: \(str)")
+                    }
+                } else {
+                    print("Update was successful: activity with id \(activityId) has decreased upvote")
+                    // Si la mise à jour est OK, on lance une mise à jour des données utilisateur dans le stateObject pour mettre à jour l'affichage
+                    DispatchQueue.main.async {
+                        self.needsRefresh = true
+                    }
+                }
+            }
+        } catch let error {
+            // Gestion des erreurs de mise à jour ici
+            print("API ACTIVITY - REMOVE UP VOTE ERROR: ", error)
+        }
     }
     
     
