@@ -15,41 +15,7 @@ struct FavoriteButton: View {
     /// Id de l'activité à afficher
     var activityId : Int
     
-    
-    
-    /// fonction permettant de retrouver l'id du record de l'activité concerné
-    func findActivityRecordID(activityID: Int, records: [ActivityRecord]) -> String {
-        for record in records {
-            if record.fields.id == activityID {
-                return record.id
-            }
-        }
-        return "nil" /// Retourne nil si aucun enregistrement correspondant n'est trouvé
-    }
-    // idem pour un tableau d'activité
-    func findActivityRecordIDs(activityIDs: [Int], records: [ActivityRecord]) -> [String] {
-        var recordIDs = [String]()
-        
-        // Pour chaque ID d'Activity dans le tableau d'entrée...
-        for activityID in activityIDs {
-            // Trouver le premier ActivityRecord dont l'ID d'Activity correspond
-            // et ajouter son ID à notre tableau de sortie.
-            if let recordID = records.first(where: { $0.fields.id == activityID })?.id {
-                recordIDs.append(recordID)
-            }
-        }
-        
-        return recordIDs
-    }
-    /// idem pour user
-    func findUserRecordID(userID: Int, records: [UserRecord]) -> String {
-        for record in records {
-            if record.fields.id == userID {
-                return record.id
-            }
-        }
-        return "nil" /// Retourne nil si aucun enregistrement correspondant n'est trouvé
-    }
+    // MARK: FONCTIONS DE LA VUE
     /// Fonction pour vérifier si l'activité est dans les favoris du user connecté
     func isFavorite(activityId : Int) -> Bool {
         return userGlobalVariables.connectedUser.idFromFavorite.contains(activityId)
