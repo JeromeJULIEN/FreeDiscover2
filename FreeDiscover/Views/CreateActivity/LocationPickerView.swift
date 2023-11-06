@@ -11,10 +11,10 @@ import CoreLocation
 
 struct NewLocation: Identifiable, Codable, Equatable {
     let id: UUID
-    let latitude: Double
-    let longitude: Double
+    var newLatitude: Double
+    var newLongitude: Double
     var coordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
     }
 }
 
@@ -24,12 +24,13 @@ struct LocationPickerView: View {
     @State private var cameraPosition: MapCameraPosition = .region(.userRegion)
     @State private var locations = [NewLocation]()
     @Environment(\.presentationMode) var presentationMode
+    @State var showingAlertLocation = false
     
     var body: some View {
         VStack {
             ZStack {
                 Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.newLatitude, longitude: location.newLongitude))
                 }
                 .mapControls {
                     MapUserLocationButton()
@@ -49,16 +50,21 @@ struct LocationPickerView: View {
             }
                 VStack {
                     Button {
-                        let newLocation = NewLocation(id: UUID(), latitude: mapRegion.center.latitude, longitude: mapRegion.center.longitude)
+                        @State var newLocation = NewLocation(id: UUID(), newLatitude: mapRegion.center.latitude, newLongitude: mapRegion.center.longitude)
                         locations.append(newLocation)
                         var coordinate = newLocation.coordinate
-                        print(newLocation.coordinate)
+                        print(newLocation.newLatitude)
+                        print(newLocation.newLongitude)
                         presentationMode.wrappedValue.dismiss()
+                        showingAlertLocation = true
                         
                     } label: {
                         Text("Sélectionner cet emplacement")
                         
                     }
+                    .alert(isPresented: $showingAlertLocation) {
+                                Alert(title: Text("Emplacement sélectionné"), message: Text(""), dismissButton: .default(Text("OK")))
+                            }
                 }
             
     }

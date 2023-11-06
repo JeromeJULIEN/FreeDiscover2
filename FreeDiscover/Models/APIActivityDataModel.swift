@@ -164,7 +164,10 @@ class Activity: Codable, Identifiable, ObservableObject {
 }
 
 extension Activity{
-    static let nature1 = Activity(dateDeFin: "31/12/2100", id: 1, photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))], favoriteByUserID: ["1"], famille: "false", vote: 5, accessibilite: "false", latitude: 43.20233894144298, upVote: ["1"], longitude: 5.498078687708157, description: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.", typeActivite: "nature", temporaire: "false", name: "Calanque d'en vau", dateDeDebut: "01/01/2000", creator: ["2"], idFromCreator: [1],idFromFavoriteByUserID: [1],idFromUpVote: [1], downVote: ["2"], idFromDownVote: [2])
+    static let nature1 = Activity(dateDeFin: "31/12/2100", id: 1, 
+                                  photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))]
+                                  
+                                  , favoriteByUserID: ["1"], famille: "false", vote: 5, accessibilite: "false", latitude: 43.20233894144298, upVote: ["1"], longitude: 5.498078687708157, description: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.", typeActivite: "nature", temporaire: "false", name: "Calanque d'en vau", dateDeDebut: "01/01/2000", creator: ["2"], idFromCreator: [1],idFromFavoriteByUserID: [1],idFromUpVote: [1], downVote: ["2"], idFromDownVote: [2])
     
 }
 

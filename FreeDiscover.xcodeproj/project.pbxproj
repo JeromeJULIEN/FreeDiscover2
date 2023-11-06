@@ -74,6 +74,7 @@
 		C770A4C42AE904F700A60BB8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C770A4C32AE904F700A60BB8 /* ImagePicker.swift */; };
 		C77343A92AF0F95D00F551EB /* PHPickerViewMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */; };
 		C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77D1F312AE286CC00C7CB74 /* CtaButton.swift */; };
+		C783A8532AF8F73200E8D7C9 /* FindHighestID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783A8522AF8F73200E8D7C9 /* FindHighestID.swift */; };
 		C79564792AE2C51500D059F2 /* AccessibilitySymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */; };
 		C7FB10602AEFE54900BFA605 /* LocationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */; };
 		F2E031582AE17D98001ECF38 /* ActivityTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E031572AE17D98001ECF38 /* ActivityTypes.swift */; };
@@ -154,6 +155,7 @@
 		C770A4C32AE904F700A60BB8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C77343A82AF0F95D00F551EB /* PHPickerViewMultiple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerViewMultiple.swift; sourceTree = "<group>"; };
 		C77D1F312AE286CC00C7CB74 /* CtaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaButton.swift; sourceTree = "<group>"; };
+		C783A8522AF8F73200E8D7C9 /* FindHighestID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHighestID.swift; sourceTree = "<group>"; };
 		C79564782AE2C51500D059F2 /* AccessibilitySymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilitySymbol.swift; sourceTree = "<group>"; };
 		C7FB105F2AEFE54900BFA605 /* LocationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerView.swift; sourceTree = "<group>"; };
 		F2E031572AE17D98001ECF38 /* ActivityTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTypes.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				7CE725282AF0FCD30092B623 /* FavoriteManager.swift */,
 				7CE725392AF790620092B623 /* APIRecordHelper.swift */,
 				C76D0DBC2AF506AB00E4BE48 /* DateFormatter.swift */,
+				C783A8522AF8F73200E8D7C9 /* FindHighestID.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				7C5F00AF2AEAA02B00E0AEAE /* SearchView.swift in Sources */,
 				C77D1F322AE286CC00C7CB74 /* CtaButton.swift in Sources */,
 				7C7385CC2AE12DE30024DDCC /* HomepageView.swift in Sources */,
+				C783A8532AF8F73200E8D7C9 /* FindHighestID.swift in Sources */,
 				7CE7253A2AF790620092B623 /* APIRecordHelper.swift in Sources */,
 				43B862FF2AF39B4000C8DAD5 /* GetContributions.swift in Sources */,
 				7CE7252B2AF103BA0092B623 /* FavoriteButton.swift in Sources */,
