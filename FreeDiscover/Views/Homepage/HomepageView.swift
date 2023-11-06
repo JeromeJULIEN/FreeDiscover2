@@ -62,7 +62,9 @@ struct HomepageView: View {
                                 Text("Nos bons plans du moment")
                                     .font(.headline)
                                     .foregroundColor(.white)
+                                    .padding()
                             }
+                            .offset(x: 0, y: -20)
                             
                         })
                     }
@@ -84,27 +86,29 @@ struct HomepageView: View {
                                 
                                 CarrousselBonPlan()
                                    // .transition(.move(edge: .bottom))
-                                    .animation(.easeInOut)
+                                    
                                    // .zIndex(1)
                                     .background(Color.white)
-                                 //   .opacity(0.8)
-                                    .frame(maxWidth: .infinity, maxHeight: 200, alignment: .bottom)
-                                    
+                                    .opacity(0.9)
+                                    .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
+                                    .animation(.easeInOut)
+                                    .padding([.bottom], 20)
                                     .overlay(
                                     Button(action: {
-                                    showCarroussel = false
+                                        showCarroussel = false
                                     }) {
                                         Image(systemName: "x.circle.fill")
                                             .foregroundColor(.grayDark)
+                                            .font(.title)
                                     }
-                                    .padding(0)
-                                    .shadow(radius: 1)
-                                  //  .opacity(0.8)
+                                    .opacity(0.8)
+                                   // .clipShape(RoundedRectangle(cornerRadius:10))
+                                    .offset(x: 0, y: -10)
+                                   // .shadow(radius: 1)
                                     , alignment: .topTrailing)
-                              //  .frame(width: 150, height: 150)
-                                .clipShape(RoundedRectangle(cornerRadius:10))
                                 
                             }
+                            .shadow(color: Color.grayDark, radius: 2)
                            
                         }
                        
@@ -123,25 +127,25 @@ struct HomepageView: View {
                             ZStack(alignment: .bottom) {
                                 NavigationLink(destination:ActivityDetailView(activity: searchGlobalVariables.selectedActivityInSearch)){
                                     
-                                    ListCard(activity: searchGlobalVariables.selectedActivityInSearch)
+                                    ListCardLarge(activity: searchGlobalVariables.selectedActivityInSearch)
                                 }.accentColor(Color.grayDark)
                                         //.background(Color.white)
                                     //    .opacity(0.8)
                                         .edgesIgnoringSafeArea(.all)
                                        // .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
-                                    .overlay(
-                                    Button(action: {
-                                    showActivityPreview = false
-                                    }) {
-                                        Image(systemName: "x.circle.fill")
-                                            .foregroundColor(.grayDark)
-                                    }
-                                    .padding(0)
-                                    .shadow(radius: 1)
-                                  //  .opacity(0.8)
-                                    , alignment: .topTrailing)
-                              //  .frame(width: 150, height: 150)
-                                .clipShape(RoundedRectangle(cornerRadius:10))
+                                        .overlay(
+                                        Button(action: {
+                                            showActivityPreview = false
+                                        }) {
+                                            Image(systemName: "x.circle.fill")
+                                                .foregroundColor(.grayDark)
+                                                .font(.title)
+                                        }
+                                        .opacity(0.8)
+                                       // .clipShape(RoundedRectangle(cornerRadius:10))
+                                        .offset(x: 0, y: -10)
+                                       // .shadow(radius: 1)
+                                        , alignment: .topTrailing)
                                     
                             }
                         }

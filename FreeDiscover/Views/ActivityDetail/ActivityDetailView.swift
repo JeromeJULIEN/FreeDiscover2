@@ -29,27 +29,7 @@ struct ActivityDetailView: View {
         ScrollView{
             //VStack de la vue entiere
             VStack{
-                
-                
-                //     ShareButton()
-//                VStack {
-//                    ShareLink(item: url) {
-//                        Image(systemName: "square.and.arrow.up")
-//                    }
-//                }
-//                .swipeActions(){
-//                    Button(action: {
-//                        let url = URL(string: "https://www.freediscover.fr")
-//                        let av = UIActivityViewController(activityItems: [url!], applicationActivities: nil)
-//
-//                        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-//                    }) {
-//                        Label("", systemImage: "square.and.arrow.up")
-//                    }
-//                }
-               // .padding(5)
-                
-                
+                ActivityContentView()
                 
                 ZStack (alignment: .topTrailing){
                     //  Image("calanque-en-vau")
@@ -68,8 +48,6 @@ struct ActivityDetailView: View {
                         .frame(maxHeight: 250)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-                    
-                    //.padding(5)
                     Button(action : {isFavorite = !isFavorite}){
                         ZStack {
                             Image(systemName: "heart.fill")
@@ -84,178 +62,187 @@ struct ActivityDetailView: View {
                                 .bold()
                                 .font(.title2)
                         }
-                        
                     }
                 }
-                    
-                    VStack {
-                        VStack{
-                            HStack (){
-                                ActivitySymbolSmall(activityType: activity.typeActivite)
-                                //                                                            if(activity.temporary){
-                                //                                                                Image(systemName: "calendar")
-                                //                                                                    .foregroundColor(.grayDark)
-                                //                                                            }
-                                Text("\(activity.name)")
-                                    .font(.title2.bold())
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            Spacer()
+                VStack {
+                    VStack{
+                        HStack (){
+                            ActivitySymbolSmall(activityType: activity.typeActivite)
+                            //                                                            if(activity.temporary){
+                            //                                                                Image(systemName: "calendar")
+                            //                                                                    .foregroundColor(.grayDark)
+                            //                                                            }
+                            Text("\(activity.name)")
+                                .font(.title2.bold())
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        Spacer()
+                        
+                        HStack{
                             
-                            HStack{
+                            Text ("Créé par Marion")
+                            //     Text("\(activity.contributor)")
+                                .font(.subheadline)
+                                .foregroundColor(Color("GrayDark"))
+                                .frame(maxWidth: .infinity, alignment: .leading)                     /*.padding(5)*/
+                            laurelleadingLevel()
+                                .padding(5)
+                            //Integrer la date //calendar.badge.clock
+                        }
+                        HStack{
+                            if(activity.famille == "true"){
+                                Image(systemName: "figure.2.and.child.holdinghands")
+                                    .foregroundColor(.grayDark)
+                            }
+                            if(activity.accessibilite == "true"){
+                                Image(systemName: "figure.roll")
+                                    .foregroundColor(.grayDark)
+                                    .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                                 
-                                Text ("Créé par Marion")
-                                //     Text("\(activity.contributor)")
-                                    .font(.subheadline)
-                                    .foregroundColor(Color("GrayDark"))
-                                    .frame(maxWidth: .infinity, alignment: .leading)                     .padding(5)
-                                laurelleadingLevel()
-                                    .padding(5)
-                                //Integrer la date //calendar.badge.clock
-                            }
-                            HStack{
-                                if(activity.famille == "true"){
-                                    Image(systemName: "figure.2.and.child.holdinghands")
-                                        .foregroundColor(.grayDark)
-                                }
-                                if(activity.accessibilite == "true"){
-                                    Image(systemName: "figure.roll")
-                                        .foregroundColor(.grayDark)
-                                        .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
-                                    
-                                }
-                            }
-
-                            if (activity.temporaire == "true"){
-                                Text("La date est : ")
-                                //                                Text ("\(activity.startingDate)")
-                                    .font(.subheadline)
-                                    .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
                             }
                         }
-                        
-                    }
-                    Divider()
-                    
-                    Text ("En quelques mots...")
-                        .font(.title3.bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
-                    //Afficher s'il y a une date si c'est social sinon ne pas afficher
-                    
-                    Spacer()
-                    
-                    Text("\(activity.description)")
-                    //                    .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .multilineTextAlignment(.leading)
-                    //VoteCountDisplay2(activity: $activity)
-                    //                    .frame(height: 110)
-                    //            Text ("Accessible toute l'année")
-                    //                .font(.title3)
-                        .frame(maxWidth: .infinity, alignment: .leading)                                .padding(5)
-                    //            //picto accessibilité et famille
-                    Divider ()
-                    
-                    
-                    //Partie 2 : photos/vidéos
-                    HStack{
-                        //                    Text("Photos - vidéos")
-                        //                        .font(.title3.bold())
-                        //                    //                    .padding(5)
-                        //                        .frame(maxWidth: .infinity, alignment: .leading)
-                        Button(action: {
-                            isPickerShowing = true
-                        }) {
-                        label: do {
-                            Label ("Photos / Videos", systemImage: "photo.badge.plus" )
+                     //   DATE ACTIVITE : A DESACTIVER APRES LE MERGE
+                        if (activity.temporaire == "true"){
+                            Text("La date : ")
+                            //                                Text ("\(activity.startingDate)")
+                                .font(.subheadline)
+                                .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
                         }
-                            //                        CtaButton(ctaIcon: "photo.badge.plus", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
-                            ////                            .frame(minWidth: 40)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                         
+//                        DATE ACTIVIT2 : A ACTIVER APRES LE MERGE
+//                        if(activity.temporaire == "true"){
+//                                                    VStack {
+//                                                        if activity.dateDeDebut == activity.dateDeFin {
+//                                                            
+//                                                        if let date = dateFormatter.date(from: activity.dateDeDebut) {
+//                                                            let frenchDate = formatDateInFrench(date)
+//                                                            Text("Date : \(frenchDate)")
+//                                                                
+//                                                        } else {
+//                                                            Text("Date invalide")
+//                                                        }
+//                                                       }
+//                                                        else {
+//                                                            if let dateDebut = dateFormatter.date(from: activity.dateDeDebut),
+//                                                               let dateFin = dateFormatter.date(from: activity.dateDeFin)
+//                                                            {
+//                                                                let frenchDateDebut = formatDateInFrench(dateDebut)
+//                                                                let frenchDateFin = formatDateInFrench(dateFin)
+//                                                                Text("Date : du \(frenchDateDebut) au \(frenchDateFin)")
+//                                                                    
+//                                                            } else {
+//                                                                Text("Date invalide")
+//                                                            }
+//                                                            
+//                                                          //  Text("Date : Du \(activity.dateDeDebut) au \(activity.dateDeFin)")
+//                                                        }
+//                                                    }
                     }
-                    .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
-                        
-                        
-                        //Image picker pour une seule
-                        //                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
-                        //                    }
-                        
-                        //Image picker pour selectionner plusieurs photos en 1 fois
-                        
-                        ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
-                        
+                    
+                }
+                Divider()
+                
+                Text ("En quelques mots...")
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                //Afficher s'il y a une date si c'est social sinon ne pas afficher
+                
+                Spacer()
+                
+                Text("\(activity.description)")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .multilineTextAlignment(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)                                /*.padding(5)*/
+                //            //picto accessibilité et famille
+                Divider ()
+                
+                
+                //Partie 2 : photos/vidéos
+                HStack{
+                    //                    Text("Photos - vidéos")
+                    //                        .font(.title3.bold())
+                    //                    //                    .padding(5)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Button(action: {
+                        isPickerShowing = true
+                    }) {
+                    label: do {
+                        Label ("Photos / Videos", systemImage: "photo.badge.plus" )
                     }
-                    ScrollView(.horizontal) {
-
-                    if selectedImages != nil {
-                        //
-                            HStack(spacing: 10) {
-                                ForEach(Array(selectedImages?.indices ?? 0..<0), id: \.self) { index in
-                                    //                                    if selectedImages != nil {
-                                    
-                                    if let image = selectedImages?[index] {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .overlay(
-                                                Button(action: {
-                                                    selectedImages?.remove(at: index)
-                                                }) {
-                                                    Image(systemName: "x.circle.fill")
-                                                        .foregroundColor(.white)
-                                                }
-                                                    .padding(0)
-                                                    .shadow(radius: 1)
-                                                    .opacity(0.8)
-                                                , alignment: .topTrailing)
-                                            .frame(width: 150, height: 150)
-                                            .clipShape(RoundedRectangle(cornerRadius:10))
-                                    }
+                        //                        CtaButton(ctaIcon: "photo.badge.plus", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
+                        ////                            .frame(minWidth: 40)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
+                .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
+                    
+                    
+                    //Image picker pour une seule
+                    //                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+                    //                    }
+                    
+                    //Image picker pour selectionner plusieurs photos en 1 fois
+                    
+                    ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
+                    
+                }
+                ScrollView(.horizontal) {
+                    //                        VStack(alignment:.leading){
+                    
+                    HStack (spacing: 10){
+                        if let imageFound = activity.photos.first {
+                            AsyncImage(url: URL(string: imageFound.url)) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                } else if phase.error != nil {
+                                    Text("Image indisponible")
+                                } else {
+                                    ProgressView()
                                 }
                             }
-                            .padding()
+                            .frame(width: 150,height: 150)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
-                        VStack(alignment:.leading){
-                            if let imageFound = activity.photos.first {
-                                AsyncImage(url: URL(string: imageFound.url)) { phase in
-                                    if let image = phase.image {
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                    } else if phase.error != nil {
-                                        Text("Image indisponible")
-                                    } else {
-                                        ProgressView()
-                                    }
+                        //    Text("\(activity.name)")
+                        //      .foregroundColor(.grayDark)
+                        //    .font(.headline)
+                        //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                        // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        // }
+                        if selectedImages != nil {
+                            //
+                            //                            HStack(spacing: 10) {
+                            ForEach(Array(selectedImages?.indices ?? 0..<0), id: \.self) { index in
+                                if let image = selectedImages?[index] {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .overlay(
+                                            Button(action: {
+                                                selectedImages?.remove(at: index)
+                                            }) {
+                                                Image(systemName: "x.circle.fill")
+                                                    .foregroundColor(.white)
+                                            }
+                                                .padding(0)
+                                                .shadow(radius: 1)
+                                                .opacity(0.8)
+                                            , alignment: .topTrailing)
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(RoundedRectangle(cornerRadius:10))
                                 }
-                               .frame(width: 150,height: 150)
-                               .clipShape(RoundedRectangle(cornerRadius: 8))
                             }
-                                                        //    Text("\(activity.name)")
-                                                        //      .foregroundColor(.grayDark)
-                                                        //    .font(.headline)
-                                                        //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                                                        // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                                                            }
+                        }
                     }
-                    
-
-
+                    .padding()
                 }
             }
-        .padding()
-
-            
         }
-
+        .padding()
     }
-
-    
-        
-
-
-
+}
 #Preview {
     ActivityDetailView(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }

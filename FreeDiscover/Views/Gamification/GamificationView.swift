@@ -10,8 +10,6 @@ import SwiftUI
 struct GamificationView: View {
     var level: LevelGame
     var userContribution: UserProfile
-
-//    var contribForNextLevel = level.nbOfContributionNeeded - userContribution.userContributions.count
     var body: some View {
         
         VStack {
@@ -27,17 +25,10 @@ struct GamificationView: View {
                 VStack {
                     Text("Ton niveau actuel")
                         .font(.title2)
-//                    Image(systemName: "ant")
-//                        .resizable()
-//                        .frame(width: 30, height: 30)
-                    ZStack {
-                        Circle()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(.accentColor)
-                        Image(systemName: "\(level.levelBadge)")
+                    Image( "\(level.levelBadge)")
                             .resizable()
-                            .frame(width: 20, height: 25)
-                    }
+                            .frame(width: 60, height: 60)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                     Text("\(level.levelName)")
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         .font(.title)
@@ -45,41 +36,42 @@ struct GamificationView: View {
                     ProgressView(value: Double(7), total: Double(level.nbOfContributionNeeded))
                         .frame(width: 300)
 
-//                    barre de progression
                     Text("En route vers le niveau Discoverer avancé")
                         .font(.callout)
                         .foregroundColor(.grayDark)
-//                    Text("Plus que \(level.nbOfContributionNeeded)-5 contributions")
                 }
             }
             .padding()
-            ForEach(levels, id:\.self) { level in
-                ExtractedView(level: level, userContribution: UserProfile(id: 1)) }
+            
+            ScrollView() {
+                ForEach(levels, id:\.self) { level in
+                    ExtractedView(level: level, userContribution: UserProfile(id: 1)) }
+            }
         }
     }
 }
 
 #Preview {
-    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "laurel.leading", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)
+    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)
 }
 
 struct ExtractedView: View {
     var level: LevelGame
     var userContribution: UserProfile
-//    var nbOfContrib = userContribution.userContributions.count
     var body: some View {
         HStack {
             ZStack {
-                Circle()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.accentColor)
-                Image(systemName: "\(level.levelBadge)")
+
+                Image("\(level.levelBadge)")
                     .resizable()
-                    .frame(width: 20, height: 25)
+                    .frame(width: 50, height: 50)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
             }
+            .padding(12)
             VStack(alignment: .leading) {
                 Text("Niveau \(level.levelNumber)")
                     .fontWeight(.bold)
+                    .font(.title3)
                 Text("\(level.levelName)")
             }
                 Spacer()
@@ -89,8 +81,10 @@ struct ExtractedView: View {
                     .font(.title2)
                 Text("Contributions")
                     .font(.footnote)
-            }
+            }                 
+            .padding(.trailing)
+            .navigationTitle("Niveau de discover")
+
         }
-        .padding()
     }
 }
