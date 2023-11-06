@@ -25,6 +25,6 @@ func formatDateInFrench(_ date: Date) -> String {
 func dateToString(_ date: Date) -> String {
         let formatter = DateFormatter()
         // Définissez le format de date que vous souhaitez
-        formatter.dateFormat = "dd-MM-yyyy"
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
