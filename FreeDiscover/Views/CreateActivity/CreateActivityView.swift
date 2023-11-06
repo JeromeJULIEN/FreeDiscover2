@@ -15,6 +15,8 @@ enum DurationMode {
 
 struct CreateActivityView: View {
     
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+    
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State var activityName: String = ""
@@ -31,10 +33,12 @@ struct CreateActivityView: View {
     //@State var showingAlertLocation = false
     @State private var showingAlertCreated = false
     @State var buttonColor = Color.lightBlue
+
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     let newLocation: NewLocation
+
     
     var body : some View {
         
@@ -165,6 +169,7 @@ struct CreateActivityView: View {
             }
             Spacer()
             Button(action: {
+
                 let newActivity = Activity(dateDeFin: dateToString(endDate), 
                                            id: findHighestID(activities: activityGlobalVariables.allActivities)+1,
                                            photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
@@ -186,6 +191,7 @@ struct CreateActivityView: View {
                                            idFromUpVote: [1],
                                            downVote: ["2"],
                                            idFromDownVote: [2])
+
                 showingAlertCreated = true
             }) {
                 CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .socialRed, ctaFgColor: .grayLight)
@@ -201,10 +207,12 @@ struct CreateActivityView: View {
 
 
 #Preview {
+
     CreateActivityView(currentCategory: .nature, 
                        isTemporary: false,
                        currentUser: User.marion,
                        newLocation: NewLocation(id: UUID(), newLatitude: 0.0, newLongitude: 0.0))
+
 }
 
 //static let nature1 = Activity(dateDeFin: "31/12/2100", id: 1,
