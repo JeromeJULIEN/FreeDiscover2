@@ -14,29 +14,18 @@ struct ListCardLarge: View {
         ZStack{
             RoundedRectangle(cornerRadius: 12)
                 .ignoresSafeArea()
-                .frame(height: 220)
+                .frame(height: 240)
                 .foregroundColor(.white)
                 .shadow(radius: 2)
-            VStack(spacing: 0) {
-                
-                  //  .padding()
-                HStack{
-                    
-                    VStack(spacing: 0){
+            HStack(alignment: .top) {
+                    VStack(alignment: .leading){
                         Text("\(activity.name)")
                             .font(.title3.bold())
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
                         Spacer()
-                        // .padding()
                         
-//                        Text("\(activity.description)")
-//                            .font(.caption)
-//                            .fontWeight(.light)
-//                            .lineLimit(4)
-//                            .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-//                            .fixedSize(horizontal: false, vertical: true)
-//                            .padding(.leading)
                         if(activity.temporaire == "true"){
-                            VStack {
                                 if activity.dateDeDebut == activity.dateDeFin {
                                     
                                 if let date = dateFormatter.date(from: activity.dateDeDebut) {
@@ -53,22 +42,22 @@ struct ListCardLarge: View {
                                     {
                                         let frenchDateDebut = formatDateInFrench(dateDebut)
                                         let frenchDateFin = formatDateInFrench(dateFin)
-                                        Text("Date : du \(frenchDateDebut) au \(frenchDateFin)")
+                                        Text("Du \(frenchDateDebut) au \(frenchDateFin)")
+                                            .font(.subheadline)
+                                            .multilineTextAlignment(.leading)
                                             
                                     } else {
                                         Text("Date invalide")
                                     }
-                                    
-                                  //  Text("Date : Du \(activity.dateDeDebut) au \(activity.dateDeFin)")
                                 }
-                            }
                         }
-                        
-                        Text("12.4 km")
-                            .font(.subheadline.weight(.light))
-                            .foregroundColor(Color.grayDark)
-                            .padding([.top], 5)
-
+                        HStack {
+                            Image(systemName: "mappin.and.ellipse")
+                                .foregroundColor(.grayDark)
+                            Text("12.4 km")
+                                .font(.subheadline.weight(.light))
+                                .foregroundColor(Color.grayDark)
+                            .padding([.top, .bottom], 8) }
                         HStack{
                             
                             ActivitySymbolSmall(activityType: activity.typeActivite)
@@ -80,19 +69,14 @@ struct ListCardLarge: View {
                                 Image(systemName: "figure.roll")
                                     .foregroundColor(.grayDark)
                             }
-                            if(activity.temporaire == "true"){
-                                Image(systemName: "calendar")
-                                    .foregroundColor(.grayDark)
-                            }
-                                
-                          
-                            
-                        } .padding([.bottom], 5)
+
+                        } .padding(.bottom, 4)
                         // VoteCountDisplay2(activity: $activity)
                           //  .padding([.bottom], 0)
                     }
-                    .frame(height: 180)
-                    ZStack(alignment:.topTrailing) {
+                    .frame(height: 170)
+                                    Spacer()
+                        ZStack(alignment:.topTrailing) {
                         if let imageFound = activity.photos.first {
                             AsyncImage(url: URL(string: imageFound.url)) { phase in
                                 if let image = phase.image {
@@ -106,18 +90,14 @@ struct ListCardLarge: View {
                                         .progressViewStyle(.circular)
                                 }
                             }
-                           .frame(width: 150, height: 150)
+                           .frame(width: 170, height: 170)
                            .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
                         FavoriteButton(activityId: activity.id)
-                        
-                        
                     }
-                    .padding([.trailing], 10)
-                }
             }
-            .padding(10)
-        }
+            .padding(16)
+        } .padding(2)
     }
 }
 

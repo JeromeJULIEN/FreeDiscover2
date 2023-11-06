@@ -20,16 +20,48 @@ struct ListCard: View {
             HStack{
                 VStack(alignment: .leading, spacing: 0){
                     Text("\(activity.name)")
+                        .multilineTextAlignment(.leading)
                         .font(.title3.bold())
-                    Text("\(activity.description)")
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                        .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                        .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-                    Text("12.4 km")
-                        .font(.subheadline.weight(.light))
-                        .foregroundColor(Color("GrayDark"))
+                        .fixedSize(horizontal: false, vertical: true)
+                    if(activity.temporaire == "true"){
+                            if activity.dateDeDebut == activity.dateDeFin {
+                                
+                            if let date = dateFormatter.date(from: activity.dateDeDebut) {
+                                let frenchDate = formatDateInFrench(date)
+                                Text("Date : \(frenchDate)")
+                                    
+                            } else {
+                                Text("Date invalide")
+                            }
+                            }
+                            else {
+                                if let dateDebut = dateFormatter.date(from: activity.dateDeDebut),
+                                   let dateFin = dateFormatter.date(from: activity.dateDeFin)
+                                {
+                                    let frenchDateDebut = formatDateInFrench(dateDebut)
+                                    let frenchDateFin = formatDateInFrench(dateFin)
+                                    Text("Du \(frenchDateDebut) au \(frenchDateFin)")
+                                        .font(.subheadline)
+                                        .multilineTextAlignment(.leading)
+//                                        .fixedSize(horizontal: false, vertical: true)
+
+                                        
+                                } else {
+                                    Text("Date invalide")
+                                }
+                            }
+                    }
                     Spacer()
+                    HStack {
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(.grayDark)
+                        
+                        Text("12.4 km")
+                            .font(.subheadline.weight(.light))
+                            .foregroundColor(Color("GrayDark"))
+                        .fontWeight(.light) }
+                    Spacer()
+                        .padding(.trailing, 4)
                     HStack{
                         ActivitySymbolSmall(activityType: activity.typeActivite)
                         if(activity.famille == "true"){
@@ -40,12 +72,12 @@ struct ListCard: View {
                             Image(systemName: "figure.roll")
                                 .foregroundColor(.grayDark)
                         }
-                        if(activity.temporaire == "true"){
-                            Image(systemName: "calendar")
-                                .foregroundColor(.grayDark)
-                        }
+//                        if(activity.temporaire == "true"){
+//                            Image(systemName: "calendar")
+//                                .foregroundColor(.grayDark)
+//                        }
                         Spacer()
-                        VoteCountDisplay2(activity: $activity)
+//                        VoteCountDisplay2(activity: $activity)
                     }
                   
                 }
@@ -71,7 +103,7 @@ struct ListCard: View {
                     
                 }
             }
-            .padding(10)
+            .padding(8)
         }.padding(2)
     }
 }
