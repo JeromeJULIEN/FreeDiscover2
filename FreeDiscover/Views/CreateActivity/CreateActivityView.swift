@@ -35,7 +35,7 @@ struct CreateActivityView: View {
     @State var buttonColor = Color.lightBlue
 
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
-    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+
     
     let newLocation: NewLocation
 
@@ -119,9 +119,6 @@ struct CreateActivityView: View {
                 
                 //Image picker
                 ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
-                let imageModels = selectedImages?.map { image in
-                        ImageDataModel(id: UUID().uuidString, width: 1000, height: 1000, url: "", filename: "image\(UUID().uuidString)", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))
-                    } ?? []
             }
             
             if selectedImages != nil {
@@ -169,10 +166,13 @@ struct CreateActivityView: View {
             }
             Spacer()
             Button(action: {
-
-                let newActivity = Activity(dateDeFin: dateToString(endDate), 
+                let imageModels = selectedImages?.map { image in
+                        ImageDataModel(id: UUID().uuidString, width: 1000, height: 1000, url: "", filename: "image\(UUID().uuidString)", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))
+                    } ?? []
+                
+                let newActivity = Activity(dateDeFin: dateToString(endDate),
                                            id: findHighestID(activities: activityGlobalVariables.allActivities)+1,
-                                           photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
+                                           photos: imageModels,
                                            favoriteByUserID: [],
                                            famille: String(isFamilyFriendly),
                                            vote: 0,

@@ -14,17 +14,18 @@ struct CarrousselBonPlan: View {
     var body: some View {
         NavigationView{
             ZStack {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 12)
                     .ignoresSafeArea()
                     .frame(height: 220)
                     .foregroundColor(.white)
                     .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                    .shadow(radius: 2)
                 VStack(alignment : .center){
                     HStack {
                         Spacer()
                         Text("Nos bons plans du moment")
-                            .font(.headline)
-                            .padding(10)
+                            .font(.title3.bold())
+                            .padding(8)
                         .foregroundColor(.grayDark)
                         Spacer()
                     }
@@ -32,7 +33,7 @@ struct CarrousselBonPlan: View {
                         HStack(spacing:20){
                             ForEach(getTemporaryActivities(activityList: activityGlobalVariables.allActivities),id: \.id){
                                 activity in
-                                NavigationLink(destination:ActivityDetailView(activity: activity)){
+                                NavigationLink(destination:ListCardLarge(activity: activity)){
                                     VStack(alignment:.center){
                                         if let imageFound = activity.photos.first {
                                             AsyncImage(url: URL(string: imageFound.url)) { phase in
@@ -66,9 +67,9 @@ struct CarrousselBonPlan: View {
                 }
                 /// autoriser les interaction avec la carte malgré l'affichage de la sheet carroussel
                 
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                .padding(.leading,10)
-                .padding(.top,20)
+//                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+//                .padding(.leading,10)
+//                .padding(.top,20)
                 /// limitation de la taille de la sheet
                 
                 /// bloquer la possibilité de fermer la sheet avec un swipe down
