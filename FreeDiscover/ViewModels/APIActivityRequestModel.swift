@@ -304,6 +304,7 @@ class APIActivityRequestModel : ObservableObject {
             // Gestion des erreurs de mise à jour ici
             print("API ACTIVITY - CREATE ACTIVITY ERROR: ", error)
         }
+         
     }
     
     

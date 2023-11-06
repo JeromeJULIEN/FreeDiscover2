@@ -153,15 +153,15 @@ struct CreateActivityView: View {
             
             HStack {
                 Button(action: {
-                    isFamilyFriendly = true
+                    isFamilyFriendly.toggle()
                 }) {
-                    AccessibilitySymbol(accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
+                    AccessibilitySymbol(isOn : $isFamilyFriendly, accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale" )
                 }
                 .padding(10)
                 Button(action: {
-                    isAccessible = true
+                    isAccessible.toggle()
                 }) {
-                    AccessibilitySymbol(accessSymbol: "figure.roll", accessName: "Accessible")
+                    AccessibilitySymbol(isOn : $isAccessible,accessSymbol: "figure.roll", accessName: "Accessible" )
                 }
                 .padding(10)
                    
@@ -207,6 +207,13 @@ struct CreateActivityView: View {
                     Alert(title: Text("Votre activité a été créée"), message: Text(""), dismissButton: .default(Text("OK")))
                 }
         .navigationTitle("Créer une activité")
+        .onChange(of: activityGlobalVariables.needsRefresh) { newValue in
+                    if newValue {
+                        Task {
+                            await activityGlobalVariables.refreshData()
+                        }
+                    }
+                }
     }
 }
 

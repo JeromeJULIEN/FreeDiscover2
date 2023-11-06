@@ -22,6 +22,10 @@ struct ActivityDetailView: View {
     @State var isPickerShowing = false
     @State var buttonColor = Color.lightBlue
     
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    
+    
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     
@@ -29,7 +33,6 @@ struct ActivityDetailView: View {
         ScrollView{
             //VStack de la vue entiere
             VStack{
-                ActivityContentView()
                 
                 ZStack (alignment: .topTrailing){
                     //  Image("calanque-en-vau")
@@ -75,6 +78,9 @@ struct ActivityDetailView: View {
                             Text("\(activity.name)")
                                 .font(.title2.bold())
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            ActivityContentView()
+
                         }
                         Spacer()
                         
@@ -86,59 +92,58 @@ struct ActivityDetailView: View {
                                 .foregroundColor(Color("GrayDark"))
                                 .frame(maxWidth: .infinity, alignment: .leading)                     /*.padding(5)*/
                             laurelleadingLevel()
+//                            Image("Badge1")
+                                .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                                 .padding(5)
                             //Integrer la date //calendar.badge.clock
                         }
-                        HStack{
-                            if(activity.famille == "true"){
-                                Image(systemName: "figure.2.and.child.holdinghands")
-                                    .foregroundColor(.grayDark)
+
+                        //   .padding(5)
+                        
+                        //                        DATE ACTIVIT2 :
+                        if(activity.temporaire == "true"){
+                            VStack {
+                                if activity.dateDeDebut == activity.dateDeFin {
+                                    
+                                    if let date = dateFormatter.date(from: activity.dateDeDebut) {
+                                        let frenchDate = formatDateInFrench(date)
+                                        Text("Date : \(frenchDate)")
+                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+
+                                        
+                                    } else {
+                                        Text("Date invalide")
+                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+
+                                    }
+                                }
+                                else {
+                                    if let dateDebut = dateFormatter.date(from: activity.dateDeDebut),
+                                       let dateFin = dateFormatter.date(from: activity.dateDeFin)
+                                    {
+                                        let frenchDateDebut = formatDateInFrench(dateDebut)
+                                        let frenchDateFin = formatDateInFrench(dateFin)
+                                        Text("Date : du \(frenchDateDebut)\nau \(frenchDateFin)")
+                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+
+                                        
+                                    } else {
+                                        Text("Date invalide")
+                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+
+                                    }
+                                    
+                                    //  Text("Date : Du \(activity.dateDeDebut) au \(activity.dateDeFin)")
+                                }
                             }
-                            if(activity.accessibilite == "true"){
-                                Image(systemName: "figure.roll")
-                                    .foregroundColor(.grayDark)
-                                    .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
-                                
-                            }
-                        }
-                     //   DATE ACTIVITE : A DESACTIVER APRES LE MERGE
-                        if (activity.temporaire == "true"){
-                            Text("La date : ")
-                            //                                Text ("\(activity.startingDate)")
-                                .font(.subheadline)
-                                .frame(maxWidth: .infinity, alignment: .leading)                             //   .padding(5)
+//                            .padding(0)
+                            .shadow(radius: 1)
+                            .opacity(0.8)
+                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                    .clipShape(RoundedRectangle(cornerRadius:10))
                         }
                         
-//                        DATE ACTIVIT2 : A ACTIVER APRES LE MERGE
-//                        if(activity.temporaire == "true"){
-//                                                    VStack {
-//                                                        if activity.dateDeDebut == activity.dateDeFin {
-//                                                            
-//                                                        if let date = dateFormatter.date(from: activity.dateDeDebut) {
-//                                                            let frenchDate = formatDateInFrench(date)
-//                                                            Text("Date : \(frenchDate)")
-//                                                                
-//                                                        } else {
-//                                                            Text("Date invalide")
-//                                                        }
-//                                                       }
-//                                                        else {
-//                                                            if let dateDebut = dateFormatter.date(from: activity.dateDeDebut),
-//                                                               let dateFin = dateFormatter.date(from: activity.dateDeFin)
-//                                                            {
-//                                                                let frenchDateDebut = formatDateInFrench(dateDebut)
-//                                                                let frenchDateFin = formatDateInFrench(dateFin)
-//                                                                Text("Date : du \(frenchDateDebut) au \(frenchDateFin)")
-//                                                                    
-//                                                            } else {
-//                                                                Text("Date invalide")
-//                                                            }
-//                                                            
-//                                                          //  Text("Date : Du \(activity.dateDeDebut) au \(activity.dateDeFin)")
-//                                                        }
-//                                                    }
                     }
-                    
                 }
                 Divider()
                 
@@ -154,15 +159,24 @@ struct ActivityDetailView: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)                                /*.padding(5)*/
                 //            //picto accessibilité et famille
+                
+                HStack{
+                    if(activity.famille == "true"){
+                        Image(systemName: "figure.2.and.child.holdinghands")
+                            .foregroundColor(.grayDark)
+                    }
+                    if(activity.accessibilite == "true"){
+                        Image(systemName: "figure.roll")
+                            .foregroundColor(.grayDark)
+                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                        
+                    }
+                }
                 Divider ()
                 
                 
                 //Partie 2 : photos/vidéos
                 HStack{
-                    //                    Text("Photos - vidéos")
-                    //                        .font(.title3.bold())
-                    //                    //                    .padding(5)
-                    //                        .frame(maxWidth: .infinity, alignment: .leading)
                     Button(action: {
                         isPickerShowing = true
                     }) {
@@ -190,7 +204,7 @@ struct ActivityDetailView: View {
                 ScrollView(.horizontal) {
                     //                        VStack(alignment:.leading){
                     
-                    HStack (spacing: 10){
+                    HStack (){
                         if let imageFound = activity.photos.first {
                             AsyncImage(url: URL(string: imageFound.url)) { phase in
                                 if let image = phase.image {
@@ -226,7 +240,7 @@ struct ActivityDetailView: View {
                                                 Image(systemName: "x.circle.fill")
                                                     .foregroundColor(.white)
                                             }
-                                                .padding(0)
+//                                                .padding(0)
                                                 .shadow(radius: 1)
                                                 .opacity(0.8)
                                             , alignment: .topTrailing)
@@ -246,7 +260,6 @@ struct ActivityDetailView: View {
 #Preview {
     ActivityDetailView(activity: Activity.nature1).environmentObject(APIUserRequestModel())
 }
-
 
 
 
