@@ -91,8 +91,8 @@ struct ActivityDetailView: View {
                                 .font(.subheadline)
                                 .foregroundColor(Color("GrayDark"))
                                 .frame(maxWidth: .infinity, alignment: .leading)                     /*.padding(5)*/
-//                            laurelleadingLevel()
-                            Image("Badge1")
+                            laurelleadingLevel()
+//                            Image("Badge1")
                                 .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                                 .padding(5)
                             //Integrer la date //calendar.badge.clock
