@@ -45,7 +45,7 @@ struct ListCard: View {
                                 .foregroundColor(.grayDark)
                         }
                         Spacer()
-                        //VoteCountDisplay2(activity: $activity)
+                        VoteCountDisplay2(activity: $activity)
                     }
                   
                 }

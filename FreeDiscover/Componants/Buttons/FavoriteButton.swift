@@ -11,8 +11,11 @@ struct FavoriteButton: View {
      
     // MARK: Variables externes à la vue
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     /// Id de l'activité à afficher
     var activityId : Int
+    
+    // MARK: FONCTIONS DE LA VUE
     /// Fonction pour vérifier si l'activité est dans les favoris du user connecté
     func isFavorite(activityId : Int) -> Bool {
         return userGlobalVariables.connectedUser.idFromFavorite.contains(activityId)
@@ -28,19 +31,22 @@ struct FavoriteButton: View {
     var body: some View {
         Button(action :
                 /// action conditionnelle en fonction de si l'activité est déjà dans les fav ou non
-                {isFavorite(activityId: activityId) ? 
+                {
+
+                isFavorite(activityId: activityId) ?
+                
                 /// action si true
                 Task{
-                    do{
-                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
-                    }
-                }                :
+                    print("isFavorite : ",isFavorite(activityId: activityId))
+                    await userGlobalVariables.removeFavoriteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord), currentFavorites:  userGlobalVariables.connectedUser.favorite, favoriteToRemove: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord))
+                }
+                :
                 /// action si false
                 Task{
-                    do{
-                        try await userGlobalVariables.addFavoriteToUser(userId: userGlobalVariables.connectedUser.id, currentFavorites: userGlobalVariables.connectedUser.idFromFavorite, favoriteToAdd: activityId)
-                    }
+                    print("isFavorite : ",isFavorite(activityId: activityId))
+                    await userGlobalVariables.addFavoriteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord), currentFavorites:  userGlobalVariables.connectedUser.favorite, favoriteToAdd: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord))
                 }
+
                 }){
             ZStack {
                 Image(systemName: "heart.fill")
@@ -57,9 +63,19 @@ struct FavoriteButton: View {
             }
             
         }
+        .onChange(of: userGlobalVariables.needsRefresh) { newValue in
+                    if newValue {
+                        Task {
+                            await userGlobalVariables.refreshData()
+                        }
+                    }
+                }
     }
+    
 }
 
 #Preview {
-    FavoriteButton(activityId: 1).environmentObject(APIUserRequestModel())
+    FavoriteButton(activityId: 1)
+        .environmentObject(APIUserRequestModel())
+        .environmentObject(APIActivityRequestModel())
 }

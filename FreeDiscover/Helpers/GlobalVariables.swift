@@ -39,3 +39,7 @@ class SearchGlobalVariables :ObservableObject {
 //class ActivityGlobalVariables : ObservableObject {
 //    @Published var activities : [FreeDiscover] = FreeDiscover.allFreeDiscover
 //}
+
+class ChangeSwitcher : ObservableObject {
+    @Published var change : Bool = false
+}
