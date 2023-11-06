@@ -16,7 +16,8 @@ enum DurationMode {
 struct CreateActivityView: View {
     
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
-    
+    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+  
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State var activityName: String = ""
@@ -34,7 +35,7 @@ struct CreateActivityView: View {
     @State private var showingAlertCreated = false
     @State var buttonColor = Color.lightBlue
 
-    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+    
     
     let newLocation: NewLocation
 
@@ -118,9 +119,6 @@ struct CreateActivityView: View {
                 
                 //Image picker
                 ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
-                let imageModels = selectedImages?.map { image in
-                        ImageDataModel(id: UUID().uuidString, width: 1000, height: 1000, url: "", filename: "image\(UUID().uuidString)", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))
-                    } ?? []
             }
             
             if selectedImages != nil {
@@ -220,23 +218,3 @@ struct CreateActivityView: View {
 
 }
 
-//static let nature1 = Activity(dateDeFin: "31/12/2100", id: 1,
-//                              photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
-//                              favoriteByUserID: ["1"],
-//                              famille: "false",
-//                              vote: 5,
-//                              accessibilite: "false",
-//                              latitude: 43.20233894144298,
-//                              upVote: ["1"],
-//                              longitude: 5.498078687708157,
-//                              description: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.",
-//                              typeActivite: "nature",
-//                              temporaire: "false",
-//                              name: "Calanque d'en vau",
-//                              dateDeDebut: "01/01/2000",
-//                              creator: ["2"],
-//                              idFromCreator: [1],
-//                              idFromFavoriteByUserID: [1],
-//                              idFromUpVote: [1],
-//                              downVote: ["2"],
-//                              idFromDownVote: [2])

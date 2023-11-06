@@ -90,9 +90,10 @@ struct HomepageView: View {
                                    // .zIndex(1)
                                     .background(Color.white)
                                     .opacity(0.9)
+                                    .padding([.bottom], 20)
                                     .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
                                     .animation(.easeInOut)
-                                    .padding([.bottom], 20)
+                                   
                                     .overlay(
                                     Button(action: {
                                         showCarroussel = false
