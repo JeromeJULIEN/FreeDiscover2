@@ -28,6 +28,7 @@ func dateToString(_ date: Date) -> String {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
+
 func shortDateFormatter(_ date: Date) -> String {
        let shortDateFormatter = DateFormatter()
     shortDateFormatter.dateFormat = "dd/MM/yyyy"

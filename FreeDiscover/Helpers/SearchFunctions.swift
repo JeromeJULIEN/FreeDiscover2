@@ -26,6 +26,19 @@ extension String {
 extension Array where Element == Activity {
     /// Renvoie une liste d'activités dont le champ `summary` contient au moins un des mots spécifiés et dont le type et sélectionné dans les filtres de recherche
     func filter(searchText: String, lookForNature: Bool, lookForSport : Bool, lookForCulture : Bool,lookForSocial : Bool) -> [Activity] {
+        // Si le texte de recherche est vide, retournez les activités qui correspondent seulement aux types sélectionnés
+        if searchText.isEmpty {
+            return self.filter { activity in
+                switch activity.typeActivite {
+                case "nature" where lookForNature: return true
+                case "sport" where lookForSport: return true
+                case "culture" where lookForCulture: return true
+                case "social" where lookForSocial: return true
+                default: return false
+                }
+            }
+        }
+        
         let searchWords = searchText.split(separator: " ").map { String($0) }
         return self.filter { activity in
             /// En fonction du type de l'activité, on vérifie si l'utilisateur à selectionné ce type

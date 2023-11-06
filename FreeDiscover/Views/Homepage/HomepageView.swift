@@ -20,7 +20,7 @@ struct HomepageView: View {
     @State var showCarroussel : Bool = true
     @State var showActivityPreview : Bool = false
     @State var selectedActivity: FreeDiscover?
-    
+
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     
     var body: some View {
@@ -35,15 +35,28 @@ struct HomepageView: View {
                     ListView()
                 }
                 VStack {
-                    HStack{
-                        SearchButton(showSearchModal: $showSearchView)
-                        Spacer()
-                        DisplaySwitchButton(displayMode: $currentDisplayMode, showCarroussel: $showCarroussel)
-                        Spacer()
-                        ProfileButton(showCarroussel: $showCarroussel)
+                    ZStack(alignment : .top){
+                        if currentDisplayMode == .list {
+                            Rectangle()
+                                .ignoresSafeArea()
+                                .foregroundColor(.white)
+                                .frame(height: 110)
+                                .offset(y : -50)
+                        }
+                       
+
+                            
+                        HStack{
+                            SearchButton(showSearchModal: $showSearchView)
+                            Spacer()
+                            DisplaySwitchButton(displayMode: $currentDisplayMode, showCarroussel: $showCarroussel, showActivityPreview: $showActivityPreview)
+                            Spacer()
+                            ProfileButton(showCarroussel: $showCarroussel)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom,1)
+                        
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom,1)
                     if(searchGlobalVariables.isSearchOngoing == true){
                         HStack{
                             CancelSearchButton()
@@ -51,6 +64,7 @@ struct HomepageView: View {
                         }
                         .padding(.leading)
                     }
+                    
                     
                     
                     Spacer()
@@ -88,9 +102,9 @@ struct HomepageView: View {
                                    // .transition(.move(edge: .bottom))
                                     
                                    // .zIndex(1)
-                                    .background(Color.white)
-                                    .opacity(0.9)
-                                    .padding([.bottom], 20)
+                                   // .background(Color.white)
+                                    .opacity(1)
+                                  //  .padding([.bottom], 20)
                                     .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
                                     .animation(.easeInOut)
                                    
@@ -102,14 +116,14 @@ struct HomepageView: View {
                                             .foregroundColor(.grayDark)
                                             .font(.title)
                                     }
-                                    .opacity(0.8)
+                                        .opacity(0.8)
                                    // .clipShape(RoundedRectangle(cornerRadius:10))
                                     .offset(x: 0, y: -10)
                                    // .shadow(radius: 1)
                                     , alignment: .topTrailing)
                                 
                             }
-                            .shadow(color: Color.grayDark, radius: 2)
+                           // .shadow(color: Color.grayDark, radius: 2)
                            
                         }
                        
@@ -123,17 +137,19 @@ struct HomepageView: View {
                 
                 
                 .overlay(alignment: .bottomLeading) {
-                    Group {
+                    
                         if showActivityPreview {
+                            Group {
                             ZStack(alignment: .bottom) {
                                 NavigationLink(destination:ActivityDetailView(activity: searchGlobalVariables.selectedActivityInSearch)){
                                     
                                     ListCardLarge(activity: searchGlobalVariables.selectedActivityInSearch)
-                                }.accentColor(Color.grayDark)
+                                }
+                                .accentColor(Color.grayDark)
                                         //.background(Color.white)
                                     //    .opacity(0.8)
-                                        .edgesIgnoringSafeArea(.all)
-                                       // .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
+                                       // .edgesIgnoringSafeArea(.all)
+                                        .frame(maxWidth: .infinity, maxHeight: 220, alignment: .bottom)
                                         .overlay(
                                         Button(action: {
                                             showActivityPreview = false

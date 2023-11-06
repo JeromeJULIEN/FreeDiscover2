@@ -22,10 +22,10 @@ class SearchGlobalVariables :ObservableObject {
     /// Activité sélectionnée dans la vue map
     @Published var selectedActivityInSearch = Activity.nature1
     /// Filtre par catégorie pour la recherche
-    @Published var isNatureSelectedForSearch : Bool = true
-    @Published var isSportSelectedForSearch : Bool = true
-    @Published var isCultureSelectedForSearch : Bool = true
-    @Published var isSocialSelectedForSearch : Bool = true
+    @Published var isNatureSelectedForSearch : Bool = false
+    @Published var isSportSelectedForSearch : Bool = false
+    @Published var isCultureSelectedForSearch : Bool = false
+    @Published var isSocialSelectedForSearch : Bool = false
 
 }
 
