@@ -171,6 +171,7 @@ struct ActivityDetailView: View {
                     if(activity.famille == "true"){
                         Image(systemName: "figure.2.and.child.holdinghands")
                             .foregroundColor(.grayDark)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     if(activity.accessibilite == "true"){
                         Image(systemName: "figure.roll")

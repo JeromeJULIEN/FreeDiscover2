@@ -43,7 +43,7 @@ struct ListView: View {
                             RoundedRectangle(cornerRadius: 25)
                                 .frame(width: 300,height: 50)
                                 .foregroundColor(.accent)
-                            Text("Aucune activitée trouvée...😭")
+                            Text("Aucune activité trouvée...😭")
                                 .foregroundColor(.white)
                                 .font(.headline)
                         }
