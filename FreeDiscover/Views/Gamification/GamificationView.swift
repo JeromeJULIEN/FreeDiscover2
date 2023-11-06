@@ -83,7 +83,7 @@ struct ExtractedView: View {
                     .font(.footnote)
             }                 
             .padding(.trailing)
-            .navigationTitle("Niveau de discover")
+            .navigationTitle("Mon niveau")
 
         }
     }

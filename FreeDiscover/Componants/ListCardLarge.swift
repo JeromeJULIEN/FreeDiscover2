@@ -30,7 +30,9 @@ struct ListCardLarge: View {
                                     
                                 if let date = dateFormatter.date(from: activity.dateDeDebut) {
                                     let frenchDate = formatDateInFrench(date)
-                                    Text("Date : \(frenchDate)")
+                                    Text("\(frenchDate)")
+                                        .font(.subheadline)
+                                        .multilineTextAlignment(.leading)
                                         
                                 } else {
                                     Text("Date invalide")
@@ -42,7 +44,7 @@ struct ListCardLarge: View {
                                     {
                                         let frenchDateDebut = formatDateInFrench(dateDebut)
                                         let frenchDateFin = formatDateInFrench(dateFin)
-                                        Text("Du \(frenchDateDebut) au \(frenchDateFin)")
+                                        Text("Du \(frenchDateDebut) \nau \(frenchDateFin)")
                                             .font(.subheadline)
                                             .multilineTextAlignment(.leading)
                                             
@@ -51,6 +53,7 @@ struct ListCardLarge: View {
                                     }
                                 }
                         }
+                        Spacer()
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.grayDark)
@@ -58,6 +61,7 @@ struct ListCardLarge: View {
                                 .font(.subheadline.weight(.light))
                                 .foregroundColor(Color.grayDark)
                             .padding([.top, .bottom], 8) }
+                        
                         HStack{
                             
                             ActivitySymbolSmall(activityType: activity.typeActivite)
