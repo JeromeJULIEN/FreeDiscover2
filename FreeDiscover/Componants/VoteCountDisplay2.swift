@@ -12,6 +12,8 @@ struct VoteCountDisplay2: View {
     // MARK: Variables externes à la vue
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+    
+    // MARK: Variables de la vue
     /// Id de l'activité à afficher
     @Binding var activity : Activity
     
@@ -24,7 +26,9 @@ struct VoteCountDisplay2: View {
         return userGlobalVariables.connectedUser.idFromUserDownVote.contains(activity.id)
     }
     
-    /// fonctions pour ajouter/supprimer un vote
+    /// fonctions pour ajouter/supprimer un vote up
+    /// cette fonction doit envoyer les id des records airtable, et non l'id des objets de la bdd
+    /// pour ce faire, on utilise des fonctions qui récupèrent l'id du record à partir de l'id de l'objet
     func voteUp(activityId : Int){
         if (hasVotedUp() == false && hasVotedDown() == false){
             print("ADD UP VOTE")
@@ -35,8 +39,6 @@ struct VoteCountDisplay2: View {
                 )
                 await activityGlobalVariables.increaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
             }
-//            activity.upVote()
-//            userGlobalVariables.connectedUser.userUpVote.append(activityId)
         } else if(hasVotedUp() == true) {
             print("REMOVE UP VOTE")
             Task{
@@ -49,6 +51,7 @@ struct VoteCountDisplay2: View {
         }
     }
     
+    /// fonctions pour ajouter/supprimer un vote down
     func voteDown(activityId : Int){
         if (hasVotedDown() == false && hasVotedUp() == false){
             print("DOWN VOTE")

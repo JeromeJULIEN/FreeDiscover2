@@ -30,7 +30,6 @@ func findActivityRecordIDs(activityIDs: [Int], records: [ActivityRecord]) -> [St
             recordIDs.append(recordID)
         }
     }
-    
     return recordIDs
 }
 /// fonction permettant de retrouver l'id du record du user concerné
