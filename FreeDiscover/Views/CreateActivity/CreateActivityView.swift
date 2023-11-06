@@ -51,7 +51,7 @@ struct CreateActivityView: View {
                           text: $activityName)
                 .padding()
                 .background(Color.grayLight)
-                .cornerRadius(5.0)
+                .cornerRadius(10)
                 .padding()
                 
                 TextField(("Description de l'activité..."),
@@ -61,7 +61,7 @@ struct CreateActivityView: View {
                 .padding()
                 .background(Color.grayLight)
                 
-                .cornerRadius(5.0)
+                .cornerRadius(10)
                 .padding()
                 //    .textFieldStyle(.roundedBorder)
                 
@@ -70,7 +70,7 @@ struct CreateActivityView: View {
                     isLocationPickerShowing = true
                 }) {
                     CtaButton(ctaText: "Sélectionner l'emplacement", ctaIcon: "location", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
-                        .frame(minWidth: 340)
+                        .frame(minWidth: 360)
                 }
                 .sheet(isPresented: $isLocationPickerShowing, onDismiss: nil) {
                     LocationPickerView()
@@ -81,7 +81,7 @@ struct CreateActivityView: View {
                     .foregroundColor(Color.grayDark)
                     .padding()
                     .background(Color.grayLight)
-                    .cornerRadius(5.0)
+                    .cornerRadius(10)
                     .padding()
                 
                 if isTemporary == true {
@@ -113,7 +113,7 @@ struct CreateActivityView: View {
                 isPickerShowing = true
             }) {
                 CtaButton(ctaText: "Ajouter une photo/vidéo", ctaIcon: "photo.badge.plus", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
-                    .frame(minWidth: 340)
+                    .frame(minWidth: 360)
             }
             .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
                 
@@ -197,7 +197,7 @@ struct CreateActivityView: View {
                 }
                
             }) {
-                CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .socialRed, ctaFgColor: .grayLight)
+                CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .accentColor, ctaFgColor: .grayLight)
                     .padding()
             }
         }
