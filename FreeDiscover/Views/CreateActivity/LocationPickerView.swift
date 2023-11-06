@@ -26,6 +26,10 @@ struct LocationPickerView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var showingAlertLocation = false
     
+    @Binding var latitude : Double
+    @Binding var longitude : Double
+
+    
     var body: some View {
         VStack {
             ZStack {
@@ -52,7 +56,9 @@ struct LocationPickerView: View {
                     Button {
                         @State var newLocation = NewLocation(id: UUID(), newLatitude: mapRegion.center.latitude, newLongitude: mapRegion.center.longitude)
                         locations.append(newLocation)
-                        var coordinate = newLocation.coordinate
+                        latitude = newLocation.newLatitude
+                        longitude = newLocation.newLongitude
+//                        var coordinate = newLocation.coordinate
                         print(newLocation.newLatitude)
                         print(newLocation.newLongitude)
                         presentationMode.wrappedValue.dismiss()
@@ -74,5 +80,5 @@ struct LocationPickerView: View {
 
 
 #Preview {
-    LocationPickerView()
+    LocationPickerView(latitude: .constant(0.0), longitude: .constant(0.0))
 }
