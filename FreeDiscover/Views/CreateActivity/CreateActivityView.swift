@@ -15,6 +15,8 @@ enum DurationMode {
 
 struct CreateActivityView: View {
     
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+    
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State var activityName: String = ""
@@ -24,15 +26,26 @@ struct CreateActivityView: View {
     @State var isPickerShowing = false
     @State var isLocationPickerShowing = false
     @State var selectedImages: [UIImage]?
-    
-//    var dateFormatter: DateFormatter {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .long
-//        return formatter
-//    }
-    
+    //  @State var activity : Activity
+    @State var isFamilyFriendly = false
+    @State var isAccessible = false
+    @State var currentUser: User
+    //@State var showingAlertLocation = false
+    @State private var showingAlertCreated = false
     @State var buttonColor = Color.lightBlue
-
+    
+    func dateToString(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        // Définissez le format de date que vous souhaitez
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter.string(from: date)
+    }
+    
+    func findHighestID(activities: [Activity]) -> Int {
+        guard let maxId = activities.max(by: { $0.id < $1.id })?.id else {return 0}
+        return maxId
+    }
+    
     
     var body : some View {
         
@@ -142,29 +155,39 @@ struct CreateActivityView: View {
                     .padding()
                 }
             }
-        }
+            
             HStack {
                 Button(action: {
-                    print("")
+                    isFamilyFriendly = true
                 }) {
                     AccessibilitySymbol(accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
                 }
+                .padding(10)
                 Button(action: {
-                    print("")
+                    isAccessible = true
                 }) {
                     AccessibilitySymbol(accessSymbol: "figure.roll", accessName: "Accessible")
                 }
-                
-            
-                
+                .padding(10)
+                   
             }
             Spacer()
-            CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .grayLight, ctaFgColor: .accentColor)
-                .padding()
+            Button(action: {
+                let newActivity = Activity(dateDeFin: dateToString(endDate), id: findHighestID(activities: activityGlobalVariables.allActivities)+1, photos: selectedImages ?? Image(systemName:  "questionmark.video"), favoriteByUserID: <#T##[String]#>, famille: String(isFamilyFriendly), vote: 0, accessibilite: String(isAccessible), latitude: NewLocation.latitude, upVote: [String], longitude: NewLocation.longitude, description: activityDescription, typeActivite: currentCategory.rawValue, temporaire: String(isTemporary), name: activityName, dateDeDebut: String(startDate), creator: currentUser, idFromCreator: currentUser.id, idFromFavoriteByUserID: <#T##[Int]#>, idFromUpVote: <#T##[Int]#>, downVote: <#T##[String]#>, idFromDownVote: <#T##[Int]#>)
+                showingAlertCreated = true
+            }) {
+                CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .socialRed, ctaFgColor: .grayLight)
+                    .padding()
+            }
         }
+        .alert(isPresented: $showingAlertCreated) {
+                    Alert(title: Text("Votre activité a été créée"), message: Text(""), dismissButton: .default(Text("OK")))
+                }
+        .navigationTitle("Créer une activité")
     }
+}
 
 
 #Preview {
-    CreateActivityView(currentCategory: .nature, isTemporary: false)
+    CreateActivityView(currentCategory: .nature, isTemporary: false, currentUser: User.marion)
 }

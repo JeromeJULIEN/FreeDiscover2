@@ -27,7 +27,7 @@ struct FreeDiscoverApp: App {
                 .onAppear{
                     Task{
                         (userGlobalVariables.allUsers, userGlobalVariables.allUsersRecord) = await userGlobalVariables.fetchedUser()
-                        userGlobalVariables.connectedUser = userGlobalVariables.allUsers[4]
+                        userGlobalVariables.connectedUser = userGlobalVariables.allUsers[0]
                         (activityGlobalVariables.allActivities, activityGlobalVariables.allActivitiesRecord) = await activityGlobalVariables.fetchedActivity()
                     }
                     

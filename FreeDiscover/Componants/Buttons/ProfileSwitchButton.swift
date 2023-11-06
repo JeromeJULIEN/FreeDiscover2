@@ -12,7 +12,7 @@ enum ProfileViewMode {
 }
 
 struct ProfileSwitchButton: View {
-    @State private var currentMode: ProfileViewMode = .favorite
+    @Binding var currentMode: ProfileViewMode
 
 
     var body : some View{
@@ -47,5 +47,5 @@ struct ProfileSwitchButton: View {
 
 
 #Preview {
-    ProfileSwitchButton()
+    ProfileSwitchButton(currentMode: .constant(.favorite))
 }

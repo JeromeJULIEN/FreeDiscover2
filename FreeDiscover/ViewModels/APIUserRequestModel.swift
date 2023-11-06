@@ -30,7 +30,7 @@ class APIUserRequestModel : ObservableObject {
             DispatchQueue.main.async {
                 self.allUsers = users
                 self.allUsersRecord = userRecords
-                self.connectedUser = self.allUsers[4]
+                self.connectedUser = self.allUsers[0]
                 self.needsRefresh = false
             }
         } catch {
