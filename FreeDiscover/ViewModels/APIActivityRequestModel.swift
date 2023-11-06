@@ -228,6 +228,7 @@ class APIActivityRequestModel : ObservableObject {
     
     /// fonction pour décrémenter le nbr de vote d'une activité
     func createActivity(activity: Activity) async {
+        print("ENTREE DANS CREATE ACTIVITY AVEC activité : \(activity)")
         // Check de l'URL
         guard let url = URL(string: "https://api.airtable.com/v0/appg0b2X0FfkTwFJg/Activities") else {
             print("URL unavailable")
@@ -241,39 +242,46 @@ class APIActivityRequestModel : ObservableObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
       
-        
-        
         // Préparation du corps de la requête avec la nouvelle activité
         let activityToCreate: [String: Any] = [
             "records": [
-                "fields": [
-                    "id": activity.id,
-                    "name": activity.name,
-                    "photos" : "https://images.unsplash.com/photo-1692118450510-3c1d8e7d1ae8?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    "latitude" : activity.latitude,
-                    "longitude" : activity.longitude,
-                    "Description" : activity.description,
-                    "Famille" : activity.famille,
-                    "Accessibilite" : activity.accessibilite,
-                    "Type activite" : activity.typeActivite,
-                    "temopraire" : activity.temporaire,
-                    "Date de debut" : activity.dateDeDebut,
-                    "Date de fin" : activity.dateDeFin,
-                    "vote" : activity.vote,
-                    "creator" : activity.creator,
-                    "favoriteBuUserId" : activity.favoriteByUserID,
-                    "upVote" : activity.upVote,
-                    "downVote" : activity.downVote
-                    
+                [
+                    "fields":[
+                        "id": activity.id,
+                        "name": activity.name,
+                        "photos" : [
+                            [
+                            "url" : "https://images.unsplash.com/photo-1692118450510-3c1d8e7d1ae8?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                            ]
+                        ] ,
+                        "latitude" : activity.latitude,
+                        "longitude" : activity.longitude,
+                        "Description" : activity.description,
+                        "Famille" : activity.famille,
+                        "Accessibilite" : activity.accessibilite,
+                        "Type activite" : activity.typeActivite,
+                        "temporaire" : activity.temporaire,
+                        "Date de debut" : activity.dateDeDebut,
+                        "Date de fin" : activity.dateDeFin,
+                        "vote" : activity.vote,
+                        "creator" : activity.creator,
+                        "favoriteByUserId" : activity.favoriteByUserID,
+                        "upVote" : activity.upVote,
+                        "downVote" : activity.downVote
+                  ]
                 ]
+                
+                
             ]
         ]
+        print("activity to create from api call : \(activityToCreate)" )
         
         // Encodage du corps de la requête au format JSON
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: activityToCreate)
             request.httpBody = jsonData
             
+            print("json data from create activite API : \(String(describing: request.httpBody))")
             // Exécution de la requête
             let (_, response) = try await URLSession.shared.data(for: request)
             
