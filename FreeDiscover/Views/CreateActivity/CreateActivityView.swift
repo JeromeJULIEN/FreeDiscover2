@@ -33,19 +33,12 @@ struct CreateActivityView: View {
     //@State var showingAlertLocation = false
     @State private var showingAlertCreated = false
     @State var buttonColor = Color.lightBlue
+
+    @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
-    func dateToString(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        // Définissez le format de date que vous souhaitez
-        formatter.dateFormat = "dd-MM-yyyy"
-        return formatter.string(from: date)
-    }
-    
-    func findHighestID(activities: [Activity]) -> Int {
-        guard let maxId = activities.max(by: { $0.id < $1.id })?.id else {return 0}
-        return maxId
-    }
-    
+    let newLocation: NewLocation
+
     
     var body : some View {
         
@@ -126,6 +119,9 @@ struct CreateActivityView: View {
                 
                 //Image picker
                 ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
+                let imageModels = selectedImages?.map { image in
+                        ImageDataModel(id: UUID().uuidString, width: 1000, height: 1000, url: "", filename: "image\(UUID().uuidString)", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))
+                    } ?? []
             }
             
             if selectedImages != nil {
@@ -173,7 +169,29 @@ struct CreateActivityView: View {
             }
             Spacer()
             Button(action: {
-                let newActivity = Activity(dateDeFin: dateToString(endDate), id: findHighestID(activities: activityGlobalVariables.allActivities)+1, photos: selectedImages ?? Image(systemName:  "questionmark.video"), favoriteByUserID: <#T##[String]#>, famille: String(isFamilyFriendly), vote: 0, accessibilite: String(isAccessible), latitude: NewLocation.latitude, upVote: [String], longitude: NewLocation.longitude, description: activityDescription, typeActivite: currentCategory.rawValue, temporaire: String(isTemporary), name: activityName, dateDeDebut: String(startDate), creator: currentUser, idFromCreator: currentUser.id, idFromFavoriteByUserID: <#T##[Int]#>, idFromUpVote: <#T##[Int]#>, downVote: <#T##[String]#>, idFromDownVote: <#T##[Int]#>)
+
+                let newActivity = Activity(dateDeFin: dateToString(endDate), 
+                                           id: findHighestID(activities: activityGlobalVariables.allActivities)+1,
+                                           photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
+                                           favoriteByUserID: [],
+                                           famille: String(isFamilyFriendly),
+                                           vote: 0,
+                                           accessibilite: String(isAccessible),
+                                           latitude: newLocation.newLatitude,
+                                           upVote: ["1"],
+                                           longitude: newLocation.newLongitude,
+                                           description: activityDescription,
+                                           typeActivite: currentCategory.rawValue,
+                                           temporaire: String(isTemporary),
+                                           name: activityName,
+                                           dateDeDebut: dateToString(startDate),
+                                           creator: ["rec1v1YrspAhE25pi"],
+                                           idFromCreator: [1],
+                                           idFromFavoriteByUserID: [1],
+                                           idFromUpVote: [1],
+                                           downVote: ["2"],
+                                           idFromDownVote: [2])
+
                 showingAlertCreated = true
             }) {
                 CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .socialRed, ctaFgColor: .grayLight)
@@ -189,5 +207,31 @@ struct CreateActivityView: View {
 
 
 #Preview {
-    CreateActivityView(currentCategory: .nature, isTemporary: false, currentUser: User.marion)
+
+    CreateActivityView(currentCategory: .nature, 
+                       isTemporary: false,
+                       currentUser: User.marion,
+                       newLocation: NewLocation(id: UUID(), newLatitude: 0.0, newLongitude: 0.0))
+
 }
+
+//static let nature1 = Activity(dateDeFin: "31/12/2100", id: 1,
+//                              photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
+//                              favoriteByUserID: ["1"],
+//                              famille: "false",
+//                              vote: 5,
+//                              accessibilite: "false",
+//                              latitude: 43.20233894144298,
+//                              upVote: ["1"],
+//                              longitude: 5.498078687708157,
+//                              description: "Située entre Marseille et Cassis, c’est la calanque la plus grandiose du parc national avec ses eaux turquoise.",
+//                              typeActivite: "nature",
+//                              temporaire: "false",
+//                              name: "Calanque d'en vau",
+//                              dateDeDebut: "01/01/2000",
+//                              creator: ["2"],
+//                              idFromCreator: [1],
+//                              idFromFavoriteByUserID: [1],
+//                              idFromUpVote: [1],
+//                              downVote: ["2"],
+//                              idFromDownVote: [2])

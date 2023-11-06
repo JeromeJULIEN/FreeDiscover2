@@ -56,7 +56,7 @@ struct Profile_rectangle: View {
                             .foregroundColor(.gray)
                         .padding(.top, 4)
                      
-                    NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true)){
+                    NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true, currentUser: user, newLocation: NewLocation(id: UUID(), newLatitude: 0.0, newLongitude: 0.0))){
                         HStack {
                             Text("Ajouter une activité")
                                 .foregroundColor(.gray)
