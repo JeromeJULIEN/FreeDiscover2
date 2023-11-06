@@ -10,6 +10,7 @@ import SwiftUI
 struct DisplaySwitchButton: View {
     @Binding var displayMode: ViewMode
     @Binding var showCarroussel : Bool
+    @Binding var showActivityPreview : Bool
 
     var body : some View{
         ZStack{
@@ -36,6 +37,7 @@ struct DisplaySwitchButton: View {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         displayMode = .list
                         showCarroussel = false
+                        showActivityPreview = false
                     }}, label: {
                     Image(systemName: "list.bullet")
                     .foregroundColor(displayMode == .list ? .white : Color("GrayDark"))
@@ -50,5 +52,5 @@ struct DisplaySwitchButton: View {
 
 #Preview {
     // besoin de passer avec .constant la valeur en binding pour générer la preview
-    DisplaySwitchButton(displayMode: .constant(.map), showCarroussel: .constant(false))
+    DisplaySwitchButton(displayMode: .constant(.map), showCarroussel: .constant(false), showActivityPreview: .constant(false))
 }

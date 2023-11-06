@@ -263,4 +263,3 @@ struct ActivityDetailView: View {
 
 
 
-

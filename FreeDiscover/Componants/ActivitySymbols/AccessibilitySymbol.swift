@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AccessibilitySymbol: View {
 
-    @State private var isOn = false
+    @Binding var isOn : Bool
         
         var accessSymbol: String
         var accessName: String
@@ -42,5 +42,5 @@ struct AccessibilitySymbol: View {
 
 
     #Preview {
-        AccessibilitySymbol(accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
+        AccessibilitySymbol(isOn: .constant(true), accessSymbol: "figure.2.and.child.holdinghands", accessName: "Familiale")
     }

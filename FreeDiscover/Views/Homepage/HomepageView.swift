@@ -35,15 +35,28 @@ struct HomepageView: View {
                     ListView()
                 }
                 VStack {
-                    HStack{
-                        SearchButton(showSearchModal: $showSearchView)
-                        Spacer()
-                        DisplaySwitchButton(displayMode: $currentDisplayMode, showCarroussel: $showCarroussel)
-                        Spacer()
-                        ProfileButton(showCarroussel: $showCarroussel)
+                    ZStack(alignment : .top){
+                        if currentDisplayMode == .list {
+                            Rectangle()
+                                .ignoresSafeArea()
+                                .foregroundColor(.white)
+                                .frame(height: 110)
+                                .offset(y : -50)
+                        }
+                       
+
+                            
+                        HStack{
+                            SearchButton(showSearchModal: $showSearchView)
+                            Spacer()
+                            DisplaySwitchButton(displayMode: $currentDisplayMode, showCarroussel: $showCarroussel, showActivityPreview: $showActivityPreview)
+                            Spacer()
+                            ProfileButton(showCarroussel: $showCarroussel)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom,1)
+                        
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom,1)
                     if(searchGlobalVariables.isSearchOngoing == true){
                         HStack{
                             CancelSearchButton()
@@ -51,6 +64,7 @@ struct HomepageView: View {
                         }
                         .padding(.leading)
                     }
+                    
                     
                     
                     Spacer()
