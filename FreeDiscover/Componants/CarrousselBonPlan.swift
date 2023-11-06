@@ -12,13 +12,13 @@ struct CarrousselBonPlan: View {
 
     
     var body: some View {
-        NavigationView{
+
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .ignoresSafeArea()
                     .frame(height: 220)
                     .foregroundColor(.white)
-                    .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                    .opacity(1)
                     .shadow(radius: 2)
                 VStack(alignment : .center){
                     HStack {
@@ -30,10 +30,10 @@ struct CarrousselBonPlan: View {
                         Spacer()
                     }
                     ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing:20){
+                        HStack(spacing:24){
                             ForEach(getTemporaryActivities(activityList: activityGlobalVariables.allActivities),id: \.id){
                                 activity in
-                                NavigationLink(destination:ListCardLarge(activity: activity)){
+                                NavigationLink(destination:ActivityDetailView(activity: activity)){
                                     VStack(alignment:.center){
                                         if let imageFound = activity.photos.first {
                                             AsyncImage(url: URL(string: imageFound.url)) { phase in
@@ -56,13 +56,16 @@ struct CarrousselBonPlan: View {
                                             .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                                             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                             .multilineTextAlignment(.center)
+                                            .padding([.bottom], 8)
                                     }
                                     .frame(width: 110)
 
                                 }
                             }
                         }
+                        
                     }
+                    .contentMargins(8, for: .scrollContent)
                     
                 }
                 /// autoriser les interaction avec la carte malgré l'affichage de la sheet carroussel
@@ -84,7 +87,6 @@ struct CarrousselBonPlan: View {
       //  .ignoresSafeArea(.all)
     }
         
-}
 
 #Preview {
     CarrousselBonPlan().environmentObject(APIActivityRequestModel())

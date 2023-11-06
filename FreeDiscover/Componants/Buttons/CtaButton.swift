@@ -21,7 +21,7 @@ struct CtaButton: View {
                 Text(ctaText)
             }
             .padding()
-            .frame(minWidth: 280)
+            .frame(minWidth: 360)
             .foregroundColor(ctaFgColor)
             .background(ctaBgColor)
             .cornerRadius(10)
