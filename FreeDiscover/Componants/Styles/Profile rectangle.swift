@@ -35,7 +35,7 @@ struct Profile_rectangle: View {
                    .clipShape(Circle())
 //                   .padding()
                 }
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("\(user.name)")
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
@@ -52,9 +52,7 @@ struct Profile_rectangle: View {
                         }
                     }
                     Text("\(user.activities.count) contributions")
-                            
                             .foregroundColor(.gray)
-                        .padding(.top, 4)
                      
                     NavigationLink(destination: CreateActivityView(currentCategory: .nature, isTemporary: true, currentUser: user, newLocation: NewLocation(id: UUID(), newLatitude: 0.0, newLongitude: 0.0))){
                         HStack {

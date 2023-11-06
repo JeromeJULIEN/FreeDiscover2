@@ -26,22 +26,32 @@ struct CarrouselFavoriteEV: View {
         }
         ScrollView(.horizontal) {
             LazyHGrid(rows: [GridItem(.flexible())], content: {
-                ForEach(getFavoriteFromUserByType(activityDataBase: activityGlobalVariable.allActivities, userFavorites: user.idFromFavorite, type: activityType),id: \.id){
-                    favorite in
-                    if let imageFound = favorite.photos.first {
-                        AsyncImage(url: URL(string: imageFound.url)) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                            } else if phase.error != nil {
-                                Text("Image indisponible")
-                            } else {
-                                ProgressView()
+                    ForEach(getFavoriteFromUserByType(activityDataBase: activityGlobalVariable.allActivities, userFavorites: user.idFromFavorite, type: activityType),id: \.id){
+                        favorite in
+                        NavigationLink(destination:ActivityDetailView(activity: favorite)) {
+                            VStack {
+                                
+                                if let imageFound = favorite.photos.first {
+                                    AsyncImage(url: URL(string: imageFound.url)) { phase in
+                                        if let image = phase.image {
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                        } else if phase.error != nil {
+                                            Text("Image indisponible")
+                                        } else {
+                                            ProgressView()
+                                        }
+                                    }
+                                    .frame(width:140,height: 140)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                }
+                                Text("\(favorite.name)")
+                                    .frame(width:120,height: 50)
+                                    .multilineTextAlignment(.center)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .accentColor(Color("GrayDark"))
                             }
-                        }
-                        .frame(width:140,height: 140)
-                       .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                 }
             })

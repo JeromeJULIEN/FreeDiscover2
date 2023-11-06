@@ -32,8 +32,11 @@ struct ListCardLarge: View {
                             if activity.dateDeDebut == activity.dateDeFin {
                                 
                                 if let date = dateFormatter.date(from: activity.dateDeDebut) {
+
                                     let frenchDate = shortDateFormatter(date)
                                     Text("\(frenchDate)")
+                                        .font(.subheadline)
+                                        .multilineTextAlignment(.leading)
                                     
                                 } else {
                                     Text("Date invalide")
@@ -52,8 +55,11 @@ struct ListCardLarge: View {
                                 } else {
                                     Text("Date invalide")
                                 }
+
                             }
+
                         }
+                        Spacer()
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.grayDark)
@@ -61,6 +67,7 @@ struct ListCardLarge: View {
                                 .font(.subheadline.weight(.light))
                                 .foregroundColor(Color.grayDark)
                             .padding([.top, .bottom], 8) }
+                        
                         HStack{
                             
                             ActivitySymbolSmall(activityType: activity.typeActivite)

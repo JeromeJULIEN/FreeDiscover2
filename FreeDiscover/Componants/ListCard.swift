@@ -28,7 +28,9 @@ struct ListCard: View {
                                 
                             if let date = dateFormatter.date(from: activity.dateDeDebut) {
                                 let frenchDate = formatDateInFrench(date)
-                                Text("Date : \(frenchDate)")
+                                Text("\(frenchDate)")
+                                    .font(.subheadline)
+                                    .multilineTextAlignment(.leading)
                                     
                             } else {
                                 Text("Date invalide")
@@ -38,13 +40,11 @@ struct ListCard: View {
                                 if let dateDebut = dateFormatter.date(from: activity.dateDeDebut),
                                    let dateFin = dateFormatter.date(from: activity.dateDeFin)
                                 {
-                                    let frenchDateDebut = formatDateInFrench(dateDebut)
-                                    let frenchDateFin = formatDateInFrench(dateFin)
+                                    let frenchDateDebut = shortDateFormatter(dateDebut)
+                                    let frenchDateFin = shortDateFormatter(dateFin)
                                     Text("Du \(frenchDateDebut) au \(frenchDateFin)")
                                         .font(.subheadline)
                                         .multilineTextAlignment(.leading)
-//                                        .fixedSize(horizontal: false, vertical: true)
-
                                         
                                 } else {
                                     Text("Date invalide")
