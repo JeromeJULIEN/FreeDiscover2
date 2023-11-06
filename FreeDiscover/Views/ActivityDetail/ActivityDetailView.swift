@@ -25,7 +25,6 @@ struct ActivityDetailView: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
     
-    
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     
@@ -35,7 +34,6 @@ struct ActivityDetailView: View {
             VStack{
                 
                 ZStack (alignment: .topTrailing){
-                    //  Image("calanque-en-vau")
                     if let imageFound = activity.photos.first {
                         AsyncImage(url: URL(string: imageFound.url)) { phase in
                             if let image = phase.image {
@@ -51,21 +49,24 @@ struct ActivityDetailView: View {
                         .frame(maxHeight: 250)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
-                    Button(action : {isFavorite = !isFavorite}){
-                        ZStack {
-                            Image(systemName: "heart.fill")
-                            //        .padding(10)
-                                .foregroundStyle(.accent)
-                                .opacity(isFavorite ? 1 : 0)
-                                .bold()
-                                .font(.title2)
-                            Image(systemName: "heart")
-                                .padding(4)
-                                .foregroundStyle(.white)
-                                .bold()
-                                .font(.title2)
-                        }
-                    }
+                    FavoriteButton(activityId: activity.id)
+
+//Bouton coeur fonctionnel mais pas relié à la BDD
+                    //                    Button(action : {isFavorite = !isFavorite}){
+//                        ZStack {
+//                            Image(systemName: "heart.fill")
+//                            //        .padding(10)
+//                                .foregroundStyle(.accent)
+//                                .opacity(isFavorite ? 1 : 0)
+//                                .bold()
+//                                .font(.title2)
+//                            Image(systemName: "heart")
+//                                .padding(4)
+//                                .foregroundStyle(.white)
+//                                .bold()
+//                                .font(.title2)
+//                        }
+//                    }
                 }
                 VStack {
                     VStack{
@@ -82,6 +83,8 @@ struct ActivityDetailView: View {
                             ActivityContentView()
 
                         }
+                        .padding(5)
+
                         Spacer()
                         
                         HStack{
@@ -91,11 +94,14 @@ struct ActivityDetailView: View {
                                 .font(.subheadline)
                                 .foregroundColor(Color("GrayDark"))
                                 .frame(maxWidth: .infinity, alignment: .leading)                     /*.padding(5)*/
-                            laurelleadingLevel()
-//                            Image("Badge1")
-                                .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
-                                .padding(5)
-                            //Integrer la date //calendar.badge.clock
+//                           laurelleadingLevel()
+                            Image("Badge1")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 30, height: 30)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                          .padding(5)
+
                         }
 
                         //   .padding(5)
@@ -142,8 +148,9 @@ struct ActivityDetailView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                     .clipShape(RoundedRectangle(cornerRadius:10))
                         }
-                        
                     }
+//                    .padding(5)
+
                 }
                 Divider()
                 
@@ -172,6 +179,8 @@ struct ActivityDetailView: View {
                         
                     }
                 }
+                .padding(5)
+
                 Divider ()
                 
                 
@@ -204,8 +213,8 @@ struct ActivityDetailView: View {
                 ScrollView(.horizontal) {
                     //                        VStack(alignment:.leading){
                     
-                    HStack (){
-                        if let imageFound = activity.photos.first {
+                    HStack {
+                        if let imageFound = activity.photos.last {
                             AsyncImage(url: URL(string: imageFound.url)) { phase in
                                 if let image = phase.image {
                                     image
@@ -250,7 +259,6 @@ struct ActivityDetailView: View {
                             }
                         }
                     }
-                    .padding()
                 }
             }
         }
