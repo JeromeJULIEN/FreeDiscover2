@@ -16,7 +16,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             Profile_rectangle(user : user)
-            ProfileSwitchButton()
+            ProfileSwitchButton(currentMode: $currentMode)
                 .padding()
 
             if (currentMode == .favorite){
@@ -32,20 +32,21 @@ struct ProfileView: View {
                     }
                 }
             }
-//            else if (currentMode == .contribution){
-//                ScrollView {
-//                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
-//                        HStack {
-//                            ActivitySymbolSmall(activityType: activity.rawValue)
-//                                .padding(.leading)
-//                            Text(activity.rawValue.capitalized)
-//                            Spacer()
-//                        }
-//                        CarrouselContributionEV(activityType: activity, user : user)
-//                    }
-//                }
-//            }
+            else if (currentMode == .contribution){
+                ScrollView {
+                    ForEach(ActivityTypes.allCases, id:\.self) { activity in
+                        HStack {
+                            ActivitySymbolSmall(activityType: activity.rawValue)
+                                .padding(.leading)
+                            Text(activity.rawValue.capitalized)
+                            Spacer()
+                        }
+                        CarrouselContributionEV(activityType: activity.rawValue, user : user)
+                    }
+                }
+            }
         }
+        .navigationTitle("Mon profil")
     }
 }
 

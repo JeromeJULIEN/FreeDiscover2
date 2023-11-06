@@ -7,40 +7,70 @@
 
 import SwiftUI
 
-/*
+
 struct VoteCountDisplay2: View {
     // MARK: Variables externes à la vue
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+    
+    // MARK: Variables de la vue
     /// Id de l'activité à afficher
     @Binding var activity : Activity
     
     // MARK: Fonctions de la vue
     /// fonctions pour vérifier si un vote a déjà été fait
-    func hasVotedUp(activityId : Int)-> Bool {
-        return userGlobalVariables.connectedUser.userUpVote.contains(activityId)
+    func hasVotedUp()-> Bool {
+        return userGlobalVariables.connectedUser.idFromUserUpVote.contains(activity.id)
     }
-    func hasVotedDown(activityId : Int)-> Bool {
-        return userGlobalVariables.connectedUser.userDownVote.contains(activityId)
+    func hasVotedDown()-> Bool {
+        return userGlobalVariables.connectedUser.idFromUserDownVote.contains(activity.id)
     }
     
-    /// fonctions pour ajouter/supprimer un vote
+    /// fonctions pour ajouter/supprimer un vote up
+    /// cette fonction doit envoyer les id des records airtable, et non l'id des objets de la bdd
+    /// pour ce faire, on utilise des fonctions qui récupèrent l'id du record à partir de l'id de l'objet
     func voteUp(activityId : Int){
-        if (hasVotedUp(activityId: activityId) == false && hasVotedDown(activityId: activityId) == false){
-            activity.upVote()
-            userGlobalVariables.connectedUser.userUpVote.append(activityId)
-        } else if(hasVotedUp(activityId: activityId) == true) {
-            activity.downVote()
-            userGlobalVariables.connectedUser.userUpVote.removeAll{$0 == activityId}
+        if (hasVotedUp() == false && hasVotedDown() == false){
+            print("ADD UP VOTE")
+            Task{
+                await userGlobalVariables.addUpVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                    activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                    currentUpVote: userGlobalVariables.connectedUser.userUpVote
+                )
+                await activityGlobalVariables.increaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
+        } else if(hasVotedUp() == true) {
+            print("REMOVE UP VOTE")
+            Task{
+            await userGlobalVariables.removeUpVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentUpVote: userGlobalVariables.connectedUser.userUpVote
+                )
+            await activityGlobalVariables.decreaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
         }
     }
     
+    /// fonctions pour ajouter/supprimer un vote down
     func voteDown(activityId : Int){
-        if (hasVotedDown(activityId: activityId) == false && hasVotedUp(activityId: activityId) == false){
-            activity.downVote()
-            userGlobalVariables.connectedUser.userDownVote.append(activityId)
-        } else if(hasVotedDown(activityId: activityId) == true) {
-            activity.upVote()
-            userGlobalVariables.connectedUser.userDownVote.removeAll{$0 == activityId}
+        if (hasVotedDown() == false && hasVotedUp() == false){
+            print("DOWN VOTE")
+            Task{
+                await userGlobalVariables.addDownVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentDownVote: userGlobalVariables.connectedUser.userDownVote
+                )
+                await activityGlobalVariables.decreaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
+        } else if(hasVotedDown() == true) {
+            print("UP VOTE")
+            Task{
+                await userGlobalVariables.removeDownVoteToUser(userId: findUserRecordID(userID: userGlobalVariables.connectedUser.id, records: userGlobalVariables.allUsersRecord),
+                                                activityId:findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord),
+                                                currentDownVote: userGlobalVariables.connectedUser.userDownVote
+                )
+                await activityGlobalVariables.increaseVoteCount(activityId: findActivityRecordID(activityID: activityId, records: activityGlobalVariables.allActivitiesRecord), currentVoteCOunt: activity.vote)
+            }
         }
     }
     
@@ -50,7 +80,7 @@ struct VoteCountDisplay2: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 0)
                     .frame(width: 50,height: 20)
-                    .foregroundColor(activity.voteCounter > 0 ? Color.blueFD : .socialRed)
+                    .foregroundColor(activity.vote > 0 ? Color.blueFD : .socialRed)
                     .clipShape(
                         .rect(
                             topLeadingRadius: 10,
@@ -60,7 +90,7 @@ struct VoteCountDisplay2: View {
                         )
                     )
                 HStack{
-                    Text("\(activity.voteCounter) \(activity.voteCounter > 1 ? "pts" : "pt")")
+                    Text("\(activity.vote) \(activity.vote > 1 ? "pts" : "pt")")
                         .font(.caption.bold())
                 }
                 .foregroundColor(.white)
@@ -71,7 +101,7 @@ struct VoteCountDisplay2: View {
                             RoundedRectangle(cornerRadius: 0)
                                 .frame(width: 30,height: 20)
                                 .foregroundColor(Color.blueFD)
-                            Image(systemName:hasVotedUp(activityId: activity.id) ? "hand.thumbsup.fill" : "hand.thumbsup")
+                            Image(systemName:hasVotedUp() ? "hand.thumbsup.fill" : "hand.thumbsup")
                                 .font(.caption)
                         }
                     }
@@ -93,7 +123,7 @@ struct VoteCountDisplay2: View {
                             )
                         )
                     
-                    Image(systemName:hasVotedDown(activityId: activity.id) ? "hand.thumbsdown.fill" : "hand.thumbsdown")
+                    Image(systemName:hasVotedDown() ? "hand.thumbsdown.fill" : "hand.thumbsdown")
                         .font(.caption)
                 }
                 .foregroundColor(.white)
@@ -102,6 +132,13 @@ struct VoteCountDisplay2: View {
         }
        
         .shadow(color: Color.secondary, radius: 1)
+        .onChange(of: activityGlobalVariables.needsRefresh) { newValue in
+                    if newValue {
+                        Task {
+                            await activityGlobalVariables.refreshData()
+                        }
+                    }
+                }
     }
     
         
@@ -109,7 +146,9 @@ struct VoteCountDisplay2: View {
 }
 
 #Preview {
-    VoteCountDisplay2(activity: .constant(FreeDiscover.nature1)).environmentObject(APIUserRequestModel())
+    VoteCountDisplay2(activity: .constant(Activity.nature1))
+        .environmentObject(APIUserRequestModel())
+        .environmentObject(APIActivityRequestModel())
 }
-*/
+
 

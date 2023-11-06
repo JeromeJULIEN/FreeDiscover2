@@ -19,20 +19,21 @@ struct CarrousselBonPlan: View {
                     .frame(height: 220)
                     .foregroundColor(.white)
                     .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
-                VStack(alignment : .leading){
+                VStack(alignment : .center){
                     HStack {
                         Spacer()
                         Text("Nos bons plans du moment")
                             .font(.headline)
+                            .padding(10)
                         .foregroundColor(.grayDark)
                         Spacer()
                     }
                     ScrollView(.horizontal, showsIndicators: false){
-                        HStack(spacing:40){
+                        HStack(spacing:20){
                             ForEach(getTemporaryActivities(activityList: activityGlobalVariables.allActivities),id: \.id){
                                 activity in
                                 NavigationLink(destination:ActivityDetailView(activity: activity)){
-                                    VStack(alignment:.leading){
+                                    VStack(alignment:.center){
                                         if let imageFound = activity.photos.first {
                                             AsyncImage(url: URL(string: imageFound.url)) { phase in
                                                 if let image = phase.image {
@@ -50,10 +51,10 @@ struct CarrousselBonPlan: View {
                                         }
                                         Text("\(activity.name)")
                                             .foregroundColor(.grayDark)
-                                            .font(.headline)
+                                            .font(.subheadline)
                                             .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
                                             .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                                            .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+                                            .multilineTextAlignment(.center)
                                     }
                                     .frame(width: 110)
 
@@ -75,9 +76,9 @@ struct CarrousselBonPlan: View {
                 
             }
         }
-        .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
-        .presentationDetents([.height(200),.large])
-        .presentationCornerRadius(20)
+//        .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
+//        .presentationDetents([.height(200),.large])
+//        .presentationCornerRadius(20)
       // .presentationDragIndicator(.visible)
       //  .ignoresSafeArea(.all)
     }

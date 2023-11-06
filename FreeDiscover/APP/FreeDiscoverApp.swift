@@ -16,6 +16,7 @@ struct FreeDiscoverApp: App {
     @StateObject var searchGlobalVariables = SearchGlobalVariables() // -> local
     @StateObject var userGlobalVariables = APIUserRequestModel() // -> API
     @StateObject var activityGlobalVariables = APIActivityRequestModel() // -> local
+    
 
 
     
@@ -24,16 +25,19 @@ struct FreeDiscoverApp: App {
             HomepageView()
                 // lancement du call API au niveau de la vue inti de l'app
                 .onAppear{
-                Task{
-                    userGlobalVariables.allUsers = await userGlobalVariables.fetchedUser()
-                    userGlobalVariables.connectedUser = userGlobalVariables.allUsers[4]
-                    activityGlobalVariables.allActivities = await activityGlobalVariables.fetchedActivity()
+                    Task{
+                        (userGlobalVariables.allUsers, userGlobalVariables.allUsersRecord) = await userGlobalVariables.fetchedUser()
+                        userGlobalVariables.connectedUser = userGlobalVariables.allUsers[0]
+                        (activityGlobalVariables.allActivities, activityGlobalVariables.allActivitiesRecord) = await activityGlobalVariables.fetchedActivity()
+                    }
+                    
                 }
-            }
         }
         .environmentObject(searchGlobalVariables)
         .environmentObject(userGlobalVariables)
         .environmentObject(activityGlobalVariables)
     }
 }
+
+
 

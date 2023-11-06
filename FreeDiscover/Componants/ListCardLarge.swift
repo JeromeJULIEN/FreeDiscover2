@@ -13,6 +13,7 @@ struct ListCardLarge: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 12)
+                .ignoresSafeArea()
                 .frame(height: 220)
                 .foregroundColor(.white)
                 .shadow(radius: 2)

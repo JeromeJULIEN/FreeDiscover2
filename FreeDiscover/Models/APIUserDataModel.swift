@@ -30,7 +30,11 @@ struct UserRecord: Codable {
 //le @Published est la victime ;D
 
 //oubliez pas de rendre votre donnée finale (celle que vous voulez utiliser et travailler) Identifiable pour SwiftUI
-class User: Codable,Identifiable,ObservableObject {
+class User: Codable,Identifiable,ObservableObject, Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        lhs.favorite == rhs.favorite
+    }
+    
     @Published var activities : [String]
     @Published var userUpVote: [String]
     @Published var id: Int
