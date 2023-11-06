@@ -35,7 +35,6 @@ struct CreateActivityView: View {
     @State var buttonColor = Color.lightBlue
 
     @EnvironmentObject var userGlobalVariables : APIUserRequestModel
-    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     let newLocation: NewLocation
 
@@ -169,30 +168,36 @@ struct CreateActivityView: View {
             }
             Spacer()
             Button(action: {
+                
+                Task {
+                    let newActivity = Activity(dateDeFin: dateToString(endDate),
+                                               id: findHighestID(activities: activityGlobalVariables.allActivities)+1,
+                                               photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
+                                               favoriteByUserID: ["rec1v1YrspAhE25pi"],
+                                               famille: String(isFamilyFriendly),
+                                               vote: 0,
+                                               accessibilite: String(isAccessible),
+                                               latitude: newLocation.newLatitude,
+                                               upVote: ["rec1v1YrspAhE25pi"],
+                                               longitude: newLocation.newLongitude,
+                                               description: activityDescription,
+                                               typeActivite: currentCategory.rawValue,
+                                               temporaire: String(isTemporary),
+                                               name: activityName,
+                                               dateDeDebut: dateToString(startDate),
+                                               creator: ["rec1v1YrspAhE25pi"],
+                                               idFromCreator: [1],
+                                               idFromFavoriteByUserID: [1],
+                                               idFromUpVote: [1],
+                                               downVote: ["rec1v1YrspAhE25pi"],
+                                               idFromDownVote: [2]
+                                    )
+                    print("newActivity from createActivity page : \(newActivity.name)")
+                    await activityGlobalVariables.createActivity(activity: newActivity)
 
-                let newActivity = Activity(dateDeFin: dateToString(endDate), 
-                                           id: findHighestID(activities: activityGlobalVariables.allActivities)+1,
-                                           photos: [ImageDataModel(id: "1", width: 1000, height: 1000, url: "", filename: "calanque-en-vau", size: 2800, type: "image.jpeg", thumbnails: Thumbnails(small: .init(url: "", width: 0, height: 0), large: .init(url: "", width: 0, height: 0), full: .init(url: "", width: 1000, height: 1000)))],
-                                           favoriteByUserID: [],
-                                           famille: String(isFamilyFriendly),
-                                           vote: 0,
-                                           accessibilite: String(isAccessible),
-                                           latitude: newLocation.newLatitude,
-                                           upVote: ["1"],
-                                           longitude: newLocation.newLongitude,
-                                           description: activityDescription,
-                                           typeActivite: currentCategory.rawValue,
-                                           temporaire: String(isTemporary),
-                                           name: activityName,
-                                           dateDeDebut: dateToString(startDate),
-                                           creator: ["rec1v1YrspAhE25pi"],
-                                           idFromCreator: [1],
-                                           idFromFavoriteByUserID: [1],
-                                           idFromUpVote: [1],
-                                           downVote: ["2"],
-                                           idFromDownVote: [2])
-
-                showingAlertCreated = true
+                    showingAlertCreated = true
+                }
+               
             }) {
                 CtaButton(ctaText: "Créer mon activité", ctaIcon: "", ctaBgColor: .socialRed, ctaFgColor: .grayLight)
                     .padding()
