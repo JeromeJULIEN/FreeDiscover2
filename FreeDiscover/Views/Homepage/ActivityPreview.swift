@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityPreview: View {
 
     @State var activity : Activity
+    var distanceToUser : Double {calculateDistance(lat1: 43.296367, lon1: 5.368363, lat2: activity.latitude, lon2: activity.longitude)}
 
 
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
@@ -23,7 +24,7 @@ struct ActivityPreview: View {
                     Text("\(activity.name)")
                         .font(.headline)
                 }
-                Text("12,7 km")
+                Text("\(distanceToUser, specifier: "%.1f") km")
                     .font(.caption)
                 HStack{
                     ActivitySymbolSmall(activityType: activity.typeActivite)

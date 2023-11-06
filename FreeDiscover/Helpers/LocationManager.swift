@@ -60,3 +60,11 @@ extension LocationManager: CLLocationManagerDelegate {
         self.userLocation = location
     }
 }
+
+func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Double {
+    let location1 = CLLocation(latitude: lat1, longitude: lon1)
+    let location2 = CLLocation(latitude: lat2, longitude: lon2)
+    let distanceInMeters = location1.distance(from: location2) // résultat en mètres
+    let distanceInKilometers = distanceInMeters / 1000 // convertit en kilomètres
+    return distanceInKilometers
+}

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoryPicker: View {
 
-    @State var currentCategory: ActivityTypes
+    @Binding var currentCategory: ActivityTypes
     @State var buttonColor = Color.natureGreen
     @State var selectedCategory: String = "Category1"
     
@@ -109,5 +109,5 @@ struct CategoryPicker: View {
 }
 
 #Preview {
-    CategoryPicker(currentCategory: .nature)
+    CategoryPicker(currentCategory: .constant(.nature))
 }

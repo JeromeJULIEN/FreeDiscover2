@@ -10,6 +10,7 @@ import SwiftUI
 struct ListCard: View {
     // activity to display
     @State var activity : Activity
+    var distanceToUser : Double {calculateDistance(lat1: 43.296367, lon1: 5.368363, lat2: activity.latitude, lon2: activity.longitude)}
     
     var body: some View {
         ZStack{
@@ -56,7 +57,7 @@ struct ListCard: View {
                         Image(systemName: "mappin.and.ellipse")
                             .foregroundColor(.grayDark)
                         
-                        Text("12.4 km")
+                        Text("\(distanceToUser, specifier: "%.1f") km")
                             .font(.subheadline.weight(.light))
                             .foregroundColor(Color("GrayDark"))
                         .fontWeight(.light) }

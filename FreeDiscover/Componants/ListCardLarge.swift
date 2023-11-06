@@ -11,6 +11,8 @@ struct ListCardLarge: View {
     @State var activity : Activity
     @State private var isDetailViewActive = false
     
+    var distanceToUser : Double {calculateDistance(lat1: 43.296367, lon1: 5.368363, lat2: activity.latitude, lon2: activity.longitude)}
+    
     var body: some View {
             ZStack{
                 RoundedRectangle(cornerRadius: 12)
@@ -63,7 +65,7 @@ struct ListCardLarge: View {
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.grayDark)
-                            Text("12.4 km")
+                            Text("\(distanceToUser, specifier: "%.1f") km")
                                 .font(.subheadline.weight(.light))
                                 .foregroundColor(Color.grayDark)
                             .padding([.top, .bottom], 8) }

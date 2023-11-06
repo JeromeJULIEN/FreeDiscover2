@@ -34,6 +34,9 @@ struct CreateActivityView: View {
     //@State var showingAlertLocation = false
     @State private var showingAlertCreated = false
     @State var buttonColor = Color.lightBlue
+    @State var longitude : Double = 0.0
+    @State var latitude : Double = 0.0
+
 
     
     
@@ -44,7 +47,7 @@ struct CreateActivityView: View {
         
         ScrollView {
             VStack {
-                CategoryPicker(currentCategory: currentCategory)
+                CategoryPicker(currentCategory: $currentCategory)
                     .padding()
                 
                 TextField(("Nom de l'activité..."),
@@ -73,7 +76,7 @@ struct CreateActivityView: View {
                         .frame(minWidth: 360)
                 }
                 .sheet(isPresented: $isLocationPickerShowing, onDismiss: nil) {
-                    LocationPickerView()
+                    LocationPickerView(latitude: $latitude, longitude: $longitude)
                 }
                 Toggle("Il s'agit d'une activité temporaire", isOn: $isTemporary)
                     .toggleStyle(.switch)
@@ -175,9 +178,9 @@ struct CreateActivityView: View {
                                                famille: String(isFamilyFriendly),
                                                vote: 0,
                                                accessibilite: String(isAccessible),
-                                               latitude: newLocation.newLatitude,
+                                               latitude: latitude,
                                                upVote: ["rec1v1YrspAhE25pi"],
-                                               longitude: newLocation.newLongitude,
+                                               longitude: longitude,
                                                description: activityDescription,
                                                typeActivite: currentCategory.rawValue,
                                                temporaire: String(isTemporary),
