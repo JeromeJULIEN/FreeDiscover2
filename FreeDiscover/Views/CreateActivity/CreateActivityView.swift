@@ -179,7 +179,7 @@ struct CreateActivityView: View {
                                                vote: 0,
                                                accessibilite: String(isAccessible),
                                                latitude: latitude,
-                                               upVote: ["rec1v1YrspAhE25pi"],
+                                               upVote: ["reccZsmqjJRfShq8T"],
                                                longitude: longitude,
                                                description: activityDescription,
                                                typeActivite: currentCategory.rawValue,
@@ -190,7 +190,7 @@ struct CreateActivityView: View {
                                                idFromCreator: [1],
                                                idFromFavoriteByUserID: [1],
                                                idFromUpVote: [1],
-                                               downVote: ["rec1v1YrspAhE25pi"],
+                                               downVote: ["reccZsmqjJRfShq8T"],
                                                idFromDownVote: [2]
                                     )
                     print("newActivity from createActivity page : \(newActivity.name)")
@@ -212,9 +212,12 @@ struct CreateActivityView: View {
                     if newValue {
                         Task {
                             await activityGlobalVariables.refreshData()
+                            await userGlobalVariables.refreshData()
                         }
                     }
-                }
+        }
+        
+
     }
 }
 

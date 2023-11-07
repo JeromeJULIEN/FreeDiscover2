@@ -27,6 +27,8 @@ struct ActivityDetailView: View {
     
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
+    var distanceToUser : Double {calculateDistance(lat1: 43.296367, lon1: 5.368363, lat2: activity.latitude, lon2: activity.longitude)}
+    
     
     var body: some View {
         ScrollView{
@@ -84,16 +86,30 @@ struct ActivityDetailView: View {
 
                         }
                         .padding(5)
+                        HStack {
+                            Image(systemName: "mappin.and.ellipse")
+                                .foregroundColor(.grayDark)
+                            Text("\(distanceToUser, specifier: "%.1f") km")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        
 
                         Spacer()
                         
                         HStack{
-                            
-                            Text ("Créé par Marion")
+                            if(activity.name == "Basilique Notre-Dame de la Garde") {
+                                Text ("Créé par Marion")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color("GrayDark"))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            } else if (activity.name != "Basilique Notre-Dame de la Garde"){
+                                Text ("Créé par Arthur")
+                                    .font(.subheadline)
+                                    .foregroundColor(Color("GrayDark"))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
                             //     Text("\(activity.contributor)")
-                                .font(.subheadline)
-                                .foregroundColor(Color("GrayDark"))
-                                .frame(maxWidth: .infinity, alignment: .leading)                     /*.padding(5)*/
+                            /*.padding(5)*/
 //                           laurelleadingLevel()
                             Image("Badge1")
                                 .resizable()
@@ -171,15 +187,15 @@ struct ActivityDetailView: View {
                     if(activity.famille == "true"){
                         Image(systemName: "figure.2.and.child.holdinghands")
                             .foregroundColor(.grayDark)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
                     }
                     if(activity.accessibilite == "true"){
                         Image(systemName: "figure.roll")
                             .foregroundColor(.grayDark)
-                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
                         
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(5)
 
                 Divider ()
@@ -264,6 +280,7 @@ struct ActivityDetailView: View {
             }
         }
         .padding()
+        .scrollIndicators(.hidden)
     }
 }
 #Preview {

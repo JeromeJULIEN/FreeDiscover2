@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Profile_rectangle: View {
     var user : User
+    @EnvironmentObject var userGlobalVariable : APIUserRequestModel
     
     var body: some View {
         ZStack {
@@ -40,7 +41,7 @@ struct Profile_rectangle: View {
                         .foregroundColor(.accentColor)
                         .fontWeight(.bold)
                         .font(.largeTitle)
-                    NavigationLink(destination: GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)) {
+                    NavigationLink(destination: GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), user: userGlobalVariable.connectedUser)) {
                         HStack {
                             Text("Discoverer en herbe")
                                 .foregroundColor(.black)
