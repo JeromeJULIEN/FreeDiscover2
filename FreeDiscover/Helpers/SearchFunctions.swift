@@ -25,40 +25,34 @@ extension String {
 
 extension Array where Element == Activity {
     /// Renvoie une liste d'activités dont le champ `summary` contient au moins un des mots spécifiés et dont le type et sélectionné dans les filtres de recherche
-    func filter(searchText: String, lookForNature: Bool, lookForSport : Bool, lookForCulture : Bool,lookForSocial : Bool) -> [Activity] {
-        // Si le texte de recherche est vide, retournez les activités qui correspondent seulement aux types sélectionnés
-        if searchText.isEmpty {
-            return self.filter { activity in
-                switch activity.typeActivite {
-                case "nature" where lookForNature: return true
-                case "sport" where lookForSport: return true
-                case "culture" where lookForCulture: return true
-                case "social" where lookForSocial: return true
-                default: return false
-                }
-            }
+    func filter(searchText: String, lookForNature: Bool, lookForSport: Bool, lookForCulture: Bool, lookForSocial: Bool) -> [Activity] {
+        // Vérifiez si tous les booléens de type sont false
+        let isAnyTypeSelected = lookForNature || lookForSport || lookForCulture || lookForSocial
+
+        // Si le texte de recherche est vide et aucun type n'est sélectionné, retournez toutes les activités
+        if searchText.isEmpty && !isAnyTypeSelected {
+            return self
         }
-        
+
         let searchWords = searchText.split(separator: " ").map { String($0) }
         return self.filter { activity in
-            /// En fonction du type de l'activité, on vérifie si l'utilisateur à selectionné ce type
-            let doesTypeMatch: Bool
-            switch activity.typeActivite {
-                   case "nature":
-                       doesTypeMatch = lookForNature
-                   case "sport":
-                       doesTypeMatch = lookForSport
-                   case "culture":
-                       doesTypeMatch = lookForCulture
-                   case "social":
-                       doesTypeMatch = lookForSocial
-                   default:
-                       doesTypeMatch = false
-               }
-            /// Vérifiez si le titre, le résumé ou la description contiennent l'un des mots de recherche.
-            let doesSummaryMatch = activity.description.containsAny(of: searchWords) || activity.name.containsAny(of: searchWords)
-            /// On retourne l'activité si les deux critères sont valides
-            return doesTypeMatch && doesSummaryMatch }
+            // Si aucun type n'est sélectionné, doesTypeMatch est toujours true
+            let doesTypeMatch: Bool = !isAnyTypeSelected || {
+                switch activity.typeActivite {
+                case "nature": return lookForNature
+                case "sport": return lookForSport
+                case "culture": return lookForCulture
+                case "social": return lookForSocial
+                default: return false
+                }
+            }()
+
+            // Vérifiez si le titre, le résumé ou la description contiennent l'un des mots de recherche.
+            let doesSummaryMatch = searchText.isEmpty || activity.description.containsAny(of: searchWords) || activity.name.containsAny(of: searchWords)
+
+            // On retourne l'activité si les deux critères sont valides
+            return doesTypeMatch && doesSummaryMatch
+        }
     }
 }
 
