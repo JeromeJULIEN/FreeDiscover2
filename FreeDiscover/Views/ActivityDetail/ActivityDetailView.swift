@@ -91,6 +91,8 @@ struct ActivityDetailView: View {
                                 .foregroundColor(.grayDark)
                             Text("\(distanceToUser, specifier: "%.1f") km")
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                            VoteCountDisplay2(activity: $activity)
+
                         }
                         
 
@@ -101,12 +103,12 @@ struct ActivityDetailView: View {
                                 Text ("Créé par Marion")
                                     .font(.subheadline)
                                     .foregroundColor(Color("GrayDark"))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    //.frame(maxWidth: .infinity, alignment: .leading)
                             } else if (activity.name != "Basilique Notre-Dame de la Garde"){
                                 Text ("Créé par Arthur")
                                     .font(.subheadline)
                                     .foregroundColor(Color("GrayDark"))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                   // .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             //     Text("\(activity.contributor)")
                             /*.padding(5)*/
@@ -116,9 +118,12 @@ struct ActivityDetailView: View {
                                 .foregroundColor(.black)
                                 .frame(width: 30, height: 30)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                          .padding(5)
+                                .padding(5)
+                            Spacer()
 
                         }
+                         //.frame(maxWidth: .infinity, alignment: .leading)
+
 
                         //   .padding(5)
                         
