@@ -48,6 +48,31 @@ struct MapView: View {
         searchGlobalVariables.searchResults = activityGlobalVariables.allActivities.filter(searchText: searchGlobalVariables.searchContent,lookForNature: searchGlobalVariables.isNatureSelectedForSearch,lookForSport: searchGlobalVariables.isSportSelectedForSearch,lookForCulture: searchGlobalVariables.isCultureSelectedForSearch,lookForSocial: searchGlobalVariables.isSocialSelectedForSearch)
     }
     
+    /// fonction pour calculer la nouvelle zone d'affichage en fonction des résultats de recherche
+    func regionForSearchResults(_ searchResults: [Activity]) -> MKCoordinateRegion {
+        let latitudes = searchResults.map { $0.latitude }
+        let longitudes = searchResults.map { $0.longitude }
+        
+        let maxLat = latitudes.max() ?? 0
+        var minLat = latitudes.min() ?? 0
+        let maxLong = longitudes.max() ?? 0
+        let minLong = longitudes.min() ?? 0
+        /// ajout d'un espace en bas pour ne pas être derrière le carroussel
+//        minLat -= 0.05
+        
+        let center = CLLocationCoordinate2D(
+            latitude: (maxLat + minLat) / 2,
+            longitude: (maxLong + minLong) / 2
+        )
+        
+        let span = MKCoordinateSpan(
+            latitudeDelta: (maxLat - minLat) * 2.5, // 10% extra space
+            longitudeDelta: (maxLong - minLong) * 2.5 // 10% extra space
+        )
+        
+        return MKCoordinateRegion(center: center, span: span)
+    }
+    
     // MARK: VUE
     var body: some View {
         /// 1) - Map
@@ -138,6 +163,25 @@ struct MapView: View {
                         } else {
                             selectedActivity = activityGlobalVariables.allActivities[selectedTag]
                         }
+                
+                        // Mise à jour de la position de la caméra pour centrer sur les coordonnées de l'activité sélectionnée
+                        /// Définition du niveau de zoom
+                        let zoomLevel = MKCoordinateSpan(
+                            latitudeDelta: 0.05, // Plus petite valeur pour plus de zoom
+                            longitudeDelta: 0.05 // Plus petite valeur pour plus de zoom
+                        )
+                        /// Définition de la nouvelle zone d'affichage
+                        let newRegion = MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(
+                                latitude: selectedActivity.latitude,
+                                longitude: selectedActivity.longitude
+                            ),
+                            span: zoomLevel
+                        )
+                        /// Transition par animation
+                        withAnimation(.easeInOut(duration: 1.0)) {
+                            cameraPosition = .region(newRegion)
+                        }
                         
                         // Set the selected activity and show the ActivityPreview
                         searchGlobalVariables.selectedActivityInSearch = selectedActivity
@@ -150,10 +194,23 @@ struct MapView: View {
         .onChange(of: searchGlobalVariables.launchSearch){
             searchActivities()
             
+            let newRegion = regionForSearchResults(searchGlobalVariables.searchResults)
+                
+            withAnimation(.easeInOut(duration: 1.0)) {
+                cameraPosition = .region(newRegion)
+            }
+            
         }
-        .onChange(of: searchGlobalVariables.isSearchOngoing) { _ in
+        .onChange(of: searchGlobalVariables.isSearchOngoing) { isSearchActive in
             // Reset selectedTag when the search state changes to clear the selection
             selectedTag = nil
+            if !isSearchActive {
+                    // Annulation de la recherche, recentrer sur la région initiale
+                    withAnimation(.easeInOut(duration: 1.0)) {
+                        cameraPosition = .region(.userRegion)
+                    }
+                }
+            
         }
     }
 }
