@@ -46,7 +46,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .navigationTitle("Hello")
+        .navigationTitle("Bienvenue !")
     }
 }
 

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct GamificationView: View {
     var level: LevelGame
-    var userContribution: UserProfile
+    var user: User
+    
+    @EnvironmentObject var userGlobalVariable : APIUserRequestModel
+    
     var body: some View {
         
         VStack {
@@ -45,19 +48,22 @@ struct GamificationView: View {
             
             ScrollView() {
                 ForEach(levels, id:\.self) { level in
-                    ExtractedView(level: level, userContribution: UserProfile(id: 1)) }
+                    ExtractedView(level: level, user: userGlobalVariable.connectedUser) }
             }
         }
+
     }
+
 }
 
 #Preview {
-    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), userContribution: UserProfile.marion)
+    GamificationView(level: LevelGame(levelNumber: 1, levelName: "Discoverer en herbe", levelBadge: "Badge1", nbOfContributionNeeded: 10), user: User.marion)
+        .environmentObject(APIUserRequestModel())
 }
 
 struct ExtractedView: View {
     var level: LevelGame
-    var userContribution: UserProfile
+    var user: User
     var body: some View {
         HStack {
             ZStack {
@@ -76,7 +82,7 @@ struct ExtractedView: View {
             }
                 Spacer()
             VStack {
-                Text("6 /\(level.nbOfContributionNeeded)")
+                Text("\(user.activities.count) /\(level.nbOfContributionNeeded)")
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .font(.title2)
                 Text("Contributions")
