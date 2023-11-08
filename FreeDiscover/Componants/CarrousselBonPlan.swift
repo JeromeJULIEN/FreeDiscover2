@@ -68,23 +68,8 @@ struct CarrousselBonPlan: View {
                     .contentMargins(8, for: .scrollContent)
                     
                 }
-                /// autoriser les interaction avec la carte malgré l'affichage de la sheet carroussel
-                
-//                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-//                .padding(.leading,10)
-//                .padding(.top,20)
-                /// limitation de la taille de la sheet
-                
-                /// bloquer la possibilité de fermer la sheet avec un swipe down
-                /// .interactiveDismissDisabled()
-                
             }
         }
-//        .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
-//        .presentationDetents([.height(200),.large])
-//        .presentationCornerRadius(20)
-      // .presentationDragIndicator(.visible)
-      //  .ignoresSafeArea(.all)
     }
         
 

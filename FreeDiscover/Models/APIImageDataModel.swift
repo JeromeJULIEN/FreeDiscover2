@@ -4,6 +4,7 @@
 //
 //  Created by jerome julien on 01/11/2023.
 //
+// MARK: Modèle de données des photos stockées et récupérées depuis airtable (voir doc airtable)
 
 import Foundation
 

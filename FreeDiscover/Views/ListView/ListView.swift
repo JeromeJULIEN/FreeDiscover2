@@ -13,6 +13,8 @@ struct ListView: View {
     @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
     @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
+    
+    // MARK: Variables locales de la vue
     @State var showActivityPreview : Bool = false
     
     // MARK: Fonctions de la vue
@@ -55,6 +57,7 @@ struct ListView: View {
             .frame(maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
                    alignment: (searchGlobalVariables.isSearchOngoing == true && searchGlobalVariables.searchResults.count == 0) ? .center : .top)
             .padding()
+            /// On lance la fonction de recherche lorsque l'utilisateur lance la recherche depuis la viex `SearchView`
             .onChange(of:searchGlobalVariables.isSearchOngoing){
                 searchActivities()
             }

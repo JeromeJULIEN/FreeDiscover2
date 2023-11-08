@@ -15,7 +15,7 @@ struct FavoriteButton: View {
     /// Id de l'activité à afficher
     var activityId : Int
     
-    // MARK: FONCTIONS DE LA VUE
+    // MARK: Fonctions de la vue
     /// Fonction pour vérifier si l'activité est dans les favoris du user connecté
     func isFavorite(activityId : Int) -> Bool {
         return userGlobalVariables.connectedUser.idFromFavorite.contains(activityId)

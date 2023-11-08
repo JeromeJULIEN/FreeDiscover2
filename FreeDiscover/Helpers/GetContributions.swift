@@ -6,14 +6,8 @@
 //
 
 import Foundation
-//func getContribution(userContributions : [Int],type : ActivityTypes)->[FreeDiscover]{
-//    var filteredArray = [FreeDiscover] ()
-//    filteredArray = FreeDiscover.allFreeDiscover.filter {activity in
-//        userContributions.contains(activity.id) && activity.type == type
-//    }
-//    return filteredArray
-//}
 
+/// Fonction pour retrouver les contribution de l'utilisateur connecté dans un tableau d'activité
 func getContributionFromUserByType(activityDataBase: [Activity], userContribution : [Int],type : String)->[Activity]{
     var filteredArray = [Activity] ()
     filteredArray = activityDataBase.filter {activity in

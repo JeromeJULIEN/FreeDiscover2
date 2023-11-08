@@ -17,8 +17,12 @@ import MapKit
 import CoreLocation
 
 struct MapView: View {
+    // MARK: Importation des variables globales
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
+    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
+    
     // MARK: Variables locales à la vue
-    //Instance de notre class
+    /// Instance de notre class LocationManager qui permet de gérer les fonctions de la carte
     @StateObject var locationManager = LocationManager()
     
     /// Propriété d'état qui stocke qui ajuste la postion de la caméra sur la région de l'utilisateur.
@@ -33,14 +37,11 @@ struct MapView: View {
     /// variable à utiliser pour authoriser la sélection d'item sur la map
     @State private var selectedTag : Int?
     
+    
     // MARK: Variables héritées d'autres vues
     /// Gestion affichage de la modale  activity preview
     @Binding var showActivityPreview : Bool
     
-      
-    /// Importation des variables globales
-    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
-    @EnvironmentObject var activityGlobalVariables : APIActivityRequestModel
     
     // MARK: Fonctions de la vue
     /// Fonction de recherche appliquée à la map
@@ -54,7 +55,7 @@ struct MapView: View {
         let longitudes = searchResults.map { $0.longitude }
         
         let maxLat = latitudes.max() ?? 0
-        var minLat = latitudes.min() ?? 0
+        let minLat = latitudes.min() ?? 0
         let maxLong = longitudes.max() ?? 0
         let minLong = longitudes.min() ?? 0
         /// ajout d'un espace en bas pour ne pas être derrière le carroussel
@@ -72,6 +73,7 @@ struct MapView: View {
         
         return MKCoordinateRegion(center: center, span: span)
     }
+    
     
     // MARK: VUE
     var body: some View {
@@ -97,13 +99,13 @@ struct MapView: View {
                     .tag(index)
                 }
             }
+            // Si recherche en cours, affichage des résultats de la recherche
             if(searchGlobalVariables.isSearchOngoing == true){
                 ForEach(searchGlobalVariables.searchResults.indices, id:\.self){index in
                     Annotation(
                         "\(searchGlobalVariables.searchResults[index].name)",
                         coordinate:
                             CLLocationCoordinate2D(latitude: searchGlobalVariables.searchResults[index].latitude, longitude: searchGlobalVariables.searchResults[index].longitude),
-                            //searchGlobalVariables.searchResults[index].location,
                         anchor: .center
                         
                     
@@ -143,18 +145,13 @@ struct MapView: View {
         .onAppear(perform: {
             locationManager.requestLocation()
         })
-//        .onChange(of: selectedTag){
-//            /// Définie l'objet sélectionné dans les variables globales et à afficher dans `activityPreview`
-//            searchGlobalVariables.selectedActivityInSearch = searchGlobalVariables.isSearchOngoing ? searchGlobalVariables.searchResults[selectedTag!] : freeDiscover[selectedTag!]
-//            /// Affiche la modale `activityPreview`
-//            showActivityPreview = true
-//        }
         .gesture(
             TapGesture()
                 .onEnded { _ in
                     selectedTag = nil
                 }
         )
+        /// On réagit à la sélection d'une activité sur la carte
         .onChange(of: selectedTag) { newSelectedTag in
             if let selectedTag = newSelectedTag {
                 let selectedActivity: Activity
@@ -191,6 +188,7 @@ struct MapView: View {
                 showActivityPreview = false
             }
         }
+        /// On réagit au lancement de la recherche pour ajuster la position de la carte
         .onChange(of: searchGlobalVariables.launchSearch){
             searchActivities()
             
@@ -201,6 +199,7 @@ struct MapView: View {
             }
             
         }
+        
         .onChange(of: searchGlobalVariables.isSearchOngoing) { isSearchActive in
             // Reset selectedTag when the search state changes to clear the selection
             selectedTag = nil

@@ -11,6 +11,7 @@ struct CancelSearchButton: View {
     @EnvironmentObject var globalVariables : SearchGlobalVariables
     
     var body: some View {
+        /// Bouton réinitialisant toutes les variables globales liées à la recherche
         Button {
             globalVariables.isSearchOngoing = false
             globalVariables.searchContent = ""

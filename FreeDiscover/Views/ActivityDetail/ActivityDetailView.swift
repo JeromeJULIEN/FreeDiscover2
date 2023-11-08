@@ -52,32 +52,11 @@ struct ActivityDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                     FavoriteButton(activityId: activity.id)
-
-//Bouton coeur fonctionnel mais pas relié à la BDD
-                    //                    Button(action : {isFavorite = !isFavorite}){
-//                        ZStack {
-//                            Image(systemName: "heart.fill")
-//                            //        .padding(10)
-//                                .foregroundStyle(.accent)
-//                                .opacity(isFavorite ? 1 : 0)
-//                                .bold()
-//                                .font(.title2)
-//                            Image(systemName: "heart")
-//                                .padding(4)
-//                                .foregroundStyle(.white)
-//                                .bold()
-//                                .font(.title2)
-//                        }
-//                    }
                 }
                 VStack {
                     VStack{
                         HStack (){
                             ActivitySymbolSmall(activityType: activity.typeActivite)
-                            //                                                            if(activity.temporary){
-                            //                                                                Image(systemName: "calendar")
-                            //                                                                    .foregroundColor(.grayDark)
-                            //                                                            }
                             Text("\(activity.name)")
                                 .font(.title2.bold())
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -108,11 +87,7 @@ struct ActivityDetailView: View {
                                 Text ("Créé par Arthur")
                                     .font(.subheadline)
                                     .foregroundColor(Color("GrayDark"))
-                                   // .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            //     Text("\(activity.contributor)")
-                            /*.padding(5)*/
-//                           laurelleadingLevel()
                             Image("Badge1")
                                 .resizable()
                                 .foregroundColor(.black)
@@ -122,12 +97,7 @@ struct ActivityDetailView: View {
                             Spacer()
 
                         }
-                         //.frame(maxWidth: .infinity, alignment: .leading)
 
-
-                        //   .padding(5)
-                        
-                        //                        DATE ACTIVIT2 :
                         if(activity.temporaire == "true"){
                             VStack {
                                 if activity.dateDeDebut == activity.dateDeFin {
@@ -135,12 +105,12 @@ struct ActivityDetailView: View {
                                     if let date = dateFormatter.date(from: activity.dateDeDebut) {
                                         let frenchDate = formatDateInFrench(date)
                                         Text("Date : \(frenchDate)")
-                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
 
                                         
                                     } else {
                                         Text("Date invalide")
-                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
 
                                     }
                                 }
@@ -151,26 +121,26 @@ struct ActivityDetailView: View {
                                         let frenchDateDebut = formatDateInFrench(dateDebut)
                                         let frenchDateFin = formatDateInFrench(dateFin)
                                         Text("Date : du \(frenchDateDebut)\nau \(frenchDateFin)")
-                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
 
                                         
                                     } else {
                                         Text("Date invalide")
-                                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
 
                                     }
                                     
-                                    //  Text("Date : Du \(activity.dateDeDebut) au \(activity.dateDeFin)")
+            
                                 }
                             }
-//                            .padding(0)
+
                             .shadow(radius: 1)
                             .opacity(0.8)
-                            .frame(maxWidth: .infinity, alignment: .leading)                                //.padding(5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     .clipShape(RoundedRectangle(cornerRadius:10))
                         }
                     }
-//                    .padding(5)
+
 
                 }
                 Divider()
@@ -214,8 +184,7 @@ struct ActivityDetailView: View {
                     label: do {
                         Label ("Photos / Videos", systemImage: "photo.badge.plus" )
                     }
-                        //                        CtaButton(ctaIcon: "photo.badge.plus", ctaBgColor: buttonColor, ctaFgColor: .grayDark)
-                        ////                            .frame(minWidth: 40)
+                   
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -223,17 +192,13 @@ struct ActivityDetailView: View {
                 .sheet(isPresented: $isPickerShowing, onDismiss: nil) {
                     
                     
-                    //Image picker pour une seule
-                    //                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
-                    //                    }
-                    
-                    //Image picker pour selectionner plusieurs photos en 1 fois
+  
                     
                     ImagePickerView(numOfSelectedPictures: 5, images: $selectedImages)
                     
                 }
                 ScrollView(.horizontal) {
-                    //                        VStack(alignment:.leading){
+   
                     
                     HStack {
                         if let imageFound = activity.photos.last {
@@ -251,12 +216,7 @@ struct ActivityDetailView: View {
                             .frame(width: 150,height: 150)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
-                        //    Text("\(activity.name)")
-                        //      .foregroundColor(.grayDark)
-                        //    .font(.headline)
-                        //  .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
-                        // .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                        // }
+         
                         if selectedImages != nil {
                             //
                             //                            HStack(spacing: 10) {

@@ -3,6 +3,9 @@
 //
 //   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
 
+// MARK: Modèle de donnée airtable pour la table Activity
+/// Attention, airtable encapsule les `Activity` dans un `ActivityRecord`. L'objet de la table est dans le `Activity` mais le `ActivityRecord` va être nécessaire pour les fonctions `PATCH`
+
 import Foundation
 import SwiftUI
 

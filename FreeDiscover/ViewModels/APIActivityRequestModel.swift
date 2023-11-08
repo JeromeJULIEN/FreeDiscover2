@@ -7,18 +7,22 @@
 
 import Foundation
 
-//MARK: ON PRÉPARE A PART LA DONNÉE USER EN LIEN AVEC L'API
+//MARK: ON PRÉPARE A PART LA DONNÉE ACTIVITY EN LIEN AVEC L'API
 
 //on fait une classe parce que elle seule peuvent être appliquée sur toute l'application!
 //avec le ObservableObject on indique qu'on va lire la même info partout
 //
 class APIActivityRequestModel : ObservableObject {
-    //on veut savoir les faits et gestes des @Published tel un stalker
+    // MARK: Données stockées
+    //On définie avec le @Published toutes les variables de cette classe qui doivent être observé par l'app pour déclencher des actions ou réaction
+    /// Tableau stockant toutes les activités en BDD
     @Published var allActivities = [Activity]()
+    /// Tableau stockant tous les `records` contenant les objets `activités`. Les records sont nécessaire pour les fonction `PATCH`
     @Published var allActivitiesRecord = [ActivityRecord]()
-    @Published var needsRefresh: Bool = false // Cette propriété sera modifiée pour déclencher une actualisation
+   
+    @Published var needsRefresh: Bool = false
 
-    
+    // MARK: Fonctions de call API
     /// Fonction pour lancer une mise à jour des données
     func refreshData() async {
         print("enter into activity refreshdata")
@@ -35,6 +39,7 @@ class APIActivityRequestModel : ObservableObject {
         print("end of activity refreshdata")
     }
     
+    /// Fonction pour récupérer toutes les activités
     //on prépare une fonction asynchrone pour ne pas surcharger le main thread
     //cette méthode va être utiliser sur un autre thread secondaire
     //et on veut pouvoir utiliser de la donnée de type User donc on attend un array de ça en retour
@@ -226,7 +231,7 @@ class APIActivityRequestModel : ObservableObject {
         }
     }
     
-    /// fonction pour décrémenter le nbr de vote d'une activité
+    /// fonction pour créer une activité
     func createActivity(activity: Activity) async {
         print("ENTREE DANS CREATE ACTIVITY AVEC activité : \(activity)")
         // Check de l'URL
@@ -250,6 +255,7 @@ class APIActivityRequestModel : ObservableObject {
                         "id": activity.id,
                         "name": activity.name,
                         "photos" : [
+                            /// photo en dur dans le code pour la démo. Intégration de photo choisi par l'utilisateur à faire
                             [
                             "url" : "https://images.unsplash.com/photo-1692118450510-3c1d8e7d1ae8?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             ]

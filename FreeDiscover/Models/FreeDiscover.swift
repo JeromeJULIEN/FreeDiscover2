@@ -5,7 +5,10 @@
 //  Created by apprenant 101 on 19/10/2023.
 //
 
-// MARK: - FreeDiscover
+
+
+// MARK: Modèle de donnée Activity pour le fonctionnement en local sans airtable !!!
+
 
 /*
  Abstract:
