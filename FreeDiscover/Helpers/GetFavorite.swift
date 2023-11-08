@@ -7,16 +7,8 @@
 
 import Foundation
 
-//@dev : function to filter all the temporary Activities of the data base
-//func getFavorite(type: ActivityTypes) -> [FreeDiscover] {
-//    var filteredArray = [FreeDiscover] ()
-//    filteredArray = FreeDiscover.allFreeDiscover.filter {
-//        $0.favorite == true && $0.type == type }
-//    return filteredArray
-//}
-//
 
-
+/// Fonction pour retrouver les activités favorites de l'utilisateur connecté dans un tableau d'activité
 func getFavoriteFromUserByType(activityDataBase: [Activity], userFavorites : [Int],type : String)->[Activity]{
     var filteredArray = [Activity] ()
     filteredArray = activityDataBase.filter {activity in

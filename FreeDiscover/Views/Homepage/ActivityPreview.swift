@@ -9,13 +9,18 @@ import SwiftUI
 
 struct ActivityPreview: View {
 
+    // MARK: Variable d'environnement récupérées des state object
+    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
+
+    // MARK: Variables locales de la vue
     @State var activity : Activity
+    
+    // MARK: Fonctions de la vue
+    /// Fonction permettant de calculer la distance de l'activité avec la position de l'utilisateur connecté
     var distanceToUser : Double {calculateDistance(lat1: 43.296367, lon1: 5.368363, lat2: activity.latitude, lon2: activity.longitude)}
 
 
-    @EnvironmentObject var searchGlobalVariables : SearchGlobalVariables
-
-    
+    // MARK: Vue
     var body: some View {
         HStack(alignment:.top){
             VStack(alignment:.leading){
@@ -63,7 +68,6 @@ struct ActivityPreview: View {
         }
         .padding()
         .presentationDetents([ .height(200)])
-      // .presentationBackgroundInteraction(.enabled(upThrough: .height(200)))
         .presentationCornerRadius(20)
         .presentationDragIndicator(.visible)
     }
@@ -73,5 +77,4 @@ struct ActivityPreview: View {
 #Preview {
     ActivityPreview(activity: Activity.nature1)
         .environmentObject(APIUserRequestModel())
-//        .environmentObject(ActivityGlobalVariables())
 }

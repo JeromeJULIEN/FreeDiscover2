@@ -61,6 +61,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 }
 
+// fonction pour calculer la distance entre deux points de la carte
 func calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double) -> Double {
     let location1 = CLLocation(latitude: lat1, longitude: lon1)
     let location2 = CLLocation(latitude: lat2, longitude: lon2)

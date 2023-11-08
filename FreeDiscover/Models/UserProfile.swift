@@ -5,6 +5,8 @@
 //  Created by apprenant58 on 20/10/2023.
 //
 
+// MARK: Modèle de donnée User pour le fonctionnement en local sans airtable !!!
+
 import Foundation
 
 struct UserProfile: Identifiable {

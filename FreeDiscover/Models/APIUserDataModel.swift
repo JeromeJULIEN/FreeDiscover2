@@ -3,6 +3,9 @@
 //
 //   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
 
+// MARK: Modèle de donnée airtable pour la table User
+/// Attention, airtable encapsule les `User` dans un `UserRecord`. L'objet de la table est dans le `User` mais le `UserRecord` va être nécessaire pour les fonctions `PATCH`
+
 import Foundation
 
 // MARK: - Request

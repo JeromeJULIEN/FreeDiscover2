@@ -38,13 +38,7 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 }
 
-struct YourApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+
 #Preview {
     ActivityContentView()
 }

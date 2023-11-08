@@ -13,10 +13,14 @@ import Foundation
 //avec le ObservableObject on indique qu'on va lire la même info partout
 //
 class APIUserRequestModel : ObservableObject {
-    //on veut savoir les faits et gestes des @Published tel un stalker
+    // MARK: Données stockées
+    //On définie avec le @Published toutes les variables de cette classe qui doivent être observé par l'app pour déclencher des actions ou réaction
+    /// Tableau stockant toutes les user en BDD
     @Published var allUsers = [User]()
+    /// Tableau stockant tous les `records` contenant les objets `user`. Les records sont nécessaire pour les fonction `PATCH`
     @Published var allUsersRecord = [UserRecord]()
-    @Published var needsRefresh: Bool = false // Cette propriété sera modifiée pour déclencher une actualisation
+    /// Cette propriété sera modifiée pour déclencher une actualisation des vues lorsque nécessaire (ajout favoris, vote, etc)
+    @Published var needsRefresh: Bool = false 
 
     
     /// User par défaut pour lancer l'app
